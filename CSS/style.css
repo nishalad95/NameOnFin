@@ -139,28 +139,51 @@ input{
 
 .name_area #name_{
     float: left;
+    display:flex;
+    z-index:17;
 }
 
 #overlay {
     width: 100%;
     position: absolute;
     margin: -11% 0 0 0;
-    z-index: 2;
+    z-index: 19;
+    display:none;
 }
+/* 
+z indices:
+greeting
+transparent overlay
+names
+fin svg
+background
+
+*/
 
 #greeting {
     position: absolute;
     width: 45%;
     margin: 7% 0 0 3%;
-    z-index: 3;
+    z-index: 20;
     /*display:none;*/
 }
 
+.FinSVG {
+    position: absolute;
+    z-index:16;
+    /*display: none;*/
+    display: flex;
+}
+
+
+/** Multiple names scroll bar **/
+
 .namesScrollBar {
+    display:none;
     position: absolute;
     height:100%;
     width: 35%;
-    z-index:4;
+    z-index:20;
     overflow:auto;
     color: rgb(25,25,112);
     font-size: 300%;
@@ -183,14 +206,10 @@ input{
 .namesScrollBar li {
     line-height:200%;
     text-align: left;
-    padding-left: 15%;
-    
+    padding-left: 15%;   
 } 
-/*
-.namesScrollBar li:nth-child(odd){
-    background: rgba(220,220,220,0.5);
-}
-*/
+
+
 .listBorder {
     list-style-position:inside;
     border: 1px solid rgba(0,0,0,0.2);
@@ -231,7 +250,7 @@ input{
 	border-radius: 10px;
 	background-image: -webkit-gradient(linear,left bottom,left top,
 	color-stop(0.44, rgb(122,153,217)),
-	color-stop(0.72, rgb(73,125,189)),
+	color-stop(0.60, rgb(73,125,189)),
 	color-stop(0.86, rgb(28,58,148)));
 }
 

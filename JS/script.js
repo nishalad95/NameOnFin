@@ -32,11 +32,53 @@ getAllNames();
                     var obj = $.parseJSON(names);
                     var name_array = obj.NAME;
                     for(var i = 0; i < name_array.length; i++){
-                            $(".name_area").append("<div id='name_'>" + name_array[i] + "</div>");
+                            $(".name_area").append("<div id='name_' style='z-index: 17;'>" + name_array[i] + "</div>");
                     }
             }
         });	
     });
+    
+    
+    /* This is for the search bar, selecting only the names that matter. */
+	$("#search_names").submit(function(){
+		
+                $("#overlay").style.display = "block";
+                $("#greeting").style.display = "none";
+                
+		var data = $("#search_names").serializeArray().reduce(function(obj, item){
+		
+			obj[item.name] = item.value;
+			return obj;
+		}, {});
+		
+		var searchTerm = data["name"];
+		
+		var names = $.parseJSON($.ajax({
+		
+			url: "http://129.146.81.161/fin/?func_name=search&q=" + searchTerm,
+			dataType: "JSON",
+			async: false
+		}).responseText);
+	
+		// This is the search results.. Here is the best bet for generating the panel.
+		searchResults = names.NAME;
+                
+                alert(searchResults);
+                
+                if (searchResults.length > 1) {
+                    $("#namesScrollBar").style.display = "block";
+                } else if (searchResults.length === 1) {
+                    //go straight to the name in the canvas
+                } else {
+                    alert("No results found");
+                }
+		
+	
+	});
+    
+ 
+        
+    
     
     function loadImages() {
         const TOTALNUMSELFIES = 70;
