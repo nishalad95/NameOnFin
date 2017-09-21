@@ -12,7 +12,7 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="CSS/style.css?ver=1.1" />
         <link rel="shortcut icon" href="#" />
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-        <script type="text/javascript" src="JS/script.js"></script>
+        <script type="text/javascript" src="JS/script.js?a=1"></script>
     </head>
     
     <body>
@@ -31,7 +31,7 @@ and open the template in the editor.
                 </div>
                 <div class="searchInput">
                     <div class="inputText">
-                        <form  action="#" method="post" id="search_names">
+                        <form action="#" method="post" id="search_names">
                             <input id="inputValue" type="text" name="name" placeholder="Keyword, Name, Email" maxlength="100" required>
                             <div class="searchButton">
                                 <div class="Static">
@@ -49,34 +49,21 @@ and open the template in the editor.
                    <img id="overlay" src="images/BloodhoundPosterOverlay2.png" alt="Bloodhound Fin"/>
                    <img id="greeting" src="images/Greeting.png" alt="Thank you for being part of our story"/>
               
-                   <!-- Names on Fin SVG -->
+                   <!-- Fin SVG -->
                    <div class="FinSVG">
-                       <img src="images/FinVector2.png" alt="Fin Vector Image" width="100%" height="100%"/>
+                       <img id='finIMG' ondragstart="return false" src='images/FinVector2.png' alt='Fin Vector Image' width="100%"/>
                    </div>
                    
-                   <div class="namesScrollBar" id="scrollBarStyle"> 
-                       <div class="searchQuery">Results for: Chris</div>
-                       <!-- multiple search names scroll bar -->
-                       <ul>
-                        <a id="nameLink" href="#"><li class="listBorder">Chris Wing</li></a>
-                        <a id="nameLink" href="#"><li class="listBorder">Christopher Wing</li></a>
-                        <li class="listBorder">text</li>
-                        <li class="listBorder">text</li>
-                        <li class="listBorder">text</li>
-                        <li class="listBorder">text</li>
-                        <li class="listBorder">text</li>
-                        <li class="listBorder">text</li>
-                        <li class="listBorder">text</li>
-                        <li class="listBorder">text</li>
-                        <li class="listBorder">text</li>
-                        <li class="listBorder">text</li>
-                        <li class="listBorder">text</li>
-                        
-                       </ul>
-                   </div>
+                   <!-- Names on the Fin -->
+                   <div class="namesHolder" ondragstart="return false"></div>
+                   <!-- Scrolling Panel -->
+          
+                   <!--<input type="button" id="zoomout" class="button" value="-">
+                   <input type="button" id="zoomin" class="button" value="+">
+                   -->
                 </div>
             </div>
-            
+        
             <!-- Selfie gallery -->
             <div class="BottomBar">
                 <img id="selfieText" src="images/SupersonicSelfies.png" alt="Supersonic Selfies!"/>

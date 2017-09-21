@@ -129,7 +129,7 @@ input{
     position: relative;
     width: 100%;
     min-height: 100%;
-    overflow-x: auto;
+    overflow-x: hidden;
     overflow-y: hidden;
     color: white;
     text-shadow: 3px 3px 3px black ! important;
@@ -137,21 +137,15 @@ input{
     margin: 0 auto;
 }
 
-.name_area #name_{
-    float: left;
-    display:flex;
-    z-index:17;
-}
-
 #overlay {
     width: 100%;
     position: absolute;
     margin: -11% 0 0 0;
     z-index: 19;
-    display:none;
 }
 /* 
 z indices:
+zoom
 greeting
 transparent overlay
 names
@@ -165,28 +159,46 @@ background
     width: 45%;
     margin: 7% 0 0 3%;
     z-index: 20;
-    /*display:none;*/
 }
 
 .FinSVG {
     position: absolute;
     z-index:16;
-    /*display: none;*/
     display: flex;
+    margin: 0 auto;
+    max-height:100%;
+    max-width: 100%;
 }
 
+#finIMG {
+    position:relative;
+    cursor: move;
+}
+
+.namesHolder{
+    /*display:none;*/
+    position:absolute;
+    z-index:17;
+}
+
+.namesHolder .name{
+    float: left;
+    display:flex;
+    z-index:17;
+    cursor:move;
+    position:relative;
+}
 
 /** Multiple names scroll bar **/
 
 .namesScrollBar {
-    display:none;
     position: absolute;
     height:100%;
     width: 35%;
     z-index:20;
     overflow:auto;
     color: rgb(25,25,112);
-    font-size: 300%;
+    font-size: 250%;
     text-shadow: 1px 1px;
     background: rgba(245,245,245,0.9);
 }
@@ -208,7 +220,6 @@ background
     text-align: left;
     padding-left: 15%;   
 } 
-
 
 .listBorder {
     list-style-position:inside;
@@ -253,6 +264,25 @@ background
 	color-stop(0.60, rgb(73,125,189)),
 	color-stop(0.86, rgb(28,58,148)));
 }
+/*
+.button {
+    position:absolute;
+    display:flex;
+    z-index:22;
+    width:5%;
+    height:7.5%;
+}
+
+#zoomout {
+    position:relative;
+    margin-right: 0%;
+}
+
+#zoomin {
+    position:relative;
+    margin-left:95%;
+}
+*/
 
 .BottomBar {
     width: 70%;
