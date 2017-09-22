@@ -12,7 +12,7 @@ $(document).ready(function(){
                 var name_array = obj.NAME;
 
                 for(var i = 0; i < name_array.length; i++){
-                $(".namesHolder").append("<div class='name' id='name"+i+"'>" + name_array[i] + ", &nbsp</div>");
+                $(".finNames").append("<div class='name' id='name"+i+"'>" + name_array[i] + ", &nbsp</div>");
                 }
             }
         });
@@ -20,7 +20,12 @@ $(document).ready(function(){
 
 getAllNames();
     
-    
+
+/** jquery draggable **/
+$( function() {
+    $( "#draggable" ).draggable();
+} );
+
     /* This is for the search bar, selecting only the names that matter. */
 	$("#search_names").submit(function(e){
 		
@@ -60,8 +65,10 @@ getAllNames();
                     alert("No results found");
                 }
                 
+             
                 
-                /* finIMG panning */
+                /**
+                // finSVG panning
                 var img_ele = null, x_cursor = 0, y_cursor = 0, x_img_ele = 0, y_img_ele = 0;
                 
                 function start_drag() {
@@ -92,7 +99,7 @@ getAllNames();
                 $("#finIMG").on('mousedown', start_drag);
                 $(".FinSVG").on('mousemove', while_drag);
                 $(".FinSVG").on('mouseup', stop_drag);
-                
+                **/
 	
 	});
     

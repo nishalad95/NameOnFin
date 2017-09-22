@@ -160,7 +160,7 @@ background
     margin: 7% 0 0 3%;
     z-index: 20;
 }
-
+/*
 .FinSVG {
     position: absolute;
     z-index:16;
@@ -169,15 +169,26 @@ background
     max-height:100%;
     max-width: 100%;
 }
+*/
+.fin-image {
+    max-height:100%;
+    max-width: 100%;
+    z-index:17; 
+    display:flex;
+}
 
 #finIMG {
-    position:relative;
+    position:absolute;
     cursor: move;
 }
 
+#finNames {
+    z-index: 18;
+}
+
 .namesHolder{
-    /*display:none;*/
-    position:absolute;
+    cursor:move;
+    position:relative;
     z-index:17;
 }
 
@@ -185,13 +196,13 @@ background
     float: left;
     display:flex;
     z-index:17;
-    cursor:move;
     position:relative;
 }
 
 /** Multiple names scroll bar **/
 
 .namesScrollBar {
+    /*display:none;*/
     position: absolute;
     height:100%;
     width: 35%;
