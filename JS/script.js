@@ -12,7 +12,7 @@ $(document).ready(function(){
                 var name_array = obj.NAME;
 
                 for(var i = 0; i < name_array.length; i++){
-                $(".finNames").append("<div class='name' id='name"+i+"'>" + name_array[i] + ", &nbsp</div>");
+                $(".finNames").append("<div class='name' id='"+name_array[i]+"'>" + name_array[i] + ", &nbsp</div>");
                 }
             }
         });
@@ -21,7 +21,7 @@ $(document).ready(function(){
 getAllNames();
     
 
-/** jquery draggable **/
+/** Draggable fin and names **/
 $( function() {
     $( "#draggable" ).draggable();
 } );
@@ -48,8 +48,7 @@ $( function() {
 			dataType: "JSON",
 			async: false
 		}).responseText);
-	
-		// This is the search results.. Here is the best bet for generating the panel.
+
 		searchResults = names.NAME;
                 
                 if (searchResults.length > 1) {
@@ -57,7 +56,7 @@ $( function() {
                     $(".namesScrollBar").append("<div class='searchQuery'>Results for: " + searchTerm +"</div>");
                     $(".namesScrollBar").append("<ul class='searchList'>");
                     for (var i = 0; i < searchResults.length - 1; i++) {
-                        $(".searchList").append("<a id='nameLink' href='#'><li class='listBorder'>" + searchResults[i] + "</li></a>");
+                        $(".searchList").append("<a id='nameLink' href='#'><li class='listBorder"+ i +"'>" + searchResults[i] + "</li></a>");
                     }    
                 } else if (searchResults.length === 1) {
                     //go straight to the name in the canvas
@@ -65,45 +64,14 @@ $( function() {
                     alert("No results found");
                 }
                 
-             
+                $('li[class^="listBorder"]').on('click', function(){
+                    selectedName = $(this).text();
+                    alert(selectedName);
+                    $("#"+ selectedName).style.size = "500%";
+                    
+                });
                 
-                /**
-                // finSVG panning
-                var img_ele = null, x_cursor = 0, y_cursor = 0, x_img_ele = 0, y_img_ele = 0;
-                
-                function start_drag() {
-                    img_ele = this;
-                    console.log('inside start_drag var img_ele set to : ' + this);
-                    x_img_ele = window.event.clientX - document.getElementById('finIMG').offsetLeft;
-                    y_img_ele = window.event.clientY - document.getElementById('finIMG').offsetTop;
-                    console.log('start_drag : ' + 'x_img_ele:', x_img_ele, 'y_img_ele:', y_img_ele);
-                }
-
-                function stop_drag() {
-                    console.log('stop drag');
-                    img_ele = null;
-                }
-
-                function while_drag() {
-                    console.log('while_drag: ', window.event);
-                    var x_cursor = window.event.clientX;
-                    var y_cursor = window.event.clientY;
-                    if (img_ele !== null) {
-                        img_ele.style.left = (x_cursor - x_img_ele) + 'px';
-                        img_ele.style.top = ( window.event.clientY - y_img_ele) + 'px';
-    
-                        console.log('while_drag: ','x_cursor', x_cursor, 'x_img_ele', x_img_ele, 'y_cursor', y_cursor, 'y_img_ele', y_img_ele,'Image left and top', img_ele.style.left+' - '+img_ele.style.top);
-                    }
-                }
-
-                $("#finIMG").on('mousedown', start_drag);
-                $(".FinSVG").on('mousemove', while_drag);
-                $(".FinSVG").on('mouseup', stop_drag);
-                **/
-	
-	});
-    
-                
+	});           
                 
     function loadImages() {
         const TOTALNUMSELFIES = 68;

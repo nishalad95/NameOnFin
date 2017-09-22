@@ -113,7 +113,6 @@ input{
 
 #inputValue::placeholder {
     color: #21618C; 
-    /*vertical-align:middle;*/
 }
 
 .box > div {
@@ -160,19 +159,8 @@ background
     margin: 7% 0 0 3%;
     z-index: 20;
 }
-/*
-.FinSVG {
-    position: absolute;
-    z-index:16;
-    display: flex;
-    margin: 0 auto;
-    max-height:100%;
-    max-width: 100%;
-}
-*/
+
 .fin-image {
-    max-height:100%;
-    max-width: 100%;
     z-index:17; 
     display:flex;
 }
@@ -200,9 +188,7 @@ background
 }
 
 /** Multiple names scroll bar **/
-
 .namesScrollBar {
-    /*display:none;*/
     position: absolute;
     height:100%;
     width: 35%;
@@ -232,13 +218,13 @@ background
     padding-left: 15%;   
 } 
 
-.listBorder {
+li[class^="listBorder"] {
     list-style-position:inside;
     border: 1px solid rgba(0,0,0,0.2);
     border-radius: 5px;
 }
 
-.listBorder:hover {
+li[class^="listBorder"]:hover {
     border: 2px solid rgba(0,0,0,0.2);
 }
 
@@ -275,25 +261,6 @@ background
 	color-stop(0.60, rgb(73,125,189)),
 	color-stop(0.86, rgb(28,58,148)));
 }
-/*
-.button {
-    position:absolute;
-    display:flex;
-    z-index:22;
-    width:5%;
-    height:7.5%;
-}
-
-#zoomout {
-    position:relative;
-    margin-right: 0%;
-}
-
-#zoomin {
-    position:relative;
-    margin-left:95%;
-}
-*/
 
 .BottomBar {
     width: 70%;
