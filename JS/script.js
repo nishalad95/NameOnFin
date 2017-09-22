@@ -30,6 +30,7 @@ $( function() {
 	$("#search_names").submit(function(e){
 		
                 e.preventDefault();
+                $(".namesHolder").css({transform: 'scale(1)'});
                 $("#overlay").hide();
                 $("#greeting").hide();
                 $(".namesScrollBar").remove();
@@ -57,19 +58,19 @@ $( function() {
                     $(".namesScrollBar").append("<ul class='searchList'>");
                     for (var i = 0; i < searchResults.length - 1; i++) {
                         $(".searchList").append("<a id='nameLink' href='#'><li class='listBorder"+ i +"'>" + searchResults[i] + "</li></a>");
-                    }    
+                    }
+                    
+                    $('li[class^="listBorder"]').on('click', function(){
+                        selectedName = $(this).text();
+                        $(".namesHolder").css({transform: 'scale(10)'});
+                    });
+                
                 } else if (searchResults.length === 1) {
                     //go straight to the name in the canvas
                 } else {
                     alert("No results found");
                 }
-                
-                $('li[class^="listBorder"]').on('click', function(){
-                    selectedName = $(this).text();
-                    alert(selectedName);
-                    $("#"+ selectedName).style.size = "500%";
-                    
-                });
+
                 
 	});           
                 

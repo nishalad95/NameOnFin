@@ -175,6 +175,8 @@ background
 }
 
 .namesHolder{
+    width:auto;
+    height:auto;
     cursor:move;
     position:relative;
     z-index:17;
