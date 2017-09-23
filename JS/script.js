@@ -51,7 +51,7 @@ $( function() {
 
 		searchResults = names.NAME;
                 $(".namesHolder").css({transform: 'scale(1)'});
-                var x, y, currentID;
+                var x, y, currentID, percentLeft, percentTop, xDiff, yDiff;
                 
                 
                 if (searchResults.length > 1) {
@@ -66,26 +66,43 @@ $( function() {
                     $('li[class^="listBorder"]').on('click', function(){
                         var selectedName = $(this).text();
                         currentID = namesIDMap[selectedName];
-                 
+                        
                         // calc difference between center coord (x,y) and name div (x,y)
-                        x = 403.75 - $("#name" + currentID).position().left;
-                        y = 250 - $("#name" + currentID).position().top;
+                        x = $("#name" + currentID).position().left;
+                        y = $("#name" + currentID).position().top;
+                        percentLeft = x/$(".name_area").width() * 100;
+                        percentTop = y/$(".name_area").height() * 100;
                         console.log("x is: ", x);
                         console.log("y is: ", y);
+                        console.log("x% is: ", percentLeft);
+                        console.log("y% is: ", percentTop);
                         
-                        // move the name to center
-                        //$(".namesHolder").css({transform: 'scale(10)'});
-                        $(".namesHolder").css({transform: 'translate('+x+'px,'+y+'px)'});
+                        xDiff = 50 - percentLeft;
+                        yDiff = 50 - percentTop;
+                        
+                        console.log("xDiff: ", xDiff);
+                        console.log("yDiff: ", yDiff);
+                        
+                        // translate the name to center
+                        $(".namesHolder").css({transform: 'scale(2) translate('+xDiff+'%,'+yDiff+'%)'});
+                        x = .0;
+                        y = .0;
                     });
                     
                     
                 } else if (searchResults.length === 1) {
-                    //go straight to the name
+                    
+                    // calc difference between center coord (x,y) and name div (x,y)
                     currentID = namesIDMap[searchResults];
-                    x = 403.75  - $("#name" + currentID).position().left;
-                    y = 250 - $("#name" + currentID).position().top;
-                    $(".namesHolder").css({transform: 'translate('+x+'px,'+y+'px)'});
-                  
+                    x = $("#name" + currentID).position().left;
+                    y = $("#name" + currentID).position().top;
+                    percentLeft = x/$(".name_area").width() * 100;
+                    percentTop = y/$(".name_area").height() * 100;
+                    xDiff = 50 - percentLeft;
+                    yDiff = 50 - percentTop;
+                    
+                    // translate the name to center
+                    $(".namesHolder").css({transform: 'scale(5) translate('+xDiff+'%,'+yDiff+'%)'});
                     
                 } else {
                     alert("No results found");
