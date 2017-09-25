@@ -187,6 +187,7 @@ background
     display:flex;
     z-index:17;
     position:relative;
+    border-radius: 5%;
 }
 
 /** Multiple names scroll bar **/

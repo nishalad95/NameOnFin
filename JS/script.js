@@ -14,7 +14,8 @@ $(document).ready(function(){
         
                 // create names on fin
                 for(var i = 0; i < name_array.length; i++){
-                    $(".finNames").append("<div class='name' id='name"+i+"'>" + name_array[i] + ", &nbsp</div>");
+                    $(".finNames").append("<div class='name' id='name"+ i +"'> &nbsp"
+                            + name_array[i] + ", &nbsp</div>");
                     // add to namesIDMap
                     namesIDMap.set(name_array[i], i);
                 }
@@ -32,6 +33,30 @@ getAllNames();
 $( function() {
     $("#draggable").draggable();
 } );
+
+
+// reset position of fin on another click and panning
+function reset() {
+    if ($(".namesHolder").position().left !== 0 || $(".namesHolder").position().top !== 0) {
+        $(".namesHolder").css({transform: 'scale(.2)'}, 'top:0; left:0;'); 
+    }
+}
+
+
+
+// calc % difference between center coord (x,y) and name div (x,y)
+function calcOffset(currentID) {
+    x = $("#name" + currentID).position().left;
+    y = $("#name" + currentID).position().top;
+    
+    percentLeft = x/$(".name_area").width() * 100;
+    percentTop = y/$(".name_area").height() * 100;
+   
+    xDiff = 50 - percentLeft;
+    yDiff = 50 - percentTop;
+    
+    return [xDiff, yDiff];
+}
 
 
 
@@ -56,11 +81,11 @@ $("#search_names").submit(function(e){
 	async: false
     }).responseText);
 
-    searchResults = names.NAME;           
-    var x, y, currentID, percentLeft, percentTop;
-    var xDiff, yDiff = 0;
-    //reset scale and position of fin each time search is run
+    //reset fin each time search button is clicked
     $(".namesHolder").css({transform: 'scale(1)' }); 
+    
+    searchResults = names.NAME;           
+    var currentID;
                 
     if (searchResults.length > 1) {
         // create names panel
@@ -70,18 +95,15 @@ $("#search_names").submit(function(e){
     
         // add search results to panel
         for (var i = 0; i < searchResults.length - 1; i++) {
-            $(".searchList").append("<a id='nameLink' href='#'><li class='listBorder"+ i +"'>" + searchResults[i] + "</li></a>");
+            $(".searchList").append("<a id='nameLink' href='#'><li class='listBorder"
+                    + i +"'>" + searchResults[i] + "</li></a>");
         }
         
         // for each name in panel, move fin to the name clicked
         $('li[class^="listBorder"]').on('click', function(){
             
-            // reset position of fin on another click
-            if ($(".namesHolder").position().left !== 0 && $(".namesHolder").position().top !== 0) {
-                var currentX = $(".namesHolder").position().left * -1.0;
-                var currentY = $(".namesHolder").position().top * -1.0;
-                $(".namesHolder").css({transform: 'scale(.2) translate('+ currentX +'%,'+ currentY +'%)'});
-            }
+            // reset position of fin on another click and panning
+            reset();
             
             var selectedName = $(this).text();
             alert(selectedName);
@@ -89,17 +111,8 @@ $("#search_names").submit(function(e){
             alert("name: "+ selectedName+ ", id: "+ currentID);
                         
             // calc difference between center coord (x,y) and name div (x,y)
-            x = $("#name" + currentID).position().left;
-            y = $("#name" + currentID).position().top;
-            percentLeft = x/$(".name_area").width() * 100;
-            percentTop = y/$(".name_area").height() * 100;
-            console.log("x% is: ", percentLeft);
-            console.log("y% is: ", percentTop);           
-            xDiff = 50 - percentLeft;
-            yDiff = 50 - percentTop;
-                        
-            console.log("xDiff: ", xDiff);
-            console.log("yDiff: ", yDiff);
+            offset = calcOffset(currentID);
+            console.log("(x,y)%: " +offset[0]+ ", " +offset[1]);
                         
             // translate name to center
             $(".namesHolder").css({transform: 'scale(5) translate('+ xDiff +'%,'+ yDiff +'%)'});
@@ -109,13 +122,8 @@ $("#search_names").submit(function(e){
     } else if (searchResults.length === 1) {
         // calc difference between center coord (x,y) and name div (x,y)
         currentID = namesIDMap.get(searchResults[0]);
-                    
-        x = $("#name" + currentID).position().left;
-        y = $("#name" + currentID).position().top;
-        percentLeft = x/$(".name_area").width() * 100;
-        percentTop = y/$(".name_area").height() * 100;
-        xDiff = 50 - percentLeft;
-        yDiff = 50 - percentTop;
+        offset= calcOffset(currentID);
+        console.log("(x,y)%: " +offset[0]+ ", " +offset[1]);
                     
         // translate the name to center
         $(".namesHolder").css({transform: 'scale(5) translate('+ xDiff +'%,'+ yDiff +'%)'});
@@ -132,7 +140,8 @@ $("#search_names").submit(function(e){
         const TOTALNUMSELFIES = 68;
        
         for (var i = 1; i <= TOTALNUMSELFIES; i++) {
-            var thumbnailContainer = "<a href=\"#img" + i +  "\"><img id='selfie' src='images/Selfies/" + i + ".png' alt='selfie' /></a>";
+            var thumbnailContainer = "<a href=\"#img" + i + 
+                    "\"><img id='selfie' src='images/Selfies/" + i + ".png' alt='selfie' /></a>";
             
             var prev = i - 1;
             var next = (i + 1) % 70;
@@ -145,13 +154,16 @@ $("#search_names").submit(function(e){
             /* what the user sees after click */
             $(".lightboxArea").append("<div id=\"img" + i + "\" class=\"lightbox\"></div>");
             /*previous button*/
-            $(".lightbox#img" + i + "").append("<a href=\"#img" + prev + "\" class='previous'>&lt;</a>");
+            $(".lightbox#img" + i + "").append("<a href=\"#img" + prev + 
+                    "\" class='previous'>&lt;</a>");
             /* lightbox image */
-            $(".lightbox#img" + i + "").append("<a href=\"#_\"><img src=\"images/Selfies/" + i + ".png\" alt=\"selfie\" /></a>");
+            $(".lightbox#img" + i + "").append("<a href=\"#_\"><img src=\"images/Selfies/" + i + 
+                    ".png\" alt=\"selfie\" /></a>");
             /* exit button */
             $(".lightbox#img" + i + "").append("<a href=\"#_\" class='exit'>&times;</a>");
             /* next button*/
-            $(".lightbox#img" + i + "").append("<a href=\"#img" + next + "\" class='next'>&gt;</a>");
+            $(".lightbox#img" + i + "").append("<a href=\"#img" + next + 
+                    "\" class='next'>&gt;</a>");
         }
 
     }
