@@ -1,27 +1,23 @@
 // Preload all names on fin to view when browser loads
 $(document).ready(function(){
-    var namesIDMap = new Map();
     function getAllNames(){
         $.ajax({
             type: "GET",
             dataType: "json",
             url: "http://129.146.81.161/fin/?func_name=get_data",
             
-            success: function(data){
+            success: function(data) {
                 var names = JSON.stringify(data);
                 var obj = $.parseJSON(names);
                 var name_array = obj.NAME;
+                
         
                 // create names on fin
                 for(var i = 0; i < name_array.length; i++){
-                    $(".finNames").append("<div class='name' id='name"+ i +"'> &nbsp"
+                    var concatName = name_array[i].split(" ").join("");
+                    $(".finNames").append("<div class='name' id='"+ concatName +"'> &nbsp"
                             + name_array[i] + ", &nbsp</div>");
-                    // add to namesIDMap
-                    namesIDMap.set(name_array[i], i);
                 }
-                console.log(namesIDMap);
-                console.log(name_array.length);
-                console.log(namesIDMap.size);
             }
         });
     }
@@ -31,14 +27,14 @@ getAllNames();
 
 /** Draggable fin and names **/
 $( function() {
-    $("#draggable").draggable();
+    $("#draggable").draggable({revert: 'invalid'});
 } );
 
 
 // reset position of fin on another click and panning
 function reset() {
     if ($(".namesHolder").position().left !== 0 || $(".namesHolder").position().top !== 0) {
-        $(".namesHolder").css({transform: 'scale(.2)'}, 'top:0; left:0;'); 
+        $(".namesHolder").css({transform: ''}, 'top:0; left:0;'); 
     }
 }
 
@@ -46,11 +42,13 @@ function reset() {
 
 // calc % difference between center coord (x,y) and name div (x,y)
 function calcOffset(currentID) {
-    x = $("#name" + currentID).position().left;
-    y = $("#name" + currentID).position().top;
+    x = $("#" + currentID).position().left;
+    y = $("#" + currentID).position().top;
     
     percentLeft = x/$(".name_area").width() * 100;
     percentTop = y/$(".name_area").height() * 100;
+    console.log("(x,y)%: " +percentLeft+ ", " +percentTop);
+
    
     xDiff = 50 - percentLeft;
     yDiff = 50 - percentTop;
@@ -61,6 +59,7 @@ function calcOffset(currentID) {
 
 // translate name to center 
 function translateName(offset) {
+    console.log("offset%: " +offset[0]+ ", " +offset[1]);
     $(".namesHolder").css({transform: 'scale(5) translate('+ offset[0]+'%,'+ offset[1]+'%)'});
 }
 
@@ -88,10 +87,9 @@ $("#search_names").submit(function(e){
     }).responseText);
 
     //reset fin each time search button is clicked
-    $(".namesHolder").css({transform: 'scale(1)' }); 
+    $(".namesHolder").css({transform: 'scale(1)'}); 
     
     searchResults = names.NAME;           
-    var currentID;
                 
     if (searchResults.length > 1) {
         // create names panel
@@ -105,26 +103,28 @@ $("#search_names").submit(function(e){
                     + i +"'>" + searchResults[i] + "</li></a>");
         }
         
-        reset();
+        reset(); // ?
         // for each name in panel, move fin to the name clicked
         $('li[class^="listBorder"]').on('click', function(){
             
             reset();            
-            var selectedName = $(this).text();
-            currentID = namesIDMap.get(selectedName);
-            console.log("name: "+ selectedName+ ", id: "+ currentID);
-                        
-            offset = calcOffset(currentID);
-            console.log("(x,y)%: " +offset[0]+ ", " +offset[1]);
+            var selectedName = $(this).text().split(" ").join("");
+            console.log("name: "+ selectedName);
+            offset = calcOffset(selectedName);
+            
+            console.log("offset%: " +offset[0]+ ", " +offset[1]);
                         
             translateName(offset);
         });
                     
                     
     } else if (searchResults.length === 1) {
-        currentID = namesIDMap.get(searchResults[0]);
-        offset = calcOffset(currentID);
-        console.log("(x,y)%: " +offset[0]+ ", " +offset[1]);
+        reset();
+        var selectedName = searchResults[0].split(" ").join("");
+        console.log("name: "+ selectedName);
+        offset = calcOffset(selectedName);
+        
+        console.log("offset%: " +offset[0]+ ", " +offset[1]);
                     
         translateName(offset);
         
