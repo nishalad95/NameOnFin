@@ -59,6 +59,12 @@ function calcOffset(currentID) {
 }
 
 
+// translate name to center 
+function translateName(offset) {
+    $(".namesHolder").css({transform: 'scale(5) translate('+ offset[0]+'%,'+ offset[1]+'%)'});
+}
+
+
 
 /* Search bar function */
 $("#search_names").submit(function(e){
@@ -99,35 +105,29 @@ $("#search_names").submit(function(e){
                     + i +"'>" + searchResults[i] + "</li></a>");
         }
         
+        reset();
         // for each name in panel, move fin to the name clicked
         $('li[class^="listBorder"]').on('click', function(){
             
-            // reset position of fin on another click and panning
-            reset();
-            
+            reset();            
             var selectedName = $(this).text();
-            alert(selectedName);
             currentID = namesIDMap.get(selectedName);
-            alert("name: "+ selectedName+ ", id: "+ currentID);
+            console.log("name: "+ selectedName+ ", id: "+ currentID);
                         
-            // calc difference between center coord (x,y) and name div (x,y)
             offset = calcOffset(currentID);
             console.log("(x,y)%: " +offset[0]+ ", " +offset[1]);
                         
-            // translate name to center
-            $(".namesHolder").css({transform: 'scale(5) translate('+ xDiff +'%,'+ yDiff +'%)'});
+            translateName(offset);
         });
                     
                     
     } else if (searchResults.length === 1) {
-        // calc difference between center coord (x,y) and name div (x,y)
         currentID = namesIDMap.get(searchResults[0]);
-        offset= calcOffset(currentID);
+        offset = calcOffset(currentID);
         console.log("(x,y)%: " +offset[0]+ ", " +offset[1]);
                     
-        // translate the name to center
-        $(".namesHolder").css({transform: 'scale(5) translate('+ xDiff +'%,'+ yDiff +'%)'});
-                    
+        translateName(offset);
+        
     } else {
         alert("No results found");
     }
