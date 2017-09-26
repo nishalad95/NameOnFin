@@ -3,12 +3,7 @@ $(document).ready(function(){
     var current_zoom = 1;
     var max_zoom = 16;
     var min_zoom = 1;
-    
-    var x2 = $("#finIMG").width() * 0.8;
-    var y2 = $("#finIMG").height() * 0.8;
-    var x1 = -1.0 * x2;
-    var y1 = -1.0 * y2;
-    alert(x1 + ", " + y1 + ", " + x2 + ", " + y2);
+    var contactid;
     
     function getAllNames(){
         $.ajax({
@@ -34,36 +29,46 @@ $(document).ready(function(){
 getAllNames();
 
 
-/** zoom buttons **/
-$("#zoom-in").click(function(){
+/** Draggable fin and names **/
+$(function() {
+    $("#draggable").draggable();
+} );
+
+$("#zoom-in").click(function() {
     if (current_zoom <= max_zoom){
         current_zoom *= 2.0;
-        x2 = $("#finIMG").width() * 0.8;
-        y2 = $("#finIMG").height() * 0.8;
-        x1 = -1.0 * x2;
-        y1 = -1.0 * y2;
-        alert(x1 + ", " + y1 + ", " + x2 + ", " + y2);
-        $(".namesHolder").css({transform: 'scale(' + current_zoom +')', transformOrigin: 'inherit'});      
+        alert(current_zoom);
+        $(".namesHolder").css({transform: 'scale(' + current_zoom +')'}); 
     }
 });
 
-$("#zoom-out").click(function(){           
+$("#zoom-out").click(function() {
+    if (current_zoom > max_zoom){
+        current_zoom /= 2.0;
+        alert(current_zoom);
+        $(".namesHolder").css({transform: 'scale(' + current_zoom +')'}); 
+    }
+});
+
+/** zoom buttons **/
+function zoomIn(contactid){
+    var x = $("#" + contactid).position().left + '%';
+    var y = $("#" + contactid).position().top + '%';
+    if (current_zoom <= max_zoom){
+        current_zoom *= 2.0;
+        alert(current_zoom);
+        $(".namesHolder").css({transform: 'scale(' + current_zoom +')', transformOrigin: x, y}); 
+    }
+};
+
+function zoomOut(contactid){  
+    var x = $("#" + contactid).position().left + '%';
+    var y = $("#" + contactid).position().top + '%';
     if (current_zoom > min_zoom){
         current_zoom /= 2.0; 
-        alert(x1 + ", " + y1 + ", " + x2 + ", " + y2);
-        $(".namesHolder").css({transform: 'scale(' + current_zoom +')', transformOrigin: 'inherit'});      
+        $(".namesHolder").css({transform: 'scale(' + current_zoom +')', transformOrigin: x, y});      
     }
-});
-
-    
-
-/** Draggable fin and names **/
-$( function() {  
-    if (current_zoom > 1) {
-        $(".nameHolder").css('cursor', 'move');
-        $("#draggable").draggable();
-    }
-} );
+};
 
 
 // reset position of fin on another click and panning
@@ -80,29 +85,26 @@ function removeBorder() {
         $(".name").css('box-shadow', 'none');
 }
 
-
+/*
 // calc % difference between center coord (x,y) and name div (x,y)
 function calcOffset(currentID) {
-    //console.log("#" + currentID);
     var x = $("#" + currentID).position().left;
     var y = $("#" + currentID).position().top;
     
     var percentLeft = x/$(".name_area").width() * 100;
     var percentTop = y/$(".name_area").height() * 100;
-    //console.log("(x,y)% (" + percentLeft + ", " + percentTop + ")");
    
     var xDiff = 50 - percentLeft;
     var yDiff = 50 - percentTop;
     
     return [xDiff, yDiff];
 }
-
+*/
 
 // translate name to center 
-function translateName(offset, selectedName) {
-    //console.log("offset%: " +offset[0]+ ", " +offset[1]);
-    $(".namesHolder").css({transform: 'translate('+ offset[0]+'%,'+ offset[1]+'%)'});
-    $("#" + selectedName).css('box-shadow', 'inset 0 0 5em #49250e');
+function translateName(contactid) {
+    //$(".namesHolder").css({transform: 'translate('+ offset[0]+'%,'+ offset[1]+'%)'});
+    $("#" + contactid).css('box-shadow', 'inset 0 0 5em #49250e');
 }
 
 
@@ -150,20 +152,19 @@ $("#search_names").submit(function(e){
         // for each name in panel, move fin to the name clicked
         $('li[class^="listBorder"]').on('click', function(){
             resetPosition();
-            var contact_id = "contact_"+$(this).attr("id").replace("res_", "");
-            removeBorder(); 
-            //console.log("name: "+ contact_id);
-            offset = calcOffset(contact_id);
-                                    
-            translateName(offset, contact_id);
+            contactid = "contact_"+$(this).attr("id").replace("res_", "");
+            $("#zoom-out").click(zoomOut(contactid));
+            $("#zoom-in").click(zoomIn(contactid));
+            removeBorder();                 
+            translateName(contactid);
         });
                     
     } else if (searchResults.length === 1) {
-        var contact_id = "contact_" + searchResultsID[0];
-        removeBorder(); 
-        //console.log("name: "+ contact_id);
-        offset = calcOffset(contact_id);                       
-        translateName(offset, contact_id);
+        contactid = "contact_" + searchResultsID[0];
+        $("#zoom-out").click(zoomOut(contactid));
+        $("#zoom-in").click(zoomIn(contactid));
+        removeBorder();           
+        translateName(contactid);
         
     } else {
         alert("No results found");
