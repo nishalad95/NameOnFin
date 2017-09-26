@@ -33,13 +33,17 @@ $( function() {
 
 
 // reset position of fin on another click and panning
-function reset() {
+function resetPosition() {
     if ($(".namesHolder").position().left !== 0 || $(".namesHolder").position().top !== 0) {
         $(".namesHolder").css('top', 0);
         $(".namesHolder").css('left', 0);
     }
 }
 
+function removeBorder() {
+        resetPosition();
+        $(".name").css('box-shadow', 'none');
+}
 
 
 // calc % difference between center coord (x,y) and name div (x,y)
@@ -61,10 +65,10 @@ function calcOffset(currentID) {
 
 
 // translate name to center 
-function translateName(offset) {
+function translateName(offset, selectedName) {
     console.log("offset%: " +offset[0]+ ", " +offset[1]);
-    $(".namesHolder").css({transform: 'scale(5) translate('+ offset[0]+'%,'+ offset[1]+'%)'});
-    //$("#" + selectedName).css = ('border', 'thick solid #0000FF');
+    $(".namesHolder").css({transform: 'translate('+ offset[0]+'%,'+ offset[1]+'%)'});
+    $("#" + selectedName).css('box-shadow', 'inset 0 0 5em #aa531d');
 }
 
 
@@ -91,8 +95,8 @@ $("#search_names").submit(function(e){
     }).responseText);
 
     //reset fin each time search button is clicked
-    reset();
-    $(".namesHolder").css({transform: 'scale(1)'}); 
+    resetPosition();
+    //$(".namesHolder").css({transform: 'scale(1)'}); 
     
     searchResults = names.NAME;           
                 
@@ -110,28 +114,24 @@ $("#search_names").submit(function(e){
         
         // for each name in panel, move fin to the name clicked
         $('li[class^="listBorder"]').on('click', function(){
-            
-            reset();            
+                       
             var selectedName = $(this).text().split(" ").join("");
             selectedName = selectedName.replace(/^[^a-z]+|[^\w:.-]+/gi, "");
+            removeBorder(); 
             console.log("name: "+ selectedName);
             offset = calcOffset(selectedName);
-            
-            console.log("offset%: " +offset[0]+ ", " +offset[1]);
-                        
-            translateName(offset);
+                                    
+            translateName(offset, selectedName);
         });
                     
     } else if (searchResults.length === 1) {
-        reset();
         var selectedName = searchResults[0].split(" ").join("");
         selectedName = selectedName.replace(/^[^a-z]+|[^\w:.-]+/gi, "");
+        removeBorder(); 
         console.log("name: "+ selectedName);
         offset = calcOffset(selectedName);
-        
-        console.log("offset%: " +offset[0]+ ", " +offset[1]);
-                    
-        translateName(offset);
+                            
+        translateName(offset, selectedName);
         
     } else {
         alert("No results found");
