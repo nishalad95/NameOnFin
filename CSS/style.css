@@ -161,6 +161,7 @@ background
     z-index: 20;
 }
 
+
 .fin-image {
     z-index:17; 
     display:flex;
@@ -176,7 +177,7 @@ background
     z-index: 18;
 }
 
-.namesHolder{
+.namesHolder {
     width:auto;
     height:100%;
     cursor:move;
@@ -191,6 +192,25 @@ background
     position:relative;
     border-radius: 5%;
 }
+
+
+#buttonWrapper {
+        display: none;
+	float: right;
+	z-index: 17;
+	position: absolute;
+	width: 6%;
+	height: 6%;
+        top: 0%;
+	right: 0%;
+}
+
+input[type =
+"button"] {
+	padding: 5%;
+	width: 3%;
+        height: 3%;
+}        
 
 /** Multiple names scroll bar **/
 .namesScrollBar {
@@ -238,7 +258,7 @@ li[class^="listBorder"]:hover {
     text-decoration: none;
 }
 
-#nameLink, #nameLink:visited, #nameLink:active {
+#nameLink, #nameLink:active {
   color: inherit;
 }
 
@@ -246,6 +266,7 @@ li[class^="listBorder"]:hover {
     color: #e67300;
     text-shadow: 1px 1px 1px #000;
 }
+
 
 /** Scroll bar style **/
 

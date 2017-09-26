@@ -1,5 +1,9 @@
 // Preload all names on fin to view when browser loads
 $(document).ready(function(){
+    var current_zoom = 1;
+    var max_zoom = 3;
+    var min_zoom = -1;
+    
     function getAllNames(){
         $.ajax({
             type: "GET",
@@ -10,13 +14,11 @@ $(document).ready(function(){
                 var names = JSON.stringify(data);
                 var obj = $.parseJSON(names);
                 var name_array = obj.NAME;
+                var ids_array = obj.ID; 
                 
-        
                 // create names on fin
                 for(var i = 0; i < name_array.length; i++){
-                    var concatName = name_array[i].split(" ").join("");
-                    concatName = concatName.replace(/^[^a-z]+|[^\w:.-]+/gi, "");
-                    $(".finNames").append("<div class='name' id='"+ concatName +"'> &nbsp"
+                    $(".finNames").append("<div class='name' id='contact_"+ids_array[i]+"'> &nbsp"
                             + name_array[i] + ", &nbsp</div>");
                 }
             }
@@ -24,11 +26,30 @@ $(document).ready(function(){
     }
 
 getAllNames();
+
+
+/** zoom buttons **/
+$("#zoom-in").click(function(){
+    if (current_zoom <= max_zoom){
+        $(".namesHolder").animate({'zoom' : current_zoom + 0.2}, 'fast');
+        current_zoom += 0.2;       
+    }
+});
+
+$("#zoom-out").click(function(){           
+    if (current_zoom >= min_zoom){
+        $(".namesHolder").animate({'zoom' : current_zoom - 0.2}, 'fast');
+        current_zoom -= 0.2;        
+    }
+});
+
     
 
 /** Draggable fin and names **/
 $( function() {
-    $("#draggable").draggable();
+    //$("#draggable").draggable({containment: "window", scroll: false});
+    $("#draggable").draggable({containment: "window", scroll: false});
+
 } );
 
 
@@ -54,7 +75,6 @@ function calcOffset(currentID) {
     
     var percentLeft = x/$(".name_area").width() * 100;
     var percentTop = y/$(".name_area").height() * 100;
-    
     console.log("(x,y)% (" + percentLeft + ", " + percentTop + ")");
    
     var xDiff = 50 - percentLeft;
@@ -68,7 +88,7 @@ function calcOffset(currentID) {
 function translateName(offset, selectedName) {
     console.log("offset%: " +offset[0]+ ", " +offset[1]);
     $(".namesHolder").css({transform: 'translate('+ offset[0]+'%,'+ offset[1]+'%)'});
-    $("#" + selectedName).css('box-shadow', 'inset 0 0 5em #aa531d');
+    $("#" + selectedName).css('box-shadow', 'inset 0 0 5em #49250e');
 }
 
 
@@ -81,6 +101,7 @@ $("#search_names").submit(function(e){
     $("#overlay").hide();
     $("#greeting").hide();
     $(".namesScrollBar").remove();
+    $("#buttonWrapper").show();
                 
     var data = $("#search_names").serializeArray().reduce(function(obj, item){
 	obj[item.name] = item.value;
@@ -96,9 +117,9 @@ $("#search_names").submit(function(e){
 
     //reset fin each time search button is clicked
     resetPosition();
-    //$(".namesHolder").css({transform: 'scale(1)'}); 
     
     searchResults = names.NAME;           
+    searchResultsID = names.ID;           
                 
     if (searchResults.length > 1) {
         // create names panel
@@ -108,30 +129,26 @@ $("#search_names").submit(function(e){
     
         // add search results to panel
         for (var i = 0; i < searchResults.length - 1; i++) {
-            $(".searchList").append("<a id='nameLink' href='#'><li class='listBorder"
-                    + i +"'>" + searchResults[i] + "</li></a>");
+            $(".searchList").append("<a id='nameLink' href='#'><li class='listBorder" +
+                    "dbid='"+ searchResultsID[i] +"' id='res_"+searchResultsID[i]+"'>" + searchResults[i] + "</li></a>");
         }
-        
+        resetPosition();
         // for each name in panel, move fin to the name clicked
         $('li[class^="listBorder"]').on('click', function(){
-                       
-            var selectedName = $(this).text().split(" ").join("");
-            selectedName = selectedName.replace(/^[^a-z]+|[^\w:.-]+/gi, "");
+            var contact_id = "contact_"+$(this).attr("id").replace("res_", "");
             removeBorder(); 
-            console.log("name: "+ selectedName);
-            offset = calcOffset(selectedName);
+            console.log("name: "+ contact_id);
+            offset = calcOffset(contact_id);
                                     
-            translateName(offset, selectedName);
+            translateName(offset, contact_id);
         });
                     
     } else if (searchResults.length === 1) {
-        var selectedName = searchResults[0].split(" ").join("");
-        selectedName = selectedName.replace(/^[^a-z]+|[^\w:.-]+/gi, "");
+        var contact_id = "contact_" + searchResultsID[0];
         removeBorder(); 
-        console.log("name: "+ selectedName);
-        offset = calcOffset(selectedName);
-                            
-        translateName(offset, selectedName);
+        console.log("name: "+ contact_id);
+        offset = calcOffset(contact_id);                       
+        translateName(offset, contact_id);
         
     } else {
         alert("No results found");
