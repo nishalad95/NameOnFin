@@ -1,8 +1,14 @@
 // Preload all names on fin to view when browser loads
 $(document).ready(function(){
     var current_zoom = 1;
-    var max_zoom = 3;
-    var min_zoom = -1;
+    var max_zoom = 16;
+    var min_zoom = 1;
+    
+    var x2 = $("#finIMG").width() * 0.8;
+    var y2 = $("#finIMG").height() * 0.8;
+    var x1 = -1.0 * x2;
+    var y1 = -1.0 * y2;
+    alert(x1 + ", " + y1 + ", " + x2 + ", " + y2);
     
     function getAllNames(){
         $.ajax({
@@ -31,25 +37,32 @@ getAllNames();
 /** zoom buttons **/
 $("#zoom-in").click(function(){
     if (current_zoom <= max_zoom){
-        $(".namesHolder").animate({'zoom' : current_zoom + 0.2}, 'fast');
-        current_zoom += 0.2;       
+        current_zoom *= 2.0;
+        x2 = $("#finIMG").width() * 0.8;
+        y2 = $("#finIMG").height() * 0.8;
+        x1 = -1.0 * x2;
+        y1 = -1.0 * y2;
+        alert(x1 + ", " + y1 + ", " + x2 + ", " + y2);
+        $(".namesHolder").css({transform: 'scale(' + current_zoom +')', transformOrigin: 'inherit'});      
     }
 });
 
 $("#zoom-out").click(function(){           
-    if (current_zoom >= min_zoom){
-        $(".namesHolder").animate({'zoom' : current_zoom - 0.2}, 'fast');
-        current_zoom -= 0.2;        
+    if (current_zoom > min_zoom){
+        current_zoom /= 2.0; 
+        alert(x1 + ", " + y1 + ", " + x2 + ", " + y2);
+        $(".namesHolder").css({transform: 'scale(' + current_zoom +')', transformOrigin: 'inherit'});      
     }
 });
 
     
 
 /** Draggable fin and names **/
-$( function() {
-    //$("#draggable").draggable({containment: "window", scroll: false});
-    $("#draggable").draggable({containment: "window", scroll: false});
-
+$( function() {  
+    if (current_zoom > 1) {
+        $(".nameHolder").css('cursor', 'move');
+        $("#draggable").draggable();
+    }
 } );
 
 
@@ -59,6 +72,7 @@ function resetPosition() {
         $(".namesHolder").css('top', 0);
         $(".namesHolder").css('left', 0);
     }
+    $(".namesHolder").css({transform: 'scale(1)'});
 }
 
 function removeBorder() {
@@ -69,13 +83,13 @@ function removeBorder() {
 
 // calc % difference between center coord (x,y) and name div (x,y)
 function calcOffset(currentID) {
-    console.log("#" + currentID);
+    //console.log("#" + currentID);
     var x = $("#" + currentID).position().left;
     var y = $("#" + currentID).position().top;
     
     var percentLeft = x/$(".name_area").width() * 100;
     var percentTop = y/$(".name_area").height() * 100;
-    console.log("(x,y)% (" + percentLeft + ", " + percentTop + ")");
+    //console.log("(x,y)% (" + percentLeft + ", " + percentTop + ")");
    
     var xDiff = 50 - percentLeft;
     var yDiff = 50 - percentTop;
@@ -86,7 +100,7 @@ function calcOffset(currentID) {
 
 // translate name to center 
 function translateName(offset, selectedName) {
-    console.log("offset%: " +offset[0]+ ", " +offset[1]);
+    //console.log("offset%: " +offset[0]+ ", " +offset[1]);
     $(".namesHolder").css({transform: 'translate('+ offset[0]+'%,'+ offset[1]+'%)'});
     $("#" + selectedName).css('box-shadow', 'inset 0 0 5em #49250e');
 }
@@ -101,7 +115,7 @@ $("#search_names").submit(function(e){
     $("#overlay").hide();
     $("#greeting").hide();
     $(".namesScrollBar").remove();
-    $("#buttonWrapper").show();
+    $(".wrapper").show();
                 
     var data = $("#search_names").serializeArray().reduce(function(obj, item){
 	obj[item.name] = item.value;
@@ -120,7 +134,7 @@ $("#search_names").submit(function(e){
     
     searchResults = names.NAME;           
     searchResultsID = names.ID;           
-                
+    
     if (searchResults.length > 1) {
         // create names panel
         $(".name_area").append("<div class='namesScrollBar' id='panel'></div>");
@@ -135,9 +149,10 @@ $("#search_names").submit(function(e){
         resetPosition();
         // for each name in panel, move fin to the name clicked
         $('li[class^="listBorder"]').on('click', function(){
+            resetPosition();
             var contact_id = "contact_"+$(this).attr("id").replace("res_", "");
             removeBorder(); 
-            console.log("name: "+ contact_id);
+            //console.log("name: "+ contact_id);
             offset = calcOffset(contact_id);
                                     
             translateName(offset, contact_id);
@@ -146,7 +161,7 @@ $("#search_names").submit(function(e){
     } else if (searchResults.length === 1) {
         var contact_id = "contact_" + searchResultsID[0];
         removeBorder(); 
-        console.log("name: "+ contact_id);
+        //console.log("name: "+ contact_id);
         offset = calcOffset(contact_id);                       
         translateName(offset, contact_id);
         
