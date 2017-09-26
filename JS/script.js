@@ -15,6 +15,7 @@ $(document).ready(function(){
                 // create names on fin
                 for(var i = 0; i < name_array.length; i++){
                     var concatName = name_array[i].split(" ").join("");
+                    concatName = concatName.replace(/^[^a-z]+|[^\w:.-]+/gi, "");
                     $(".finNames").append("<div class='name' id='"+ concatName +"'> &nbsp"
                             + name_array[i] + ", &nbsp</div>");
                 }
@@ -27,14 +28,15 @@ getAllNames();
 
 /** Draggable fin and names **/
 $( function() {
-    $("#draggable").draggable({revert: 'invalid'});
+    $("#draggable").draggable();
 } );
 
 
 // reset position of fin on another click and panning
 function reset() {
     if ($(".namesHolder").position().left !== 0 || $(".namesHolder").position().top !== 0) {
-        $(".namesHolder").css({transform: ''}, 'top:0; left:0;'); 
+        $(".namesHolder").css('top', 0);
+        $(".namesHolder").css('left', 0);
     }
 }
 
@@ -42,16 +44,17 @@ function reset() {
 
 // calc % difference between center coord (x,y) and name div (x,y)
 function calcOffset(currentID) {
-    x = $("#" + currentID).position().left;
-    y = $("#" + currentID).position().top;
+    console.log("#" + currentID);
+    var x = $("#" + currentID).position().left;
+    var y = $("#" + currentID).position().top;
     
-    percentLeft = x/$(".name_area").width() * 100;
-    percentTop = y/$(".name_area").height() * 100;
-    console.log("(x,y)%: " +percentLeft+ ", " +percentTop);
-
+    var percentLeft = x/$(".name_area").width() * 100;
+    var percentTop = y/$(".name_area").height() * 100;
+    
+    console.log("(x,y)% (" + percentLeft + ", " + percentTop + ")");
    
-    xDiff = 50 - percentLeft;
-    yDiff = 50 - percentTop;
+    var xDiff = 50 - percentLeft;
+    var yDiff = 50 - percentTop;
     
     return [xDiff, yDiff];
 }
@@ -61,6 +64,7 @@ function calcOffset(currentID) {
 function translateName(offset) {
     console.log("offset%: " +offset[0]+ ", " +offset[1]);
     $(".namesHolder").css({transform: 'scale(5) translate('+ offset[0]+'%,'+ offset[1]+'%)'});
+    //$("#" + selectedName).css = ('border', 'thick solid #0000FF');
 }
 
 
@@ -87,6 +91,7 @@ $("#search_names").submit(function(e){
     }).responseText);
 
     //reset fin each time search button is clicked
+    reset();
     $(".namesHolder").css({transform: 'scale(1)'}); 
     
     searchResults = names.NAME;           
@@ -103,12 +108,12 @@ $("#search_names").submit(function(e){
                     + i +"'>" + searchResults[i] + "</li></a>");
         }
         
-        reset(); // ?
         // for each name in panel, move fin to the name clicked
         $('li[class^="listBorder"]').on('click', function(){
             
             reset();            
             var selectedName = $(this).text().split(" ").join("");
+            selectedName = selectedName.replace(/^[^a-z]+|[^\w:.-]+/gi, "");
             console.log("name: "+ selectedName);
             offset = calcOffset(selectedName);
             
@@ -117,10 +122,10 @@ $("#search_names").submit(function(e){
             translateName(offset);
         });
                     
-                    
     } else if (searchResults.length === 1) {
         reset();
         var selectedName = searchResults[0].split(" ").join("");
+        selectedName = selectedName.replace(/^[^a-z]+|[^\w:.-]+/gi, "");
         console.log("name: "+ selectedName);
         offset = calcOffset(selectedName);
         
