@@ -43,7 +43,7 @@ function getDragBox() {
 }
 
 function setDragableElement() {
-    //console.log(getDragBox());
+    console.log(getDragBox());
     $("#draggable").draggable({
         containment: getDragBox()
     });
@@ -81,7 +81,6 @@ function zoomIn(contactid){
     var y = $("#" + contactid).position().top + '%';
     if (current_zoom <= max_zoom){
         current_zoom *= 2.0;
-        alert(current_zoom);
         $(".namesHolder").css({transform: 'scale(' + current_zoom +')', transformOrigin: x, y}); 
     }
 };
