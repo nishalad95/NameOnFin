@@ -130,6 +130,8 @@ input{
     width: 100%;
     height: 100%;
     min-height: 100%;
+    max-height: 100%;
+    max-width:100%;
     overflow-x: hidden;
     overflow-y: hidden;
     color: white;
@@ -196,23 +198,21 @@ background
 }
 
 .wrapper {
+    opacity: 1.0;
     position:relative;
-    display: none;
     z-index: 17;
+    width: 5%;
+    height: 5%;
     top: 2%;
     right: 2%;
 }
 
-#buttonWrapper {
-	position: relative;
-	width: 100%;
-	height: 100%;
-}
 
-input[type =
-"button"] {
-	width: 100%;
-        height: 100%;
+#in, #out {
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }   
 
 

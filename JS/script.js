@@ -28,25 +28,50 @@ $(document).ready(function(){
 
 getAllNames();
 
+var contain = $("#dragArea")[0];
+var draggable = $("#draggable")[0];
 
-/** Draggable fin and names **/
+function getDragBox() {
+    var c = contain.getBoundingClientRect();
+    var d = draggable.getBoundingClientRect();
+    return [
+        c.right - d.width,
+        c.bottom - d.height,
+        Math.max(c.left, c.right-d.width),
+        Math.max(c.top, c.bottom-d.height)
+    ];
+}
+
+function setDragableElement() {
+    //console.log(getDragBox());
+    $("#draggable").draggable({
+        containment: getDragBox()
+    });
+}
+setDragableElement();
+
+/*
+
 $(function() {
+    //$(".name_area").css('width', $(".name_area").width() * current_zoom);
+    //$(".name_area").css('height', $(".name_area").height() * current_zoom);
     $("#draggable").draggable();
 } );
+*/
 
 $("#zoom-in").click(function() {
     if (current_zoom <= max_zoom){
         current_zoom *= 2.0;
-        alert(current_zoom);
-        $(".namesHolder").css({transform: 'scale(' + current_zoom +')'}); 
+        $(".namesHolder").css({transform: 'scale(' + current_zoom +')'});
+        setDragableElement();
     }
 });
 
 $("#zoom-out").click(function() {
-    if (current_zoom > max_zoom){
+    if (current_zoom > min_zoom){
         current_zoom /= 2.0;
-        alert(current_zoom);
         $(".namesHolder").css({transform: 'scale(' + current_zoom +')'}); 
+        setDragableElement();
     }
 });
 
