@@ -3,7 +3,7 @@ $(document).ready(function(){
     var current_zoom = 1;
     var max_zoom = 16;
     var min_zoom = 1;
-    var contactid;
+    var contactid = null;
     
     function getAllNames(){
         $.ajax({
@@ -28,70 +28,71 @@ $(document).ready(function(){
 
 getAllNames();
 
+
 var contain = $("#dragArea")[0];
 var draggable = $("#draggable")[0];
 
 function getDragBox() {
     var c = contain.getBoundingClientRect();
     var d = draggable.getBoundingClientRect();
+    var x1 = c.right - d.width;
+    var y1 = c.bottom - d.height;
+    
     return [
-        c.right - d.width,
-        c.bottom - d.height,
-        Math.max(c.left, c.right-d.width),
-        Math.max(c.top, c.bottom-d.height)
+        x1,
+        y1,
+        c.left,
+        c.top
     ];
 }
 
 function setDragableElement() {
-    //console.log(getDragBox());
+    console.log(getDragBox());
     $("#draggable").draggable({
         containment: getDragBox()
     });
 }
 setDragableElement();
 
-/*
-$(function() {
-    //$(".name_area").css('width', $(".name_area").width() * current_zoom);
-    //$(".name_area").css('height', $(".name_area").height() * current_zoom);
-    $("#draggable").draggable();
-} );
-*/
 
 $("#zoom-in").click(function() {
-    if (current_zoom <= max_zoom){
-        current_zoom *= 2.0;
-        $(".namesHolder").css({transform: 'scale(' + current_zoom +')'});
-        setDragableElement();
+    if (contactid === null) {
+        if (current_zoom <= max_zoom){
+            current_zoom *= 2.0;
+            $(".namesHolder").css({transform: 'scale(' + current_zoom +')'});
+            setDragableElement();
+        }
+    } else {
+        var x = $("#" + contactid).position().left;
+        var y = $("#" + contactid).position().top;
+        alert(x +", "+ y);
+        
+        var percentX = x/($(".namesHolder").width()* 2.0^(current_zoom/2)) * 100;
+        var percentY = y/($(".namesHolder").height()* 2.0^(current_zoom/2)) * 100;
+        
+        percentX = percentX + '%';
+        percentY = percentY + '%';
+        var origin = percentX + ' ' + percentY;
+        
+        if (current_zoom <= max_zoom){
+            current_zoom *= 2.0;
+            alert(origin);
+            $(".namesHolder").css({transform: 'scale(' + current_zoom + ')', transformOrigin: ' ' + origin + ' '});
+            setDragableElement();
+        }
     }
+    
+    
 });
 
 $("#zoom-out").click(function() {
-    if (current_zoom > min_zoom){
-        current_zoom /= 2.0;
-        $(".namesHolder").css({transform: 'scale(' + current_zoom +')'}); 
-        setDragableElement();
-    }
+        if (current_zoom > min_zoom){
+            current_zoom /= 2.0;
+            $(".namesHolder").css({transform: 'scale(' + current_zoom +')'}); 
+            setDragableElement();
+        }  
 });
 
-/** zoom buttons **/
-function zoomIn(contactid){
-    var x = $("#" + contactid).position().left + '%';
-    var y = $("#" + contactid).position().top + '%';
-    if (current_zoom <= max_zoom){
-        current_zoom *= 2.0;
-        $(".namesHolder").css({transform: 'scale(' + current_zoom +')', transformOrigin: x, y}); 
-    }
-};
-
-function zoomOut(contactid){  
-    var x = $("#" + contactid).position().left + '%';
-    var y = $("#" + contactid).position().top + '%';
-    if (current_zoom > min_zoom){
-        current_zoom /= 2.0; 
-        $(".namesHolder").css({transform: 'scale(' + current_zoom +')', transformOrigin: x, y});      
-    }
-};
 
 
 // reset position of fin on another click and panning
@@ -125,7 +126,7 @@ function calcOffset(currentID) {
 */
 
 // translate name to center 
-function translateName(contactid) {
+function createBorder(contactid) {
     $("#" + contactid).css('box-shadow', 'inset 0 0 5em #49250e');
 }
 
@@ -140,6 +141,7 @@ $("#search_names").submit(function(e){
     $("#greeting").hide();
     $(".namesScrollBar").remove();
     $(".wrapper").show();
+    current_zoom = 1;
                 
     var data = $("#search_names").serializeArray().reduce(function(obj, item){
 	obj[item.name] = item.value;
@@ -153,7 +155,6 @@ $("#search_names").submit(function(e){
 	async: false
     }).responseText);
 
-    //reset fin each time search button is clicked
     resetPosition();
     
     searchResults = names.NAME;           
@@ -164,8 +165,7 @@ $("#search_names").submit(function(e){
         $(".name_area").append("<div class='namesScrollBar' id='panel'></div>");
         $(".namesScrollBar").append("<div class='searchQuery'>Results for: " + searchTerm +"</div>");
         $(".namesScrollBar").append("<ul class='searchList'>");
-    
-        // add search results to panel
+        
         for (var i = 0; i < searchResults.length - 1; i++) {
             $(".searchList").append("<a id='nameLink' href='#'><li class='listBorder' id='res_"+searchResultsID[i]+"'>" + searchResults[i] + "</li></a>");
         }
@@ -173,19 +173,16 @@ $("#search_names").submit(function(e){
         // for each name in panel, move fin to the name clicked
         $('li[class^="listBorder"]').on('click', function(){
             resetPosition();
+            current_zoom = 1;
             contactid = "contact_"+$(this).attr("id").replace("res_", "");
-            $("#zoom-out").click(zoomOut(contactid));
-            $("#zoom-in").click(zoomIn(contactid));
             removeBorder();                 
-            translateName(contactid);
+            createBorder(contactid);
         });
                     
     } else if (searchResults.length === 1) {
         contactid = "contact_" + searchResultsID[0];
-        $("#zoom-out").click(zoomOut(contactid));
-        $("#zoom-in").click(zoomIn(contactid));
         removeBorder();           
-        translateName(contactid);
+        createBorder(contactid);
         
     } else {
         alert("No results found");
