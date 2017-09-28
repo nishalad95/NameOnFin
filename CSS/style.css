@@ -185,13 +185,17 @@ background
     height:100%;
     cursor: move;
     overflow:hidden;
-    position:relative;
+    position:absolute;
     z-index:17;
+	
+	background-image: url(../images/FinVector2.png);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
 }
 
 .namesHolder .name{
-    float: left;
-    display:flex;
+
+    display:inline;
     z-index:17;
     position:relative;
     border-radius: 5%;
@@ -199,8 +203,8 @@ background
 
 .wrapper {
     opacity: 1.0;
-    position:relative;
-    z-index: 17;
+    position:absolute;
+    z-index: 18;
     width: 5%;
     height: 5%;
     top: 2%;
@@ -455,3 +459,35 @@ li[class^="listBorder"]:hover {
 }
 
 /** END of Lightbox Markup **/
+
+/* CONTAINER STUFF */
+
+#left-image {
+
+	shape-outside: polygon(
+		
+		0% 0%, 
+		0% 75%, 
+		73% 0%
+	);
+	
+	float: left;
+	shape-margin: 5px;
+	width: 50%;
+	height: 100%;
+	visibility: hidden;
+}
+
+#right-image{
+
+	shape-outside: polygon(
+	
+		100% 0%,
+		78% 100%,
+		100% 100%
+	);
+	float: right;
+	width: 50%;
+	height: 100%;
+	visibility: hidden;
+}
