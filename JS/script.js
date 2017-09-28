@@ -43,7 +43,7 @@ function getDragBox() {
 }
 
 function setDragableElement() {
-    console.log(getDragBox());
+    //console.log(getDragBox());
     $("#draggable").draggable({
         containment: getDragBox()
     });
@@ -51,7 +51,6 @@ function setDragableElement() {
 setDragableElement();
 
 /*
-
 $(function() {
     //$(".name_area").css('width', $(".name_area").width() * current_zoom);
     //$(".name_area").css('height', $(".name_area").height() * current_zoom);
@@ -127,7 +126,6 @@ function calcOffset(currentID) {
 
 // translate name to center 
 function translateName(contactid) {
-    //$(".namesHolder").css({transform: 'translate('+ offset[0]+'%,'+ offset[1]+'%)'});
     $("#" + contactid).css('box-shadow', 'inset 0 0 5em #49250e');
 }
 
@@ -169,8 +167,7 @@ $("#search_names").submit(function(e){
     
         // add search results to panel
         for (var i = 0; i < searchResults.length - 1; i++) {
-            $(".searchList").append("<a id='nameLink' href='#'><li class='listBorder" +
-                    "dbid='"+ searchResultsID[i] +"' id='res_"+searchResultsID[i]+"'>" + searchResults[i] + "</li></a>");
+            $(".searchList").append("<a id='nameLink' href='#'><li class='listBorder' id='res_"+searchResultsID[i]+"'>" + searchResults[i] + "</li></a>");
         }
         resetPosition();
         // for each name in panel, move fin to the name clicked

@@ -154,7 +154,6 @@ transparent overlay
 names
 fin svg
 background
-
 */
 
 #greeting {
@@ -177,28 +176,24 @@ background
 }
 
 .finNames {
-    position:absolute;
-    z-index: 17;
-    cursor:move;
+    z-index: 18;
 }
 
 .namesHolder {
     width:100%;
     height:100%;
-    max-width:100%;
-    min-height:100%;
     cursor: move;
     overflow:hidden;
-    position:relative;
+    position:absolute;
     z-index:17;
-    background-image: url(../images/FinVector2.png);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    /*background-size:contain;*/
-    
+	
+	background-image: url(../images/FinVector2.png);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
 }
 
 .namesHolder .name{
+
     display:inline;
     z-index:17;
     position:relative;
@@ -208,7 +203,7 @@ background
 .wrapper {
     opacity: 1.0;
     position:absolute;
-    z-index:18;
+    z-index: 18;
     width: 5%;
     height: 5%;
     top: 2%;
@@ -464,42 +459,34 @@ li[class^="listBorder"]:hover {
 
 /** END of Lightbox Markup **/
 
-.left-image {
-        -webkit-shape-outside: polygon (
-                0% 0%, 
-		0% 74%, 
-		93% 0%
-        );
-	shape-outside: polygon (
+/* CONTAINER STUFF */
+
+#left-image {
+
+	shape-outside: polygon(
+		
 		0% 0%, 
-		0% 74%, 
-		93% 0%
+		0% 75%, 
+		73% 0%
 	);
-	float:left;
-        z-index:17;
+	
+	float: left;
 	shape-margin: 5px;
 	width: 50%;
 	height: 100%;
 	visibility: hidden;
-
 }
 
-.right-image{
-        -webkit-shape-outside: polygon (
-                100% 0%, 
-		95% 100%, 
-		100% 100%
-        );
+#right-image{
+
 	shape-outside: polygon(
 	
 		100% 0%,
-		95% 100%,
+		78% 100%,
 		100% 100%
 	);
-        float:right;
-        z-index:17;
+	float: right;
 	width: 50%;
 	height: 100%;
 	visibility: hidden;
-       
 }
