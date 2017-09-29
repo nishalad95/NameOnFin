@@ -195,7 +195,7 @@ $("#search_names").submit(function(e){
 });           
                 
                 
-                
+            
     function loadImages() {
         const TOTALNUMSELFIES = 68;
        
