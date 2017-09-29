@@ -30,7 +30,7 @@ $(document).ready(function(){
 
 getAllNames();
 
-
+/*
 var contain = $("#dragArea")[0];
 var draggable = $("#draggable")[0];
 
@@ -49,28 +49,44 @@ function getDragBox() {
 }
 
 function setDragableElement() {
-    console.log(getDragBox());
     $("#draggable").draggable({
         containment: getDragBox()
     });
 }
 setDragableElement();
 
+*/
+
+$(".panzoom-elements").panzoom();
+
+// Pass options
+$("a.panzoom-elements").panzoom({
+  minScale: 0
+});
+
+$(".panzoom").panzoom({
+  $zoomIn: $("#zoom-in"),
+  $zoomOut: $("#zoom-out"),
+  contain: "invert",
+  minScale: 1
+}).panzoom("zoom");
+
+
 
 $("#zoom-in").click(function() {
     if (contactid === null) {
         if (current_zoom <= MAXZOOM){
             current_zoom *= SCALEFACTOR;
-            $(".namesHolder").css({transform: 'scale(' + current_zoom +')'});
-            setDragableElement();
+            $(".panzoom").css({transform: 'scale(' + current_zoom +')'});
+            //setDragableElement();
             counter += 1;
         }
     } else {
         var x = $("#" + contactid).position().left;
         var y = $("#" + contactid).position().top;
         
-        var percentX = x/($(".namesHolder").width()* Math.pow(SCALEFACTOR, counter)) * 100;
-        var percentY = y/($(".namesHolder").height()* Math.pow(SCALEFACTOR, counter)) * 100;
+        var percentX = x/($(".panzoom").width()* Math.pow(SCALEFACTOR, counter)) * 100;
+        var percentY = y/($(".panzoom").height()* Math.pow(SCALEFACTOR, counter)) * 100;
         
         percentX = percentX + '%';
         percentY = percentY + '%';
@@ -78,9 +94,8 @@ $("#zoom-in").click(function() {
         
         if (current_zoom <= MAXZOOM){
             current_zoom *= SCALEFACTOR;
-            alert(origin);
-            $(".namesHolder").css({transform: 'scale(' + current_zoom + ')', transformOrigin: ' ' + origin + ' '});
-            setDragableElement();
+            $(".panzoom").css({transform: 'scale(' + current_zoom + ')', transformOrigin: ' ' + origin + ' '});
+            //setDragableElement();
             counter += 1;
         }
     }
@@ -90,8 +105,8 @@ $("#zoom-in").click(function() {
 $("#zoom-out").click(function() {
         if (current_zoom > MINZOOM){
             current_zoom /= SCALEFACTOR;
-            $(".namesHolder").css({transform: 'scale(' + current_zoom +')'}); 
-            setDragableElement();
+            $(".panzoom").css({transform: 'scale(' + current_zoom +')'}); 
+            //setDragableElement();
             counter -= 1;
         } 
 });
@@ -100,9 +115,9 @@ $("#zoom-out").click(function() {
 
 // reset position of fin on another click and panning
 function resetPosition() {
-    $(".namesHolder").css('top', 0);
-    $(".namesHolder").css('left', 0);
-    $(".namesHolder").css({transform: 'scale(1)'});
+    $(".panzoom").css('top', 0);
+    $(".panzoom").css('left', 0);
+    $(".panzoom").css({transform: 'scale(1)'});
 }
 
 function removeBorder() {
