@@ -63,6 +63,7 @@ $("#zoom-in").click(function() {
             current_zoom *= SCALEFACTOR;
             $(".namesHolder").css({transform: 'scale(' + current_zoom +')'});
             setDragableElement();
+            counter += 1;
         }
     } else {
         var x = $("#" + contactid).position().left;
@@ -80,8 +81,8 @@ $("#zoom-in").click(function() {
             alert(origin);
             $(".namesHolder").css({transform: 'scale(' + current_zoom + ')', transformOrigin: ' ' + origin + ' '});
             setDragableElement();
+            counter += 1;
         }
-    counter += 1;
     }
 
 });
