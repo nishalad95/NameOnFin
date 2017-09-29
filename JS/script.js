@@ -1,9 +1,11 @@
 // Preload all names on fin to view when browser loads
 $(document).ready(function(){
     var current_zoom = 1;
-    var max_zoom = 16;
-    var min_zoom = 1;
+    const MAXZOOM = 2;
+    const MINZOOM = 1;
+    const SCALEFACTOR = 2;
     var contactid = null;
+    var counter = 0;
     
     function getAllNames(){
         $.ajax({
@@ -19,8 +21,8 @@ $(document).ready(function(){
                 
                 // create names on fin
                 for(var i = 0; i < name_array.length; i++){
-                    $(".finNames").append("<div class='name' id='contact_"+ids_array[i]+"'> &nbsp"
-                            + name_array[i] + ", &nbsp</div>");
+                    $(".finNames").append("<div class='name' id='contact_"+ids_array[i]+"'> &nbsp;"
+                            + name_array[i] + ", &nbsp;</div>");
                 }
             }
         });
@@ -57,50 +59,48 @@ setDragableElement();
 
 $("#zoom-in").click(function() {
     if (contactid === null) {
-        if (current_zoom <= max_zoom){
-            current_zoom *= 2.0;
+        if (current_zoom <= MAXZOOM){
+            current_zoom *= SCALEFACTOR;
             $(".namesHolder").css({transform: 'scale(' + current_zoom +')'});
             setDragableElement();
         }
     } else {
         var x = $("#" + contactid).position().left;
         var y = $("#" + contactid).position().top;
-        alert(x +", "+ y);
         
-        var percentX = x/($(".namesHolder").width()* 2.0^(current_zoom/2)) * 100;
-        var percentY = y/($(".namesHolder").height()* 2.0^(current_zoom/2)) * 100;
+        var percentX = x/($(".namesHolder").width()* Math.pow(SCALEFACTOR, counter)) * 100;
+        var percentY = y/($(".namesHolder").height()* Math.pow(SCALEFACTOR, counter)) * 100;
         
         percentX = percentX + '%';
         percentY = percentY + '%';
         var origin = percentX + ' ' + percentY;
         
-        if (current_zoom <= max_zoom){
-            current_zoom *= 2.0;
+        if (current_zoom <= MAXZOOM){
+            current_zoom *= SCALEFACTOR;
             alert(origin);
             $(".namesHolder").css({transform: 'scale(' + current_zoom + ')', transformOrigin: ' ' + origin + ' '});
             setDragableElement();
         }
+    counter += 1;
     }
-    
-    
+
 });
 
 $("#zoom-out").click(function() {
-        if (current_zoom > min_zoom){
-            current_zoom /= 2.0;
+        if (current_zoom > MINZOOM){
+            current_zoom /= SCALEFACTOR;
             $(".namesHolder").css({transform: 'scale(' + current_zoom +')'}); 
             setDragableElement();
-        }  
+            counter -= 1;
+        } 
 });
 
 
 
 // reset position of fin on another click and panning
 function resetPosition() {
-    if ($(".namesHolder").position().left !== 0 || $(".namesHolder").position().top !== 0) {
-        $(".namesHolder").css('top', 0);
-        $(".namesHolder").css('left', 0);
-    }
+    $(".namesHolder").css('top', 0);
+    $(".namesHolder").css('left', 0);
     $(".namesHolder").css({transform: 'scale(1)'});
 }
 
@@ -109,21 +109,6 @@ function removeBorder() {
         $(".name").css('box-shadow', 'none');
 }
 
-/*
-// calc % difference between center coord (x,y) and name div (x,y)
-function calcOffset(currentID) {
-    var x = $("#" + currentID).position().left;
-    var y = $("#" + currentID).position().top;
-    
-    var percentLeft = x/$(".name_area").width() * 100;
-    var percentTop = y/$(".name_area").height() * 100;
-   
-    var xDiff = 50 - percentLeft;
-    var yDiff = 50 - percentTop;
-    
-    return [xDiff, yDiff];
-}
-*/
 
 // translate name to center 
 function createBorder(contactid) {
@@ -142,6 +127,7 @@ $("#search_names").submit(function(e){
     $(".namesScrollBar").remove();
     $(".wrapper").show();
     current_zoom = 1;
+    counter = 0;
                 
     var data = $("#search_names").serializeArray().reduce(function(obj, item){
 	obj[item.name] = item.value;
@@ -167,13 +153,15 @@ $("#search_names").submit(function(e){
         $(".namesScrollBar").append("<ul class='searchList'>");
         
         for (var i = 0; i < searchResults.length - 1; i++) {
-            $(".searchList").append("<a id='nameLink' href='#'><li class='listBorder' id='res_"+searchResultsID[i]+"'>" + searchResults[i] + "</li></a>");
+            $(".searchList").append("<a id='nameLink' href='#'><li class='listBorder' \n\
+                    id='res_"+searchResultsID[i]+"'>" + searchResults[i] + "</li></a>");
         }
         resetPosition();
-        // for each name in panel, move fin to the name clicked
-        $('li[class^="listBorder"]').on('click', function(){
+        
+        $('.listBorder').on('click', function(){
             resetPosition();
             current_zoom = 1;
+            counter = 0;
             contactid = "contact_"+$(this).attr("id").replace("res_", "");
             removeBorder();                 
             createBorder(contactid);
