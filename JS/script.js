@@ -49,7 +49,6 @@ function getDragBox() {
 }
 
 function setDragableElement() {
-    console.log(getDragBox());
     $("#draggable").draggable({
         containment: getDragBox()
     });
@@ -78,7 +77,6 @@ $("#zoom-in").click(function() {
         
         if (current_zoom <= MAXZOOM){
             current_zoom *= SCALEFACTOR;
-            alert(origin);
             $(".namesHolder").css({transform: 'scale(' + current_zoom + ')', transformOrigin: ' ' + origin + ' '});
             setDragableElement();
             counter += 1;
