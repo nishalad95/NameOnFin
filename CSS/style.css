@@ -136,7 +136,7 @@ input{
     overflow-y: hidden;
     color: white;
     text-shadow: 3px 3px 3px black ! important;
-    font-size: 0.4vw;
+    font-size: 0.4vw ! important;
     margin: 0 auto;
     text-align: justify;
 }
@@ -221,22 +221,19 @@ background
     position:absolute;
     z-index: 18;
     width: 5%;
-    height: 5%;
+    /*height: 5%;*/
     top: 2%;
     right: 2%;
 }
 
 
-#in, #out {
+#in, #out, #Recenter {
     cursor: pointer;
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-#zoom-in:hover, #zoom-out:hover {
-    text-shadow: 1px 1px 1px #000;
-}
 
 
 /** Multiple names scroll bar **/

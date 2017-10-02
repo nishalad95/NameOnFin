@@ -21,8 +21,8 @@ $(document).ready(function(){
                 
                 // create names on fin
                 for(var i = 0; i < name_array.length; i++){
-                    $(".finNames").append("<div class='name' id='contact_"+ids_array[i]+"'>"
-                            + name_array[i] + ", </div>");
+                    $(".finNames").append("<div class='name' id='contact_"+ids_array[i]+"'>&nbsp;"
+                            + name_array[i] + ", &nbsp;</div>");
                 }
             }
         });
@@ -119,6 +119,11 @@ function resetPosition() {
     $(".panzoom").css('left', 0);
     $(".panzoom").css({transform: 'scale(1)'});
 }
+
+
+$("#recenter").click(function () {
+    resetPosition();
+});
 
 function removeBorder() {
         resetPosition();
