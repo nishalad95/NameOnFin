@@ -21,8 +21,8 @@ $(document).ready(function(){
                 
                 // create names on fin
                 for(var i = 0; i < name_array.length; i++){
-                    $(".finNames").append("<div class='name' id='contact_"+ids_array[i]+"'> &nbsp;"
-                            + name_array[i] + ", &nbsp;</div>");
+                    $(".finNames").append("<div class='name' id='contact_"+ids_array[i]+"'>"
+                            + name_array[i] + ", </div>");
                 }
             }
         });
@@ -220,9 +220,7 @@ $("#search_names").submit(function(e){
             /* lightbox image */
             $(".lightbox#img" + i + "").append("<a href=\"#_\"><img src=\"images/Selfies/" + i + 
                     ".png\" alt=\"selfie\" /></a>");
-         
-           
-            $(".lightbox#img" + i + "").append("<div class='selfieMessage'>" + allRows[i] + "</div> ");
+            $(".lightbox#img" + i + "").append("<div class='selfieMessage'>" + allRows[i-1] + "</div> ");
         
             /* exit button */
             $(".lightbox#img" + i + "").append("<a href=\"#_\" class='exit'>&times;</a>");
