@@ -357,6 +357,10 @@ li[class^="listBorder"]:hover {
     animation-play-state: paused;
 }
 
+.innerScrollArea a {
+    width: 15%;
+}
+
 #selfie {
     height:100%;
     top: 1%;

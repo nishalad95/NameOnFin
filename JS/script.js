@@ -204,12 +204,12 @@ $("#search_names").submit(function(e){
                     "\"><img id='selfie' src='images/Selfies/" + i + ".png' alt='selfie' /></a>";
             
             var prev = i - 1;
-            var next = (i + 1) % 70;
-            if (prev === 0) { prev = 70; }
+            var next = (i + 1) % TOTALNUMSELFIES;
+            if (prev === 0) { prev = TOTALNUMSELFIES; }
         
             /* scrolling photo  */
             $(".innerScrollArea").append(thumbnailContainer);
-            $(".innerScrollArea").append("&nbsp;");
+            //$(".innerScrollArea").append("&nbsp;");
             
             /* what the user sees after click */
             $(".lightboxArea").append("<div id=\"img" + i + "\" class=\"lightbox\"></div>");
