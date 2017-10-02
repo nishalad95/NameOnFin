@@ -188,6 +188,13 @@ background
     z-index: 18;
 }
 
+@-moz-document url-prefix() { 
+    .finNames {
+        position:absolute;
+    }
+
+}
+
 .panzoom {
     width:100%;
     height:100%;
@@ -473,9 +480,17 @@ li[class^="listBorder"]:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+.selfieMessage {
+    z-index: 1000;
+    position: fixed;
+    color: #ffffff;
+    width: 100%;
+    margin: 0 auto;
+}
+
 /** END of Lightbox Markup **/
 
-/* CONTAINER STUFF */
+/* Nmes on fin positioning */
 
 #left-image {
 

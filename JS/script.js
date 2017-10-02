@@ -193,11 +193,12 @@ $("#search_names").submit(function(e){
     }
             
 });           
-                
-                
+      
             
-    function loadImages() {
+    function loadImages(data) {
         const TOTALNUMSELFIES = 68;
+        var allRows = data.split(/\r?\n|\r/);
+        console.log(allRows);
        
         for (var i = 1; i <= TOTALNUMSELFIES; i++) {
             var thumbnailContainer = "<a href=\"#img" + i + 
@@ -219,6 +220,10 @@ $("#search_names").submit(function(e){
             /* lightbox image */
             $(".lightbox#img" + i + "").append("<a href=\"#_\"><img src=\"images/Selfies/" + i + 
                     ".png\" alt=\"selfie\" /></a>");
+         
+           
+            $(".lightbox#img" + i + "").append("<div class='selfieMessage'>" + allRows[i] + "</div> ");
+        
             /* exit button */
             $(".lightbox#img" + i + "").append("<a href=\"#_\" class='exit'>&times;</a>");
             /* next button*/
@@ -227,6 +232,11 @@ $("#search_names").submit(function(e){
         }
 
     }
-loadImages();
+
+$.ajax({
+    url: 'SelfieMessages.csv',
+    dataType: 'text'
+}).done(loadImages);
+
 
 });
