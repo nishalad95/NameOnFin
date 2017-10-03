@@ -31,6 +31,24 @@ body {
     display: flex;
 }
 
+@-moz-document url-prefix() {
+    .searchBar {
+        background-size: 100% 100%;
+    }
+    
+    #logo, #hashtag {
+        margin-top: 10%;
+    }
+    
+    .inputText {
+        margin-top: 3%;
+    }
+    
+    .Static {
+        margin-top: 3%;
+    }
+}
+
 .logo {
     width: 6.5%;
     position: relative;
@@ -135,8 +153,8 @@ input{
     overflow-x: hidden;
     overflow-y: hidden;
     color: white;
-    text-shadow: 3px 3px 3px black ! important;
-    font-size: 0.4vw ! important;
+    text-shadow: 1px 1px 2px black ! important;
+    font-size: 0.4vw;
     margin: 0 auto;
     text-align: justify;
 }
@@ -156,6 +174,7 @@ input{
     margin: -11% 0 0 0;
     z-index: 19;
 }
+
 /* 
 z indices:
 zoom
@@ -190,10 +209,15 @@ background
 }
 
 @-moz-document url-prefix() { 
+    #overlay {
+        margin: -18% 0 0 0;
+    }
+    .name_area {
+        text-shadow: 1px 1px 2px black ! important;
+    }
     .finNames {
         position:absolute;
     }
-
 }
 
 .panzoom {
@@ -203,10 +227,9 @@ background
     overflow:hidden;
     position:absolute;
     z-index:17;
-	
-	background-image: url(../images/FinVector2.png);
-	background-size: 100% 100%;
-	background-repeat: no-repeat;
+    background-image: url(../images/FinVector2.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
 .panzoom .name{
@@ -221,7 +244,6 @@ background
     position:absolute;
     z-index: 18;
     width: 5%;
-    /*height: 5%;*/
     top: 2%;
     right: 2%;
 }
@@ -247,6 +269,15 @@ background
     font-size: 250%;
     text-shadow: 1px 1px;
     background: rgba(245,245,245,0.9);
+}
+
+@-moz-document url-prefix() {
+    .namesScrollBar{
+        text-shadow: 1px 1px 1px;
+    }
+    #nameLink:hover {
+        text-shadow: 1px 1px 1px black ! important;
+    }
 }
 
 .searchQuery {
@@ -293,7 +324,6 @@ li[class^="listBorder"]:hover {
 
 
 /** Scroll bar style **/
-
 #panel::-webkit-scrollbar-track{
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	background-color: #F5F5F5;
@@ -312,6 +342,7 @@ li[class^="listBorder"]:hover {
 	color-stop(0.60, rgb(73,125,189)),
 	color-stop(0.86, rgb(28,58,148)));
 }
+
 
 .BottomBar {
     width: 70%;
@@ -492,14 +523,11 @@ li[class^="listBorder"]:hover {
 /* Nmes on fin positioning */
 
 #left-image {
-
 	shape-outside: polygon(
-		
 		0% 0%, 
 		0% 75%, 
 		73% 0%
 	);
-	
 	float: left;
 	shape-margin: 5px;
 	width: 50%;
@@ -508,9 +536,7 @@ li[class^="listBorder"]:hover {
 }
 
 #right-image{
-
 	shape-outside: polygon(
-	
 		100% 0%,
 		78% 100%,
 		100% 100%
@@ -520,3 +546,4 @@ li[class^="listBorder"]:hover {
 	height: 100%;
 	visibility: hidden;
 }
+

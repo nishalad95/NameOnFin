@@ -30,36 +30,8 @@ $(document).ready(function(){
 
 getAllNames();
 
-/*
-var contain = $("#dragArea")[0];
-var draggable = $("#draggable")[0];
-
-function getDragBox() {
-    var c = contain.getBoundingClientRect();
-    var d = draggable.getBoundingClientRect();
-    var x1 = c.right - d.width;
-    var y1 = c.bottom - d.height;
-    
-    return [
-        x1,
-        y1,
-        c.left,
-        c.top
-    ];
-}
-
-function setDragableElement() {
-    $("#draggable").draggable({
-        containment: getDragBox()
-    });
-}
-setDragableElement();
-
-*/
-
 $(".panzoom-elements").panzoom();
 
-// Pass options
 $("a.panzoom-elements").panzoom({
   minScale: 0
 });
@@ -215,7 +187,7 @@ $("#search_names").submit(function(e){
         
             /* scrolling photo  */
             $(".innerScrollArea").append(thumbnailContainer);
-            //$(".innerScrollArea").append("&nbsp;");
+            $(".innerScrollArea").append("&nbsp;");
             
             /* what the user sees after click */
             $(".lightboxArea").append("<div id=\"img" + i + "\" class=\"lightbox\"></div>");
