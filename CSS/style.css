@@ -257,7 +257,6 @@ background
 }
 
 
-
 /** Multiple names scroll bar **/
 .namesScrollBar {
     position: absolute;
@@ -299,13 +298,13 @@ background
     padding-left: 15%;   
 } 
 
-li[class^="listBorder"] {
+li[class^="listItem"] {
     list-style-position:inside;
     border: 1px solid rgba(0,0,0,0.2);
     border-radius: 5px;
 }
 
-li[class^="listBorder"]:hover {
+li[class^="listItem"]:hover {
     border: 2px solid rgba(0,0,0,0.2);
 }
 
@@ -324,18 +323,18 @@ li[class^="listBorder"]:hover {
 
 
 /** Scroll bar style **/
-#panel::-webkit-scrollbar-track{
+#accordion::-webkit-scrollbar-track{
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	background-color: #F5F5F5;
 	border-radius: 10px;
 }
 
-#panel::-webkit-scrollbar{
+#accordion::-webkit-scrollbar{
         width: 10px;
 	background-color: #F5F5F5;
 }
 
-#panel::-webkit-scrollbar-thumb{
+#accordion::-webkit-scrollbar-thumb{
 	border-radius: 10px;
 	background-image: -webkit-gradient(linear,left bottom,left top,
 	color-stop(0.44, rgb(122,153,217)),
@@ -352,6 +351,19 @@ li[class^="listBorder"]:hover {
     border-radius: 0 0 1em 1em;
     background: rgba(0, 0, 128, 0.8);
     overflow:hidden;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .BottomBar {
+    width: 70%;
+    height: 12.5vw;
+    margin: 1.5% auto;
+    position: relative;
+    border-radius: 0 0 1em 1em;
+    background: rgba(0, 0, 128, 0.8);
+    overflow:hidden;
+}
+
 }
 
 .photoBanner {  

@@ -1,5 +1,3 @@
-// Preload all names on fin to view when browser loads
-$(document).ready(function(){
     var current_zoom = 1;
     const MAXZOOM = 2;
     const MINZOOM = 1;
@@ -7,50 +5,33 @@ $(document).ready(function(){
     var contactid = null;
     var counter = 0;
     
-    function getAllNames(){
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: "http://129.146.81.161/fin/?func_name=get_data",
-            
-            success: function(data) {
-                var names = JSON.stringify(data);
-                var obj = $.parseJSON(names);
-                var name_array = obj.NAME;
-                var ids_array = obj.ID; 
-                
-                // create names on fin
-                for(var i = 0; i < name_array.length; i++){
-                    $(".finNames").append("<div class='name' id='contact_"+ids_array[i]+"'>&nbsp;"
-                            + name_array[i] + ", &nbsp;</div>");
-                }
-            }
+    function ini() {
+        $(".panzoom").css("visibility","hidden");
+        $(".panzoom-elements").panzoom();
+        $("a.panzoom-elements").panzoom({
+         minScale: 0
         });
+
+        $(".panzoom").panzoom({
+          $zoomIn: $("#zoom-in"),
+          $zoomOut: $("#zoom-out"),
+          contain: "invert",
+          minScale: 1
+        }).panzoom("zoom");
+
+        $(".panzoom").css("visibility","visible");
     }
 
-getAllNames();
-
-$(".panzoom-elements").panzoom();
-
-$("a.panzoom-elements").panzoom({
-  minScale: 0
-});
-
-$(".panzoom").panzoom({
-  $zoomIn: $("#zoom-in"),
-  $zoomOut: $("#zoom-out"),
-  contain: "invert",
-  minScale: 1
-}).panzoom("zoom");
-
-
-
-$("#zoom-in").click(function() {
+$(document).ready(function(){
+    
+    window.setTimeout("getAllNames()", 5);
+    
+    
+    $("#zoom-in").click(function() {
     if (contactid === null) {
         if (current_zoom <= MAXZOOM){
             current_zoom *= SCALEFACTOR;
             $(".panzoom").css({transform: 'scale(' + current_zoom +')'});
-            //setDragableElement();
             counter += 1;
         }
     } else {
@@ -67,51 +48,22 @@ $("#zoom-in").click(function() {
         if (current_zoom <= MAXZOOM){
             current_zoom *= SCALEFACTOR;
             $(".panzoom").css({transform: 'scale(' + current_zoom + ')', transformOrigin: ' ' + origin + ' '});
-            //setDragableElement();
             counter += 1;
         }
     }
 
-});
+    });
 
-$("#zoom-out").click(function() {
+    $("#zoom-out").click(function() {
         if (current_zoom > MINZOOM){
             current_zoom /= SCALEFACTOR;
             $(".panzoom").css({transform: 'scale(' + current_zoom +')'}); 
-            //setDragableElement();
             counter -= 1;
         } 
-});
-
-
-
-// reset position of fin on another click and panning
-function resetPosition() {
-    $(".panzoom").css('top', 0);
-    $(".panzoom").css('left', 0);
-    $(".panzoom").css({transform: 'scale(1)'});
-}
-
-
-$("#recenter").click(function () {
-    resetPosition();
-});
-
-function removeBorder() {
-        resetPosition();
-        $(".name").css('box-shadow', 'none');
-}
-
-
-// translate name to center 
-function createBorder(contactid) {
-    $("#" + contactid).css('box-shadow', 'inset 0 0 5em #49250e');
-}
-
-
-
-/* Search bar function */
-$("#search_names").submit(function(e){
+    });
+    
+    /* Search bar function */
+    $("#search_names").submit(function(e){
 		
     // show fin and names when a name is searched
     e.preventDefault();
@@ -141,17 +93,17 @@ $("#search_names").submit(function(e){
     
     if (searchResults.length > 1) {
         // create names panel
-        $(".name_area").append("<div class='namesScrollBar' id='panel'></div>");
+        $(".name_area").append("<div class='namesScrollBar' id='accordion'></div>");
         $(".namesScrollBar").append("<div class='searchQuery'>Results for: " + searchTerm +"</div>");
-        $(".namesScrollBar").append("<ul class='searchList'>");
+        $(".namesScrollBar").append("<div><ul class='searchList'></ul></div>");
         
         for (var i = 0; i < searchResults.length - 1; i++) {
-            $(".searchList").append("<a id='nameLink' href='#'><li class='listBorder' \n\
+            $(".searchList").append("<a id='nameLink' href='#'><li class='listItem' \n\
                     id='res_"+searchResultsID[i]+"'>" + searchResults[i] + "</li></a>");
         }
         resetPosition();
         
-        $('.listBorder').on('click', function(){
+        $('.listItem').on('click', function(){
             resetPosition();
             current_zoom = 1;
             counter = 0;
@@ -169,13 +121,80 @@ $("#search_names").submit(function(e){
         alert("No results found");
     }
             
-});           
+    });
+    
+    $.ajax({
+    url: 'SelfieMessages.csv',
+    dataType: 'text'
+    }).done(loadImages);
+
+
+});
+    
+
+    
+    function getAllNames(){
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "http://129.146.81.161/fin/?func_name=get_data",
+            
+            success: function(data) {
+                var names = JSON.stringify(data);
+                var obj = $.parseJSON(names);
+                var name_array = obj.NAME;
+                var ids_array = obj.ID; 
+                var ht = " ";                
+                // create names on fin
+                for(var i = 0; i < 1000; i++){
+                    ht += "<div class='name' id='contact_"+ids_array[i]+"'>&nbsp;" + name_array[i] + ", &nbsp;</div>";
+                    //$(".finNames").append("<div class='name' id='contact_"+ids_array[i]+"'>&nbsp;"+ name_array[i] + ", &nbsp;</div>");
+                }
+                $(".finNames").append(ht);
+                window.setTimeout("ini()", 5);
+                console.log("no. of names pulled from server: " + name_array.length);
+                console.log("no. of names currently shown: 1000");
+
+            }
+        });
+    }
+
+getAllNames();
+
+
+$("#accordion").accordion({
+    collapsible: true, 
+    active: true
+});
+
+
+// reset position of fin on another click and panning
+function resetPosition() {
+    $(".panzoom").css('top', 0);
+    $(".panzoom").css('left', 0);
+    $(".panzoom").css({transform: 'scale(1)'});
+}
+
+
+$("#recenter").click(function () {
+    resetPosition();
+});
+
+function removeBorder() {
+        resetPosition();
+        $(".name").css('box-shadow', 'none');
+}
+
+
+// add border to highlight name
+function createBorder(contactid) {
+    $("#" + contactid).css('box-shadow', 'inset 0 0 5em #49250e');
+}           
       
             
     function loadImages(data) {
         const TOTALNUMSELFIES = 68;
         var allRows = data.split(/\r?\n|\r/);
-        console.log(allRows);
        
         for (var i = 1; i <= TOTALNUMSELFIES; i++) {
             var thumbnailContainer = "<a href=\"#img" + i + 
@@ -208,10 +227,3 @@ $("#search_names").submit(function(e){
 
     }
 
-$.ajax({
-    url: 'SelfieMessages.csv',
-    dataType: 'text'
-}).done(loadImages);
-
-
-});
