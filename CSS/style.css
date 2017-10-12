@@ -330,7 +330,7 @@ li[class^="listItem"]:hover {
 }
 
 #accordion::-webkit-scrollbar{
-        width: 10px;
+    width: 10px;
 	background-color: #F5F5F5;
 }
 
@@ -341,7 +341,6 @@ li[class^="listItem"]:hover {
 	color-stop(0.60, rgb(73,125,189)),
 	color-stop(0.86, rgb(28,58,148)));
 }
-
 
 .BottomBar {
     width: 70%;
@@ -379,13 +378,13 @@ li[class^="listItem"]:hover {
     width: 25%;
     margin: 2% 0 0 2%;
 }
-
+/*
 .scroller {
     position: relative;
     margin: 0 auto;
     height:100%;
 }
-
+*/
 .innerScrollArea {
     position: relative;
     height:100%;
@@ -417,6 +416,7 @@ li[class^="listItem"]:hover {
 
 /* animations */
 /* Safari 4.0 - 8.0 */
+/*
 @-webkit-keyframes bannermove {
     from {left: 100%;}
     to {left:-900%;}
@@ -426,6 +426,7 @@ li[class^="listItem"]:hover {
     from {left: 100%;}
     to {left:-900%;}
 }
+*/
 
 
 /** LIGHTBOX MARKUP **/
@@ -559,3 +560,28 @@ li[class^="listItem"]:hover {
 	visibility: hidden;
 }
 
+/* NEW SCROLLER CODE */
+
+#scroller {
+	position: relative;
+}
+#scroller .innerScrollArea {
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 1%;
+	bottom: 0;
+}
+
+#scroller ul {
+	padding: 0;
+	margin: 0;
+	position: relative;
+}
+#scroller li {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	position: absolute;
+}

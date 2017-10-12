@@ -298,7 +298,7 @@
 
 		// The increment at which to zoom
 		// Should be a number greater than 0
-		increment: 0.3,
+		//increment: 0.3,
 
 		// When no scale is passed, this option tells
 		// the `zoom` method to increment
@@ -311,15 +311,15 @@
 		panOnlyWhenZoomed: false,
 
 		// min and max zoom scales
-		minScale: 0.3,
-		maxScale: 6,
+		//minScale: 0.3,
+		//maxScale: 6,
 
 		// The default step for the range input
 		// Precendence: default < HTML attribute < option setting
-		rangeStep: 0.05,
+		//rangeStep: 0.05,
 
 		// Animation duration (ms)
-		duration: 200,
+		duration: 300,
 		// CSS easing used for scale transition
 		easing: 'ease-in-out',
 
