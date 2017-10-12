@@ -63,6 +63,30 @@ $(document).ready(function(){
             counter -= 1;
         } 
     });
+    
+    // reset position of fin on another click and panning
+    function resetPosition() {
+        $(".panzoom").css('top', 0);
+        $(".panzoom").css('left', 0);
+        $(".panzoom").css({transform: 'scale(1)'});
+        counter = 0;
+    }
+
+
+    $("#recenter").click(function () {
+        resetPosition();
+    });
+    
+    function removeBorder() {
+        resetPosition();
+        $(".name").css('box-shadow', 'none');
+    }
+
+
+    // add border to highlight name
+    function createBorder(contactid) {
+        $("#" + contactid).css('box-shadow', 'inset 0 0 5em #49250e');
+    }  
    
     /* Search bar function */
     $("#search_names").submit(function(e){
@@ -159,30 +183,7 @@ function getAllNames(){
                               }
                });
 }
-
-
-// reset position of fin on another click and panning
-function resetPosition() {
-    $(".panzoom").css('top', 0);
-    $(".panzoom").css('left', 0);
-    $(".panzoom").css({transform: 'scale(1)'});
-}
-
-
-$("#recenter").click(function () {
-    resetPosition();
-});
-
-function removeBorder() {
-        resetPosition();
-        $(".name").css('box-shadow', 'none');
-}
-
-
-// add border to highlight name
-function createBorder(contactid) {
-    $("#" + contactid).css('box-shadow', 'inset 0 0 5em #49250e');
-}           
+         
       
         
 function loadImages(data) {
