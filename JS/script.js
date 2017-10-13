@@ -152,6 +152,31 @@ $(document).ready(function(){
     url: 'SelfieMessages.csv',
     dataType: 'text'
     }).done(loadImages);
+    
+    $('#lightSlider').lightSlider({
+        item:4,
+        loop:false,
+        slideMove:2,
+        easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+        speed:600,
+        responsive : [
+            {
+                breakpoint:800,
+                settings: {
+                    item:3,
+                    slideMove:1,
+                    slideMargin:6
+                  }
+            },
+            {
+                breakpoint:480,
+                settings: {
+                    item:2,
+                    slideMove:1
+                  }
+            }
+        ]
+    }); 
 
 
 });
@@ -216,7 +241,7 @@ function loadImages(data) {
                               $(".lightbox#img" + i + "").append("<a href=\"#img" + next + "\" class='next'>&gt;</a>");
                }
 }
-
+/*
 $(function(){
                var scroller = $('#scroller div.innerScrollArea');
                var scrollerContent = scroller.children('ul');
@@ -263,3 +288,4 @@ $(function(){
                setInterval(doScroll, 20);
                tweenToNewSpeed(controller.fullSpeed);
 });
+*/
