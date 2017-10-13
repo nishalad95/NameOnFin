@@ -135,12 +135,14 @@ $(document).ready(function(){
             contactid = "contact_"+$(this).attr("id").replace("res_", "");
             removeBorder();                 
             createBorder(contactid);
+            $("#zoom-in").click();
         });
                     
     } else if (searchResults.length === 1) {
         contactid = "contact_" + searchResultsID[0];
         removeBorder();           
         createBorder(contactid);
+        $("#zoom-in").click();
         
     } else {
         alert("No results found");
@@ -202,24 +204,16 @@ function getAllNames(){
                                              $(".finNames").append(ht);
                                              
                                              window.setTimeout("ini()", 5);
-                                             
-                   
-
                               }
                });
 }
          
-      
-        
+   
 function loadImages(data) {
                const TOTALNUMSELFIES = 68;
                var allRows = data.split(/\r?\n|\r/);
-   
-   
+
                for (var i = 1; i <= TOTALNUMSELFIES; i++) {
-                              
-                              // var thumbnailContainer = "<a href=\"#img" + i + "\"><img id='selfie' src='images/Selfies/" + i + ".png' alt='selfie' /></a>";
-                              
                               var prev = i - 1;
                               var next = (i + 1) % TOTALNUMSELFIES;
                               if (prev === 0) { prev = TOTALNUMSELFIES; }
@@ -241,51 +235,3 @@ function loadImages(data) {
                               $(".lightbox#img" + i + "").append("<a href=\"#img" + next + "\" class='next'>&gt;</a>");
                }
 }
-/*
-$(function(){
-               var scroller = $('#scroller div.innerScrollArea');
-               var scrollerContent = scroller.children('ul');
-               
-               scrollerContent.children().clone().appendTo(scrollerContent);
-               var curX = 0;
-               
-               scrollerContent.children().each(function(){
-                              var $this = $(this);
-                              $this.css('left', curX);
-                              curX += $this.width();
-               });
-               
-               var fullW = curX / 2;
-               var viewportW = scroller.width();
-
-               // Scrolling speed management
-               var controller = {curSpeed:0, fullSpeed:1.5};
-               var $controller = $(controller);
-               
-               var tweenToNewSpeed = function(newSpeed, duration)
-               {
-                              if (duration === undefined)
-                                             duration = 600;
-                              $controller.stop(true).animate({curSpeed:newSpeed}, duration);
-               };
-
-               // Pause on hover
-               scroller.hover(function(){
-                              tweenToNewSpeed(0);
-               }, function(){
-                              tweenToNewSpeed(controller.fullSpeed);
-               });
-
-               // Scrolling management; start the automatical scrolling
-               var doScroll = function()
-               {
-                              var curX = scroller.scrollLeft();
-                              var newX = curX + controller.curSpeed;
-                              if (newX > fullW*2 - viewportW)
-                                             newX -= fullW;
-                              scroller.scrollLeft(newX);
-               };
-               setInterval(doScroll, 20);
-               tweenToNewSpeed(controller.fullSpeed);
-});
-*/
