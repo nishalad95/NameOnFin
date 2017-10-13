@@ -17,11 +17,68 @@ and open the template in the editor.
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        
         <script type="text/javascript" src="JS/panzoom.js"></script>
         <script type="text/javascript" src="JS/script.js?a=1"></script>
         
-    
+        <!-- #region Jssor Slider Begin -->
+        <!-- Generator: Jssor Slider Maker -->
+        <!-- Source: https://www.jssor.com -->
+        <script src="js/jssor.slider-26.3.0.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            jssor_1_slider_init = function() {
+
+                var jssor_1_options = {
+                    $AutoPlay: 1,
+                    $Idle: 0,
+                    $SlideDuration: 5000,
+                    $SlideEasing: $Jease$.$Linear,
+                    $PauseOnHover: 4,
+                    $SlideWidth: 140,
+                    $Cols: 7,
+                    $Align: 0
+                };
+
+                var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+                /*#region responsive code begin*/
+                var MAX_WIDTH = 980;
+                function ScaleSlider() {
+                    var containerElement = jssor_1_slider.$Elmt.parentNode;
+                    var containerWidth = containerElement.clientWidth;
+
+                    if (containerWidth) {
+                        var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
+                        jssor_1_slider.$ScaleWidth(expectedWidth);
+                    }
+                    else {
+                        window.setTimeout(ScaleSlider, 30);
+                    }
+                }
+
+                ScaleSlider();
+                $Jssor$.$AddEvent(window, "load", ScaleSlider);
+                $Jssor$.$AddEvent(window, "resize", ScaleSlider);
+                $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+                /*#endregion responsive code end*/
+            };
+        </script>
+        <style>
+            /* jssor slider loading skin spin css */
+            .jssorl-009-spin img {
+                animation-name: jssorl-009-spin;
+                animation-duration: 1.6s;
+                animation-iteration-count: infinite;
+                animation-timing-function: linear;
+            }
+
+            @keyframes jssorl-009-spin {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
     </head>
     
     <body>
@@ -83,89 +140,91 @@ and open the template in the editor.
                 <img id="selfieText" src="images/SupersonicSelfies.png" alt="Supersonic Selfies!"/>
                 <div class="photoBanner">
 				
-                    <div id="scroller" style='height: 100%; margin: 0 auto;'>
-					
-                        <div class="innerScrollArea">
-                            <ul>
-								<li><a href="#img1"><img src="images/Selfies/1.png" width='100vw'></a></li> 
-								<li><a href="#img2"><img src="images/Selfies/2.png" width='100vw'/></a></li>
-								<li><a href="#img3"><img src="images/Selfies/3.png"  width='100vw'/></a></li>
-								<li><a href="#img4"><img src="images/Selfies/4.png" width='100vw'/></a></li>
-								<li><a href="#img5"><img src="images/Selfies/5.png" width='100vw'/></a></li>
-								<li><a href="#img6"><img src="images/Selfies/6.png"  width='100vw'/></a></li>
-								<li><a href="#img7"><img src="images/Selfies/7.png"  width='100vw'/></a></li>
-								<li><a href="#img8"><img src="images/Selfies/8.png" width='100vw'/></a></li>
-								<li><a href="#img9"><img src="images/Selfies/9.png"  width='100vw'/></a></li>
-								<li><a href="#img10"><img src="images/Selfies/10.png"  width='100vw'/></a></li>
-								<li><a href="#img11"><img src="images/Selfies/11.png" width='100vw'/></a></li>
-								<li><a href="#img12"><img src="images/Selfies/12.png" width='100vw'/></a></li>
-								<li><a href="#img13"><img src="images/Selfies/13.png"  width='100vw'/></a></li>
-								<li><a href="#img14"><img src="images/Selfies/14.png" width='100vw'/></a></li>
-								<li><a href="#img15"><img src="images/Selfies/15.png" width='100vw'/></a></li>
-								<li><a href="#img16"><img src="images/Selfies/16.png"  width='100vw'/></a></li>
-								<li><a href="#img17"><img src="images/Selfies/17.png"  width='100vw'/></a></li>
-								<li><a href="#img18"><img src="images/Selfies/18.png"  width='100vw'/></a></li>
-								<li><a href="#img19"><img src="images/Selfies/19.png" width='100vw'/></a></li>
-								<li><a href="#img20"><img src="images/Selfies/20.png" width='100vw'/></a></li>
-								<li><a href="#img21"><img src="images/Selfies/21.png" width='100vw'/></a></li>
-								<li><a href="#img22"><img src="images/Selfies/22.png" width='100vw'/></a></li>
-								<li><a href="#img23"><img src="images/Selfies/23.png" width='100vw'/></a></li>
-								<li><a href="#img24"><img src="images/Selfies/24.png"  width='100vw'/></a></li>
-								<li><a href="#img25"><img src="images/Selfies/25.png" width='100vw'/></a></li>
-								<li><a href="#img26"><img src="images/Selfies/26.png" width='100vw'/></a></li>
-								<li><a href="#img27"><img src="images/Selfies/27.png" width='100vw'/></a></li>
-								<li><a href="#img28"><img src="images/Selfies/28.png" width='100vw'/></a></li>
-								<li><a href="#img29"><img src="images/Selfies/29.png" width='100vw'/></a></li>
-								<li><a href="#img30"><img src="images/Selfies/30.png" width='100vw'/></a></li>
-								<li><a href="#img31"><img src="images/Selfies/31.png" width='100vw'/></a></li>
-								<li><a href="#img32"><img src="images/Selfies/32.png" width='100vw'/></a></li>
-								<li><a href="#img33"><img src="images/Selfies/33.png" width='100vw'/></a></li>
-								<li><a href="#img34"><img src="images/Selfies/34.png" width='100vw'/></a></li>
-								<li><a href="#img35"><img src="images/Selfies/35.png" width='100vw'/></a></li>
-								<li><a href="#img36"><img src="images/Selfies/36.png" width='100vw'/></a></li>
-								<li><a href="#img37"><img src="images/Selfies/37.png" width='100vw'/></a></li>
-								<li><a href="#img38"><img src="images/Selfies/38.png" width='100vw'/></a></li>
-								<li><a href="#img39"><img src="images/Selfies/39.png" width='100vw'/></a></li>
-								<li><a href="#img40"><img src="images/Selfies/40.png" width='100vw'/></a></li>
-								<li><a href="#img41"><img src="images/Selfies/41.png" width='100vw'/></a></li>
-								<li><a href="#img42"><img src="images/Selfies/42.png" width='100vw'/></a></li>
-								<li><a href="#img43"><img src="images/Selfies/43.png" width='100vw'/></a></li>
-								<li><a href="#img44"><img src="images/Selfies/44.png" width='100vw'/></a></li>
-								<li><a href="#img45"><img src="images/Selfies/45.png" width='100vw'/></a></li>
-								<li><a href="#img46"><img src="images/Selfies/46.png" width='100vw'/></a></li>
-								<li><a href="#img47"><img src="images/Selfies/47.png" width='100vw'/></a></li>
-								<li><a href="#img48"><img src="images/Selfies/48.png" width='100vw'/></a></li>
-								<li><a href="#img49"><img src="images/Selfies/49.png" width='100vw'/></a></li>
-								<li><a href="#img50"><img src="images/Selfies/50.png" width='100vw'/></a></li>
-								<li><a href="#img51"><img src="images/Selfies/51.png" width='100vw'/></a></li>
-								<li><a href="#img52"><img src="images/Selfies/52.png" width='100vw'/></a></li>
-								<li><a href="#img53"><img src="images/Selfies/53.png" width='100vw'/></a></li>
-								<li><a href="#img54"><img src="images/Selfies/54.png" width='100vw'/></a></li>
-								<li><a href="#img55"><img src="images/Selfies/55.png" width='100vw'/></a></li>
-								<li><a href="#img56"><img src="images/Selfies/56.png" width='100vw'/></a></li>
-								<li><a href="#img57"><img src="images/Selfies/57.png" width='100vw'/></a></li>
-								<li><a href="#img58"><img src="images/Selfies/58.png" width='100vw'/></a></li>
-								<li><a href="#img59"><img src="images/Selfies/59.png" width='100vw'/></a></li>
-								<li><a href="#img60"><img src="images/Selfies/60.png" width='100vw'/></a></li>
-								<li><a href="#img61"><img src="images/Selfies/61.png" width='100vw'/></a></li>
-								<li><a href="#img62"><img src="images/Selfies/62.png" width='100vw'/></a></li>
-								<li><a href="#img63"><img src="images/Selfies/63.png" width='100vw'/></a></li>
-								<li><a href="#img64"><img src="images/Selfies/64.png" width='100vw'/></a></li>
-								<li><a href="#img65"><img src="images/Selfies/65.png" width='100vw'/></a></li>
-								<li><a href="#img66"><img src="images/Selfies/66.png" width='100vw'/></a></li>
-								<li><a href="#img67"><img src="images/Selfies/67.png" width='100vw'/></a></li>
-								<li><a href="#img68"><img src="images/Selfies/68.png" width='100vw'/></a></li>
-							</ul>
-                        </div>
+                    <div id="scroller" style='height: 100%; margin: 0 auto;'>		
+                            <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:980px;height:150px;overflow:hidden;visibility:hidden;">
+                                <!-- Loading Screen -->
+                                <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
+                                    <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="img/spin.svg" />
+                                </div>
+                                <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:100%;overflow:hidden;">
+                                    <div><a href="#img1"><img data-u="image" src="images/Selfies/1.png" /></a></div>
+                                    <div><a href="#img2"><img data-u="image" src="images/Selfies/2.png" /></a></div>
+                                    <div><a href="#img3"><img data-u="image" src="images/Selfies/3.png" /></a></div>
+                                    <div><a href="#img4"><img data-u="image" src="images/Selfies/4.png" /></a></div>
+                                    <div><a href="#img5"><img data-u="image" src="images/Selfies/5.png" /></a></div>
+                                    <div><a href="#img6"><img data-u="image" src="images/Selfies/6.png" /></a></div>
+                                    <div><a href="#img7"><img data-u="image" src="images/Selfies/7.png" /></a></div>
+                                    <div><a href="#img8"><img data-u="image" src="images/Selfies/8.png" /></a></div>
+                                    <div><a href="#img9"><img data-u="image" src="images/Selfies/9.png" /></a></div>
+                                    <div><a href="#img10"><img data-u="image" src="images/Selfies/10.png" /></a></div>
+                                    <div><a href="#img11"><img data-u="image" src="images/Selfies/11.png" /></a></div>
+                                    <div><a href="#img12"><img data-u="image" src="images/Selfies/12.png" /></a></div>
+                                    <div><a href="#img13"><img data-u="image" src="images/Selfies/13.png" /></a></div>
+                                    <div><a href="#img14"><img data-u="image" src="images/Selfies/14.png" /></a></div>
+                                    <div><a href="#img15"><img data-u="image" src="images/Selfies/15.png" /></a></div>
+                                    <div><a href="#img16"><img data-u="image" src="images/Selfies/16.png" /></a></div>
+                                    <div><a href="#img17"><img data-u="image" src="images/Selfies/17.png" /></a></div>
+                                    <div><a href="#img18"><img data-u="image" src="images/Selfies/18.png" /></a></div>
+                                    <div><a href="#img19"><img data-u="image" src="images/Selfies/19.png" /></a></div>
+                                    <div><a href="#img20"><img data-u="image" src="images/Selfies/20.png" /></a></div>
+                                    <div><a href="#img21"><img data-u="image" src="images/Selfies/21.png" /></a></div>
+                                    <div><a href="#img22"><img data-u="image" src="images/Selfies/22.png" /></a></div>
+                                    <div><a href="#img23"><img data-u="image" src="images/Selfies/23.png" /></a></div>
+                                    <div><a href="#img24"><img data-u="image" src="images/Selfies/24.png" /></a></div>
+                                    <div><a href="#img25"><img data-u="image" src="images/Selfies/25.png" /></a></div>
+                                    <div><a href="#img26"><img data-u="image" src="images/Selfies/26.png" /></a></div>
+                                    <div><a href="#img27"><img data-u="image" src="images/Selfies/27.png" /></a></div>
+                                    <div><a href="#img28"><img data-u="image" src="images/Selfies/28.png" /></a></div>
+                                    <div><a href="#img29"><img data-u="image" src="images/Selfies/29.png" /></a></div>
+                                    <div><a href="#img30"><img data-u="image" src="images/Selfies/30.png" /></a></div>
+                                    <div><a href="#img31"><img data-u="image" src="images/Selfies/31.png" /></a></div>
+                                    <div><a href="#img32"><img data-u="image" src="images/Selfies/32.png" /></a></div>      
+                                    <div><a href="#img33"><img data-u="image" src="images/Selfies/33.png" /></a></div>
+                                    <div><a href="#img34"><img data-u="image" src="images/Selfies/34.png" /></a></div>
+                                    <div><a href="#img35"><img data-u="image" src="images/Selfies/35.png" /></a></div>
+                                    <div><a href="#img36"><img data-u="image" src="images/Selfies/36.png" /></a></div>
+                                    <div><a href="#img37"><img data-u="image" src="images/Selfies/37.png" /></a></div>
+                                    <div><a href="#img38"><img data-u="image" src="images/Selfies/38.png" /></a></div>
+                                    <div><a href="#img39"><img data-u="image" src="images/Selfies/39.png" /></a></div>
+                                    <div><a href="#img40"><img data-u="image" src="images/Selfies/40.png" /></a></div>
+                                    <div><a href="#img41"><img data-u="image" src="images/Selfies/41.png" /></a></div>
+                                    <div><a href="#img42"><img data-u="image" src="images/Selfies/42.png" /></a></div>
+                                    <div><a href="#img43"><img data-u="image" src="images/Selfies/43.png" /></a></div>
+                                    <div><a href="#img44"><img data-u="image" src="images/Selfies/44.png" /></a></div>
+                                    <div><a href="#img45"><img data-u="image" src="images/Selfies/45.png" /></a></div>
+                                    <div><a href="#img46"><img data-u="image" src="images/Selfies/46.png" /></a></div>
+                                    <div><a href="#img47"><img data-u="image" src="images/Selfies/47.png" /></a></div>
+                                    <div><a href="#img48"><img data-u="image" src="images/Selfies/48.png" /></a></div>
+                                    <div><a href="#img49"><img data-u="image" src="images/Selfies/49.png" /></a></div>
+                                    <div><a href="#img50"><img data-u="image" src="images/Selfies/50.png" /></a></div>
+                                    <div><a href="#img51"><img data-u="image" src="images/Selfies/51.png" /></a></div>
+                                    <div><a href="#img52"><img data-u="image" src="images/Selfies/52.png" /></a></div>
+                                    <div><a href="#img53"><img data-u="image" src="images/Selfies/53.png" /></a></div>
+                                    <div><a href="#img54"><img data-u="image" src="images/Selfies/54.png" /></a></div>
+                                    <div><a href="#img55"><img data-u="image" src="images/Selfies/55.png" /></a></div>
+                                    <div><a href="#img56"><img data-u="image" src="images/Selfies/56.png" /></a></div>
+                                    <div><a href="#img57"><img data-u="image" src="images/Selfies/57.png" /></a></div>
+                                    <div><a href="#img58"><img data-u="image" src="images/Selfies/58.png" /></a></div>
+                                    <div><a href="#img59"><img data-u="image" src="images/Selfies/59.png" /></a></div>
+                                    <div><a href="#img60"><img data-u="image" src="images/Selfies/60.png" /></a></div>
+                                    <div><a href="#img61"><img data-u="image" src="images/Selfies/61.png" /></a></div>
+                                    <div><a href="#img62"><img data-u="image" src="images/Selfies/62.png" /></a></div>
+                                    <div><a href="#img63"><img data-u="image" src="images/Selfies/63.png" /></a></div>
+                                    <div><a href="#img64"><img data-u="image" src="images/Selfies/64.png" /></a></div>
+                                    <div><a href="#img65"><img data-u="image" src="images/Selfies/65.png" /></a></div>
+                                    <div><a href="#img66"><img data-u="image" src="images/Selfies/66.png" /></a></div>
+                                    <div><a href="#img67"><img data-u="image" src="images/Selfies/67.png" /></a></div>
+                                    <div><a href="#img68"><img data-u="image" src="images/Selfies/68.png" /></a></div>
+    
+                                    <a data-u="any" href="https://www.jssor.com" style="display:none">image gallery</a>
+                                </div>
+                            </div>
+                            <script type="text/javascript">jssor_1_slider_init();</script>
+                            <!-- #endregion Jssor Slider End -->
                     </div>
-                    
-                    <div class="lightboxArea">
-                            <!-- Lightbox Photos -->
-                    </div>
+                    <div class="lightboxArea"><!-- Lightbox Photos --></div>
                 </div>
             </div>
-            
             </div>
-      
     </body>
 </html>

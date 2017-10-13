@@ -378,56 +378,6 @@ li[class^="listItem"]:hover {
     width: 25%;
     margin: 2% 0 0 2%;
 }
-/*
-.scroller {
-    position: relative;
-    margin: 0 auto;
-    height:100%;
-}
-*/
-.innerScrollArea {
-    position: relative;
-    height:100%;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    display:flex;
-    -webkit-animation: bannermove 150s infinite; /* Safari 4.0 - 8.0 */
-    animation: bannermove 150s infinite;
-    -webkit-animation-timing-function: linear;
-    animation-timing-function: linear;
-}
-
-.innerScrollArea:hover{
-    -webkit-animation-play-state: paused; /* Safari 4.0 - 8.0 */
-    animation-play-state: paused;
-}
-
-.innerScrollArea a {
-    width: 15%;
-}
-
-#selfie {
-    width: 100%;
-    height:100%;
-    top: 1%;
-    opacity: 1.0;
-}
-
-/* animations */
-/* Safari 4.0 - 8.0 */
-/*
-@-webkit-keyframes bannermove {
-    from {left: 100%;}
-    to {left:-900%;}
-}
-
-@keyframes bannermove {
-    from {left: 100%;}
-    to {left:-900%;}
-}
-*/
 
 
 /** LIGHTBOX MARKUP **/
@@ -566,23 +516,11 @@ li[class^="listItem"]:hover {
 #scroller {
 	position: relative;
 }
-#scroller .innerScrollArea {
+#scroller {
 	overflow: hidden;
 	position: absolute;
 	left: 0;
 	right: 0;
-	top: 1%;
+	top: 10%;
 	bottom: 0;
-}
-
-#scroller ul {
-	padding: 0;
-	margin: 0;
-	position: relative;
-}
-#scroller li {
-	padding: 0;
-	margin: 0;
-	list-style-type: none;
-	position: absolute;
 }
