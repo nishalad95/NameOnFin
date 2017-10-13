@@ -10,12 +10,12 @@
         useCSS: true,
         cssEasing: 'ease', //'cubic-bezier(0.25, 0, 0.25, 1)',
         easing: 'linear', //'for jquery animation',//
-        speed: 400, //ms'
+        speed: 600, //ms'
         auto: true,
         pauseOnHover: false,
         loop: true,
         slideEndAnimation: true,
-        pause: 2000,
+        pause: 4000,
         keyPress: true,
         controls: true,
         prevHtml: '',
@@ -957,7 +957,8 @@
         $el.goToPrevSlide = function () {
             if (scene > 0) {
                 settings.onBeforePrevSlide.call(this, $el, scene);
-                scene--;
+                //scene--;
+                scene -= 3;
                 $el.mode(false);
                 if (settings.gallery === true) {
                     plugin.slideThumb();
@@ -989,7 +990,8 @@
             }
             if (((scene * settings.slideMove) < length - settings.slideMove) && nextI) {
                 settings.onBeforeNextSlide.call(this, $el, scene);
-                scene++;
+                //scene++;
+                scene += 3;
                 $el.mode(false);
                 if (settings.gallery === true) {
                     plugin.slideThumb();
