@@ -72,7 +72,6 @@ $(document).ready(function(){
         counter = 0;
     }
 
-
     $("#recenter").click(function () {
         resetPosition();
     });
@@ -81,8 +80,7 @@ $(document).ready(function(){
         resetPosition();
         $(".name").css('box-shadow', 'none');
     }
-
-
+    
     // add border to highlight name
     function createBorder(contactid) {
         $("#" + contactid).css('box-shadow', 'inset 0 0 5em #49250e');
@@ -122,10 +120,18 @@ $(document).ready(function(){
         $(".name_area").append("<div class='namesScrollBar' id='accordion'></div>");
         $(".namesScrollBar").append("<div class='searchQuery'>Results for: " + searchTerm +"</div>");
         $(".namesScrollBar").append("<div><ul class='searchList'></ul></div>");
-        
+        var results = '';
         for (var i = 0; i < searchResults.length - 1; i++) {
-            $(".searchList").append("<a id='nameLink' href='#'><li class='listItem' \n\               id='res_"+searchResultsID[i]+"'>" + searchResults[i] + "</li></a>");
+            results += "<a id='nameLink' href='#'><li class='listItem' id='res_"+searchResultsID[i]+"'>" + searchResults[i] + "</li></a>";
         }
+        var state = $("#accordion").accordion({
+            collapsible: true, 
+            autoHeight: false,
+            heightStyle: "content"
+        });
+        $(".searchList").append(results).accordion("destroy").accordion(); 
+        $("#accordion").accordion( "option", "active", state );
+
         resetPosition();
         
         $('.listItem').on('click', function(){
@@ -179,7 +185,7 @@ $(document).ready(function(){
             }
         ]
     }); 
-
+    
 
 });
       
