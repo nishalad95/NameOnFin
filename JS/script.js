@@ -99,7 +99,7 @@ $(document).ready(function(){
     $(".wrapper").show();
     current_zoom = 1;
     counter = 0;
-                
+    
     var data = $("#search_names").serializeArray().reduce(function(obj, item){
                obj[item.name] = item.value;
                return obj;
@@ -113,7 +113,6 @@ $(document).ready(function(){
     }).responseText);
 
     resetPosition();
-    
     searchResults = names.NAME;           
     searchResultsID = names.ID;           
     
@@ -123,7 +122,7 @@ $(document).ready(function(){
         $(".namesScrollBar").append("<div class='searchQuery'>Results for: " + searchTerm +"</div>");
         $(".namesScrollBar").append("<div><ul class='searchList'></ul></div>");
         
-        for (var i = 0; i < searchResults.length - 1; i++) {
+        for (var i = 0; i < searchResults.length; i++) {
             $(".searchList").append("<a id='nameLink' href='#'><li class='listItem' \n\               id='res_"+searchResultsID[i]+"'>" + searchResults[i] + "</li></a>");
         }
         resetPosition();
@@ -160,7 +159,7 @@ $(document).ready(function(){
         loop:false,
         slideMove:2,
         easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
-        speed:600,
+        speed:800,
         responsive : [
             {
                 breakpoint:800,
@@ -193,6 +192,7 @@ function getAllNames(){
                               success: function(data) {
                                              var names = JSON.stringify(data);
                                              var obj = $.parseJSON(names);
+                                           
                                              var name_array = obj.NAME;
                                              var ids_array = obj.ID; 
                                              var ht = " ";     
