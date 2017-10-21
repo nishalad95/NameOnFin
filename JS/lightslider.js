@@ -10,12 +10,12 @@
         useCSS: true,
         cssEasing: 'ease', //'cubic-bezier(0.25, 0, 0.25, 1)',
         easing: 'linear', //'for jquery animation',//
-        speed: 600, //ms'
+        speed: 500, //ms'
         auto: true,
         pauseOnHover: false,
         loop: true,
         slideEndAnimation: true,
-        pause: 4000,
+        pause: 5000,
         keyPress: true,
         controls: true,
         prevHtml: '',
@@ -378,7 +378,7 @@
                         }
                     }
                     var $cSouter = $slide.parent();
-                    $cSouter.find('.lSPager').html(pagers); 
+                    $cSouter.find('.lSPager').html(pagers);
                     if (settings.gallery === true) {
                         if (settings.vertical === true) {
                             // set Gallery thumbnail width
@@ -451,7 +451,7 @@
                         setCss();
                         if (!interval) {
                             $this.auto();
-                        }   
+                        }
                     }else{
                         obj.find('img').on('load', function () {
                             setTimeout(function () {
@@ -877,7 +877,7 @@
                 $(window).on('focus', function(){
                     $this.auto();
                 });
-                
+
                 $(window).on('blur', function(){
                     clearInterval(interval);
                 });
@@ -1082,7 +1082,7 @@
                 }
             }
             return sc + 1;
-        }; 
+        };
         $el.getTotalSlideCount = function () {
             return $slide.find('.lslide').length;
         };
@@ -1107,7 +1107,7 @@
                 $el.refresh = function(){};
                 $el.getCurrentSlideCount = function(){};
                 $el.getTotalSlideCount = function(){};
-                $el.goToSlide = function(){}; 
+                $el.goToSlide = function(){};
                 $el.lightSlider = null;
                 refresh = {
                     init : function(){}

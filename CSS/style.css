@@ -2,16 +2,20 @@ html {
    background: white;
    font-family: Tahoma, Helvetica, Arial, Sans-serif;
 }
+.lslide
+{
+	padding: 5px;
+}
 
 body {
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
 }
 
 .container{
     width: 100%;
     margin: 0 auto;
-    position: relative; 
+    position: relative;
 }
 
 #backgroundImage{
@@ -35,16 +39,12 @@ body {
     .searchBar {
         background-size: 100% 100%;
     }
-    
+
     #logo, #hashtag {
         margin-top: 10%;
     }
-    
-    .inputText {
-        margin-top: 3%;
-    }
-    
-    .Static {
+
+    .inputText, .Static {
         margin-top: 3%;
     }
 }
@@ -68,7 +68,7 @@ body {
 
 #hashtag {
     width: 100%;
-    position: relative; 
+    position: relative;
 }
 
 .searchInput {
@@ -93,7 +93,7 @@ input{
     color: #060e6b;
     margin: 0 auto;
     width: 70%;
-    zoom: 100%; 
+    zoom: 100%;
     background: transparent;
     border: none;
     font-size: 1.5vw;
@@ -130,7 +130,7 @@ input{
 }
 
 #inputValue::placeholder {
-    color: #21618C; 
+    color: #21618C;
 }
 
 .box > div {
@@ -138,11 +138,16 @@ input{
     height: 37vw;
     margin: 1% auto;
     position: relative;
-    box-shadow: 0 50px 100px 50px rgba(0, 0, 0, 0.03), 
+    box-shadow: 0 50px 100px 50px rgba(0, 0, 0, 0.03),
         0 50px 100px 50px rgba(0, 0, 0, 0.03);
 }
 
-@media (min-width: 701px) and (max-width: 2560px) and (orientation: portrait) {
+/* ipads and tablets */
+@media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
+  .searchBar, .box > div, .BottomBar {
+    width: 90% ! important;
+  }
+
   .box > div {
       height: 80vh;
       margin: 0 auto;
@@ -154,21 +159,34 @@ input{
     margin: 0 auto;
   }
 
-  #backgroundImage{ 
+  #backgroundImage{
       height: 100%;
       width: 200%;
       margin: 0 0 0 -50%;
   }
-  
+
   #overlay {
       height: 100vh ! important;
-      width: 200% ! important;
-      margin: -16% 0 0 -50% ! important;
+      width: 150% ! important;
+      margin: -10% 0 0 -25% ! important;
   }
-
+  .namesScrollBar {
+    font-size: 2vw ! important;
+  }
+  .name_area {
+    font-size: 0.15vw ! important;
+  }
+  .BottomBar {
+    height: 15vw ! important;
+  }
 }
 
+/* smart phones / notes*/
 @media (max-width: 700px) and (orientation: portrait) {
+  .searchBar, .box > div, .BottomBar {
+    width: 90% ! important;
+  }
+
   .box > div {
       height: 80vh;
       margin: 0 auto;
@@ -180,19 +198,29 @@ input{
     margin: 0 auto;
   }
 
-  #backgroundImage{ 
+  #backgroundImage{
       height: 100%;
       width: 200%;
       margin: 0 0 0 -50%;
   }
-  
+
   #overlay {
       height: 115% ! important;
-      width: 200% ! important;
-      margin: -12% 0 0 -50% ! important;
+      width: 150% ! important;
+      margin: -7% 0 0 -23% ! important;
+  }
+  .namesScrollBar {
+    font-size: 2vw ! important;
+  }
+  .name_area {
+    font-size: 0.2vw ! important;
+  }
+  .BottomBar {
+    height: 15vw ! important;
   }
 
 }
+
 
 .name_area {
     position: relative;
@@ -227,16 +255,6 @@ input{
     z-index: 19;
 }
 
-/* 
-z indices:
-zoom
-greeting
-transparent overlay
-names
-fin svg
-background
-*/
-
 #greeting {
     position: absolute;
     width: 45%;
@@ -246,7 +264,7 @@ background
 
 
 .fin-image {
-    z-index:17; 
+    z-index:17;
     display:flex;
 }
 
@@ -260,7 +278,7 @@ background
     z-index: 18;
 }
 
-@-moz-document url-prefix() { 
+@-moz-document url-prefix() {
     #overlay {
         margin: -18% 0 0 0;
     }
@@ -282,6 +300,7 @@ background
     background-image: url(../images/FinVector2.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
+	  visibility: hidden;
 }
 
 .panzoom .name{
@@ -313,6 +332,7 @@ background
 .namesScrollBar {
     position: absolute;
     max-height:100%;
+    height:auto;
     width: 30%;
     z-index:20;
     overflow:auto;
@@ -347,8 +367,8 @@ background
 .namesScrollBar li {
     line-height:200%;
     text-align: left;
-    padding-left: 15%;   
-} 
+    padding-left: 15%;
+}
 
 li[class^="listItem"] {
     list-style-position:inside;
@@ -406,7 +426,6 @@ li[class^="listItem"]:hover {
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .BottomBar {
-    width: 70%;
     height: 12.5vw;
     margin: 1.5% auto;
     position: relative;
@@ -417,7 +436,7 @@ li[class^="listItem"]:hover {
 
 }
 
-.photoBanner {  
+.photoBanner {
   width: 95%;
   position: relative;
   margin: 0 auto;
@@ -438,13 +457,27 @@ li[class^="listItem"]:hover {
 	right: 0;
 	top: 1%;
 	bottom: 0;
+  height: 100%;
 }
 
+.item {
+  height: 100%;
+  position: relative;
+}
+
+
 #selfie {
-    width: 100%;
-    height: 100%;
+    width: 75%;
+    height: 75%;
     top: 1%;
     opacity: 1.0;
+}
+
+.content-slider a {
+  position: relative;
+  margin: 0 auto;
+  display:flex;
+  z-index:100;
 }
 
 /** LIGHTBOX MARKUP **/
@@ -483,8 +516,8 @@ li[class^="listItem"]:hover {
 }
 
 .lightbox:target {
-	/** Remove default browser outline */   
-	outline: none;       
+	/** Remove default browser outline */
+	outline: none;
 	/** Unhide lightbox **/
 	display: block;
 }
@@ -555,8 +588,8 @@ li[class^="listItem"]:hover {
 
 #left-image {
 	shape-outside: polygon(
-		0% 0%, 
-		0% 75%, 
+		0% 0%,
+		0% 75%,
 		73% 0%
 	);
 	float: left;
