@@ -36,6 +36,16 @@ function setup_slider()
 }
 $(document).ready(function(){
 
+	var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) {
+		return p.toString() === "[object SafariRemoteNotification]";
+	})(!window['safari'] || safari.pushNotification);
+
+	if (isSafari) {
+        alert('We have detected you are not using a supported browser. Please move to either Google Chrome or Mozilla Firefox.');
+				document.write("<style>body { display:none }</style>");
+  			window.location.replace("time-out.html");
+    }
+
     window.setTimeout("getAllNames()", 5);
 
     $.ajax({

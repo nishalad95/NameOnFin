@@ -35,15 +35,14 @@ body {
     display: flex;
 }
 
+/* mozilla styling */
 @-moz-document url-prefix() {
     .searchBar {
         background-size: 100% 100%;
     }
-
     #logo, #hashtag {
         margin-top: 10%;
     }
-
     .inputText, .Static {
         margin-top: 3%;
     }
@@ -278,6 +277,7 @@ input{
     z-index: 18;
 }
 
+/* mozilla styling */
 @-moz-document url-prefix() {
     #overlay {
         margin: -20% 0 0 0;
