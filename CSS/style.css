@@ -233,9 +233,19 @@ input{
     overflow-y: hidden;
     color: white;
     text-shadow: 1px 1px 2px black ! important;
-    font-size: 0.08vw;
+    /* font-size: 0.08vw; */
     margin: 0 auto;
     text-align: justify;
+}
+
+.p_high{
+
+	font-size: 0.20vw;
+}
+
+.p_low{
+	
+	font-size: 0.10vw;
 }
 
 #dragArea {
@@ -332,7 +342,7 @@ input{
 }
 
 
-#in, #out, #Recenter {
+#zoom-in, #zoom-out, #Recenter {
     cursor: pointer;
     position: relative;
     width: 100%;
