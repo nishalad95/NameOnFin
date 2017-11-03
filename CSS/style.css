@@ -342,7 +342,7 @@ input{
 }
 
 
-#zoom-in, #zoom-out, #Recenter {
+#zoom-in, #zoom-out, #Recenter, #Flip {
     cursor: pointer;
     position: relative;
     width: 100%;
