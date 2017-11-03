@@ -37,6 +37,10 @@ function setup_slider()
 }
 $(document).ready(function(){
 
+	// Default sides of the fin to load.
+	loadHighData(current_view);
+	loadLowData(current_view);
+	
 	var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) {
 		return p.toString() === "[object SafariRemoteNotification]";
 	})(!window['safari'] || safari.pushNotification);
@@ -60,34 +64,17 @@ $(document).ready(function(){
 		}
 	});
 
-		window.setTimeout("setup_slider()", 5);
+	window.setTimeout("setup_slider()", 5);
+				
+	$("#Flip").on("click", function(){
+		
+		changeView("no");
+	});	
 
+	
   	$("#zoom-in").on("click", function() {
 		
 	$(".se-pre-con").show();
-
-		/*if (contactid === null) {
-			if (current_zoom < MAXZOOM){
-				current_zoom *= SCALEFACTOR;
-				$(".panzoom").css({transform: 'scale(' + current_zoom +')'});
-				counter += 1;
-			}
-		} else {
-			var x = $("#" + contactid).position().left;
-			var y = $("#" + contactid).position().top*3;
-			var percentX = x/($(".panzoom").width()* Math.pow(SCALEFACTOR, counter)) * 100;
-			var percentY = y/($(".panzoom").height()* Math.pow(SCALEFACTOR, counter)) * 100;
-
-			percentX = percentX + '%';
-			percentY = percentY + '%';
-			var origin = percentX + ' ' + percentY;
-
-			if (current_zoom <= MAXZOOM){
-				current_zoom *= SCALEFACTOR;
-				$(".panzoom").css({transform: 'scale(' + current_zoom + ')', transformOrigin: ' ' + origin + ' '});
-				counter += 1;
-			}
-		}*/
 			
 		currentZoom += 0.05;
 		settings = {
@@ -120,20 +107,20 @@ $(document).ready(function(){
 			// back out
 			closeclick: false
 		}
-		if (contactid === null)
+		if (contactid == null){
+			
 			$(".panzoom").zoomTo(settings);
-		else
+		}
+		else{
+			
 			$("#" + contactid).zoomTo(settings);
-			$(".se-pre-con").hide();
+		}
+		$(".se-pre-con").hide();
     });
 
 	$("#zoom-out").on("click", function() {
 		$(".se-pre-con").show();
-        /*if (current_zoom > MINZOOM){
-            current_zoom /= SCALEFACTOR;
-            $(".panzoom").css({transform: 'scale(' + current_zoom +')'});
-            counter -= 1;
-        }*/
+
 		currentZoom -= 0.05;
 		if (currentZoom < 0 || currentZoom == 0)
 		{
@@ -174,12 +161,18 @@ $(document).ready(function(){
 			closeclick: false
 		}
 		// settings can be set for both the zoomTo and zoomTarget calls:
-		$("#" + contactid).zoomTo(settings);
-		if (contactid === null)
-			$(".panzoom").zoomTo(settings);
-		else
+		
+		
+		if(contactid != null){
+			
 			$("#" + contactid).zoomTo(settings);
-			$(".se-pre-con").hide();
+		}
+		else if (contactid == null){
+			
+			$(".panzoom").zoomTo(settings);
+		}
+
+		$(".se-pre-con").hide();
     });
 
   $("#recenter").click(function () {
@@ -191,11 +184,11 @@ $(document).ready(function(){
 		currentZoom = 0;
 		$(".se-pre-con").hide();
   });
-
   
   $("#search_names").submit(function(e){
 	  
 	$(".se-pre-con").show();
+	
 	// show fin and names when a name is searched
 	e.preventDefault();
 	$("#overlay").hide();
@@ -215,9 +208,9 @@ $(document).ready(function(){
 	
 		$.ajax({
 			
-			url: "PHP/search.php",
+			url: "PHP/search.php?term=" + searchTerm,
 			type: "POST",
-			data: {term : searchTerm},
+			asyn: false,
 			dataType: "json",
 			success: function(data){
 				
@@ -267,66 +260,12 @@ $(document).ready(function(){
 					var pre_key = contactid.split("_");
 					var key = pre_key[1].slice(0, 2);
 					
-					if(key == "nn" || key == "sc"){
-						
-						// We know that these keys belong to the 'near' side view.
-						
-						if(current_view == "near"){
-							
-							// Dont do anything, the selected name belongs to the current view.
-							alert("Currently on the correct view");
-						}
-						else{
-							
-							// The current view is 'off' so we need to switch back to 'near'.
-							
-							current_view = "near";
-							alert("Switching to near side view");
-							
-							$('.panzoom').css("background-image", "url(images/FinVector2.png)");
-							$('#left-image').css("shape-outside", "polygon(0% 0%, 0% 75%, 73% 0%)");
-							$('#right-image').css("shape-outside", "polygon(100% 0%, 78% 100%, 100% 100%)");
-						}
-					}
-					else{
-						
-						// We know that these names belong to the 'off' side view.
-						
-						if(current_view == "off"){
-							
-							// Dont do anything, the selected name belongs to the current view.
-							alert("Currently on the correct view");
-						}
-						else{
-							
-							// The current view is 'near' so we need to switch back to 'off'.
-							
-							current_view = "off";
-							alert("Switching to off side view");
-							
-							$('.panzoom').css("background-image", "url(images/FinVector2Inverted.png)");
-							$('#left-image').css("shape-outside", "polygon(0% 0%, 15% 100%, 0% 100%)");
-							$('#right-image').css("shape-outside", "polygon(25% 0%, 100% 0%, 99% 80%)");
-							
-														
-							$.ajax({
-								url: "PHP/high_loader.php",
-								type: "POST",
-								data: {key_ : key},
-								dataType: "json",
-								
-								success: function(high_data){
-
-									alert(high_data);
-									
-									console.log(high_data);
-								}
-							});
-						}
-					}
-					
 					removeBorder();
 
+					// 
+					changeView(key);
+					
+					// alert(contactid);
 					contSearch(contactid);
 				});
 	
@@ -336,75 +275,137 @@ $(document).ready(function(){
 	$(".se-pre-con").hide();
   });
   
-  /* Search bar function */
-  /*$("#search_names").submit(function(e){
-	  
-	$(".se-pre-con").show();
-	// show fin and names when a name is searched
-	e.preventDefault();
-	$("#overlay").hide();
-	$("#greeting").hide();
-	$(".namesScrollBar").remove();
-	$(".wrapper").show();
-	searched = false;
-	current_zoom = 1;
-	counter = 0;
-
-	var data = $("#search_names").serializeArray().reduce(function(obj, item){
-		   obj[item.name] = item.value;
-		   return obj;
-	}, {});
-
-	var searchTerm = data["name"];
-	$.ajax({
-		url: "http://129.146.81.161/fin/?func_name=search&q=" + searchTerm,
-		dataType: "JSON",
-		async: true,
-		success: function (names)
-	{
-
-	resetPosition();
-
-	searchResults = names.NAME;
-	searchResultsID = names.ID;
-
-	if (searchResults.length > 1) {
-
-	// create names panel
-	$(".name_area").append("<div class='namesScrollBar' id='accordion'></div>");
-	$(".namesScrollBar").append("<div class='searchQuery'>Results for: " + searchTerm +"</div>");
-	$(".namesScrollBar").append("<div><ul class='searchList'></ul></div>");
-
-	for (var i = 0; i < searchResults.length; i++) {
-		$(".searchList").append("<a id='nameLink' href='#'><li class='listItem' id='res_"+searchResultsID[i]+"'>" + searchResults[i] + "</li></a>");
+	function changeView(key){
+		
+		if(key == "nn" || key == "sc"){
+			
+			// We know that these keys belong to the 'near' side view.
+			
+			if(current_view == "near"){
+				
+				// Dont do anything, the selected name belongs to the current view.
+				alert("Currently on the correct view");
+			}
+			else{
+				
+				// The current view is 'off' so we need to switch back to 'near'.
+				
+				current_view = "near";
+				
+				alert("Switching to near side view");
+				
+								
+				$('.panzoom').css("background-image", "url(images/FinVector2.png)");
+				$('#left-image').css("shape-outside", "polygon(0% 0%, 0% 75%, 73% 0%)");
+				$('#right-image').css("shape-outside", "polygon(100% 0%, 78% 100%, 100% 100%)");
+				
+				$(".se-pre-con").show();
+				
+				// Call load high data.
+				loadHighData(current_view);
+				
+				// Load low level data.
+				loadLowData(current_view);
+				
+				$(".se-pre-con").hide();
+			}
+		}
+		else{
+			
+			// We know that these names belong to the 'off' side view.
+			
+			if(current_view == "off"){
+				
+				// Dont do anything, the selected name belongs to the current view.
+				alert("Currently on the correct view");
+			}
+			else{
+				
+				// The current view is 'near' so we need to switch back to 'off'.
+				
+				current_view = "off";
+				alert("Switching to off side view");
+				
+				// Now data has been loaded up, we can set the layout.
+				$('.panzoom').css("background-image", "url(images/FinVector2Inverted.png)");
+				$('#left-image').css("shape-outside", "polygon(0% 0%, 15% 100%, 0% 100%)");
+				$('#right-image').css("shape-outside", "polygon(25% 0%, 100% 0%, 99% 80%)");
+				
+				$(".se-pre-con").show();
+				
+				// Call load high data.
+				loadHighData(current_view);
+				
+				// Load low level data.
+				loadLowData(current_view);
+				
+				$(".se-pre-con").hide();
+			}
+		}
 	}
-	resetPosition();
 
-	$('.listItem').on('click', function(){
-		resetPosition();
-					counter = 0;
-		current_zoom = 1;
-		contactid = "contact_"+$(this).attr("id").replace("res_", "");
-		removeBorder();
-
-		contSearch(contactid);
-	});
-
-	} 
-	else if (searchResults.length === 1) {
-	contactid = "contact_" + searchResultsID[0];
-	removeBorder();
-	createBorder(contactid);
-	$("#zoom-in").click();
-
-	} else {
-	alert("No results found");
-	}
-
-	$(".se-pre-con").hide();
-	}});
-	});*/
 });
+
+function loadLowData(current_view){
+	
+	$.ajax({
+		url: "PHP/low_loader.php?key_=" + current_view,
+		type: "POST",
+		dataType: "json",
+		
+		success: function(low_data){
+			
+			var count = low_data.length
+
+			// Before we add the new p_high data, we must clear out the old stuff.
+			$(".p_low").empty();
+				
+			if(count > 1){
+				
+				for(var i = 0; i < count; i++){
+
+					var id = low_data[i].id;
+					var name = low_data[i].name;
+					var key = low_data[i].key_;
+
+					// Here is where we replace the big names on the page!
+					
+					$(".p_low").append("<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;");
+				}
+			}
+		}
+	});
+}
+function loadHighData(current_view){
+	
+	$.ajax({
+		url: "PHP/high_loader.php?key_=" + current_view,
+		type: "POST",
+		dataType: "json",
+		
+		success: function(high_data){
+			
+			var count = high_data.length
+
+			// Before we add the new p_high data, we must clear out the old stuff.
+			$(".p_high").empty();
+				
+			if(count > 1){
+			
+				for(var i = 0; i < count; i++){
+
+					var id = high_data[i].id;
+					var name = high_data[i].name;
+					var key = high_data[i].key_;
+
+					// Here is where we replace the big names on the page!
+					
+					$(".p_high").append("<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;");
+				}
+			}
+		}
+	});
+}
 function init() {
 	
 	$(".finNames").html(names_html);

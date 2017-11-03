@@ -136,32 +136,9 @@ $name_result = mysqli_query($con, $names_near);
 						   
 							<div class="finNames_">
 								<div class="p_high">
-									<?php
-										
-										if(mysqli_num_rows($school_result) > 0){
-		
-											while($row = mysqli_fetch_assoc($school_result)){
-																						
-												echo "<div class='name zzoomTarget' id='contact_".$row['key_']."".$row["id"]."'>".$row["name"]."</div>";
-											}
-										}
-									?>
 								</div>
 
 								<div class="p_low">
-									<?php
-
-										if(mysqli_num_rows($name_result) > 0){
-
-											while($row = mysqli_fetch_assoc($name_result)){
-								
-												echo "<div class='name zzoomTarget' id='contact_".$row['key_']."".$row['id']."'>".$row["name"]."</div>";
-											}
-										}
-
-										mysqli_close($con);
-
-									?>
 								</div>
 							</div>
 						</div>
@@ -172,13 +149,14 @@ $name_result = mysqli_query($con, $names_near);
                         <div id="zoom-in">
 							<img id="zoom-in" src="images/ZoomIn.png" alt="+" title="Zoom in"/>
 						</div>
-						<br>
                         <div id="zoom-out">
 							<img id="zoom-out" src="images/ZoomOut.png" alt="-" title="Zoom out"/>
 						</div>
-						<br>
                         <div id="recenter">
 							<img id="Recenter" src="images/recenter.png" alt="*" title="Recenter"/>
+						</div>
+						<div id="flip">
+							<img id="Flip" src="images/flip.png" alt="<->" title="Flip"/>
 						</div>
                     </div>
                 </div>

@@ -1,10 +1,11 @@
 <?php
+
 // define variables and set to empty values
 $key = "near";
 
-if(isset($_POST['key_'])){
+if(isset($_REQUEST['key_'])){
 	
-	$key = $_POST['key_'];
+	$key = $_REQUEST['key_'];
 }
 
 $con = mysqli_connect("localhost", "root", "", "Bloodhound");
