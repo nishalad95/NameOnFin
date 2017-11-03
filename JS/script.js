@@ -236,7 +236,7 @@ $(document).ready(function(){
 					
 					contactid = "contact_" + data[0].key_ + data[0].id;
 					
-					alert(contactid);
+					//alert(contactid);
 					removeBorder();
 					createBorder(contactid);
 					$("#zoom-in").click();
@@ -284,7 +284,7 @@ $(document).ready(function(){
 			if(current_view == "near"){
 				
 				// Dont do anything, the selected name belongs to the current view.
-				alert("Currently on the correct view");
+				//alert("Currently on the correct view");
 			}
 			else{
 				
@@ -292,7 +292,7 @@ $(document).ready(function(){
 				
 				current_view = "near";
 				
-				alert("Switching to near side view");
+				//alert("Switching to near side view");
 				
 								
 				$('.panzoom').css("background-image", "url(images/FinVector2.png)");
@@ -317,14 +317,14 @@ $(document).ready(function(){
 			if(current_view == "off"){
 				
 				// Dont do anything, the selected name belongs to the current view.
-				alert("Currently on the correct view");
+				//alert("Currently on the correct view");
 			}
 			else{
 				
 				// The current view is 'near' so we need to switch back to 'off'.
 				
 				current_view = "off";
-				alert("Switching to off side view");
+				//alert("Switching to off side view");
 				
 				// Now data has been loaded up, we can set the layout.
 				$('.panzoom').css("background-image", "url(images/FinVector2Inverted.png)");
