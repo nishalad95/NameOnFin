@@ -36,9 +36,15 @@ function setup_slider()
 }
 $(document).ready(function(){
 
-	// Default sides of the fin to load.
+	// This section pre-loads all the name data to reduce the ajax calls down to once per page load.
 	loadHighData(current_view);
 	loadLowData(current_view);
+	
+	loadHighData("off");
+	loadLowData("off");
+	
+	// By default we hide the side we dont need.
+	$(".off").toggle();
 	
 	var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) {
 		return p.toString() === "[object SafariRemoteNotification]";
@@ -240,8 +246,6 @@ $(document).ready(function(){
 						var key = data[i].key_;
 				
 						sBuilder += "<a id='nameLink' href='#'><li class='listItem' id='res_" + key + id + "'>" + name + "</li></a>";
-						
-						// $(".searchList").append("<a id='nameLink' href='#'><li class='listItem' id='res_" + key + id + "'>" + name + "</li></a>");
 					}
 					
 					$(".searchList").append(sBuilder);
@@ -251,12 +255,8 @@ $(document).ready(function(){
 					contactid = "contact_" + data[0].key_ + data[0].id;
 					
 					removeBorder();
-					
 					changeView(key);
-					
 					contSearch(contactid);
-					
-					$("#zoom-in").click();
 				}
 				else{
 					
@@ -278,10 +278,7 @@ $(document).ready(function(){
 					var key = pre_key[1].slice(0, 2);
 					
 					removeBorder();
-
-					// 
 					changeView(key);
-					
 					contSearch(contactid);
 				});
 	
@@ -316,10 +313,13 @@ $(document).ready(function(){
 				$('#right-image').css("shape-outside", "polygon(100% 0%, 78% 100%, 100% 100%)");
 							
 				// Call load high data.
-				loadHighData(current_view);
+				// loadHighData(current_view);
 				
 				// Load low level data.
-				loadLowData(current_view);
+				// loadLowData(current_view);
+				
+				$(".off").toggle();
+				$(".near").toggle();
 			}
 		}
 		else{
@@ -344,10 +344,13 @@ $(document).ready(function(){
 				$('#right-image').css("shape-outside", "polygon(25% 0%, 100% 0%, 99% 80%)");
 				
 				// Call load high data.
-				loadHighData(current_view);
+				// loadHighData(current_view);
 				
 				// Load low level data.
-				loadLowData(current_view);
+				// loadLowData(current_view);
+				
+				$(".near").toggle();
+				$(".off").toggle();				
 			}
 		}
 	}
@@ -366,7 +369,7 @@ function loadLowData(current_view){
 			var count = low_data.length
 
 			// Before we add the new p_high data, we must clear out the old stuff.
-			$(".p_low").empty();
+			// $(".p_low").empty();
 				
 			if(count > 1){
 				
@@ -382,7 +385,7 @@ function loadLowData(current_view){
 					sBuilder += "<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;";
 				}
 				
-				$(".p_low").append(sBuilder);
+				$("." + current_view + " .p_low").append(sBuilder);
 			}
 		}
 	});
@@ -399,7 +402,7 @@ function loadHighData(current_view){
 			var count = high_data.length
 
 			// Before we add the new p_high data, we must clear out the old stuff.
-			$(".p_high").empty();
+			// $(".p_high").empty();
 				
 			if(count > 1){
 			
@@ -415,7 +418,7 @@ function loadHighData(current_view){
 					sBuilder += "<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;";
 				}
 				
-				$(".p_high").append(sBuilder);
+				$("." + current_view + " .p_high").append(sBuilder);
 			}
 		}
 	});

@@ -1,6 +1,6 @@
 <?php
 // define variables and set to empty values
-$key = "near";
+$key = "off";
 
 if(isset($_REQUEST['key_'])){
 	

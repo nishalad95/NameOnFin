@@ -135,10 +135,19 @@ $name_result = mysqli_query($con, $names_near);
 						   <img src="images/FinVector2.png" id="right-image" alt="Fin vector"/>
 						   
 							<div class="finNames_">
-								<div class="p_high">
-								</div>
+								<div class="near">
+									<div class="p_high">
+									</div>
 
-								<div class="p_low">
+									<div class="p_low">
+									</div>
+								</div>
+								<div class="off">
+									<div class="p_high">
+									</div>
+
+									<div class="p_low">
+									</div>
 								</div>
 							</div>
 						</div>
