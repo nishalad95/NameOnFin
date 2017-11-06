@@ -428,7 +428,9 @@ li[class^="listItem"]:hover {
 	outline: none;
 }
 
-
+.ui-accordion-header:active; .ui-accordion-header:focus {
+	outline: none;
+}
 
 /** Scroll bar style **/
 #accordion::-webkit-scrollbar-track{

@@ -6,11 +6,9 @@ var contactid = null;
 var counter = 0;
 
 var current_view = "near";
-
 var currentZoom = 0;
 
-function setup_slider()
-{
+function setup_slider() {
 	$('#lightSlider').lightSlider({
         item:4,
         loop:false,
@@ -34,6 +32,7 @@ function setup_slider()
     });
 
 }
+
 $(document).ready(function(){
 
 	// This section pre-loads all the name data to reduce the ajax calls down to once per page load.
@@ -52,7 +51,7 @@ $(document).ready(function(){
 
 	if (isSafari) {
         alert('We have detected you are not using a supported browser. Please move to either Google Chrome or Mozilla Firefox.');
-				document.write("<style>body { display:none }</style>");
+			document.write("<style>body { display:none }</style>");
   			window.location.replace("time-out.html");
     }
 
@@ -64,7 +63,6 @@ $(document).ready(function(){
 		dataType: 'text',
 		async: true,
 		success: function (e){
-			
 			loadImages(e);
 		}
 	});
@@ -74,12 +72,9 @@ $(document).ready(function(){
 	$("#Flip").on("click", function(){
 		
 		if(current_view == "near"){
-			
 			changeView("no");
 			resetPosition();
-		}
-		else{
-			
+		} else{
 			changeView("nn");
 			resetPosition();
 		}
@@ -92,41 +87,22 @@ $(document).ready(function(){
 			
 		currentZoom += 0.05;
 		settings = {
-			// zoomed size relative to the container element
-			// 0.0-1.0
 			targetsize: currentZoom,
 			// scale content to screen based on their size
 			// "width"|"height"|"both"
 			scalemode: "both",
-			// animation duration
 			duration: 1,
-			// easing of animation, similar to css transition params
-			// "linear"|"ease"|"ease-in"|"ease-out"|"ease-in-out"|[p1,p2,p3,p4]
-			// [p1,p2,p3,p4] refer to cubic-bezier curve params
 			easing: null,
-			// use browser native animation in webkit, provides faster and nicer
-			// animations but on some older machines, the content that is zoomed
-			// may show up as pixelated.
 			nativeanimation: false,
 			// root element to zoom relative to
-			// (this element needs to be positioned)
 			root: $(".panzoom"),//#dragArea"),
-			// show debug points in element corners. helps
-			// at debugging when zoomooz positioning fails
 			debug: false,
-			// this function is called with the element that is zoomed to in this
-			// when animation ends
 			animationendcallback: null,
-			// this specifies, that clicking an element that is zoomed to zooms
-			// back out
 			closeclick: false
 		}
 		if (contactid == null){
-			
 			$(".panzoom").zoomTo(settings);
-		}
-		else{
-			
+		} else{
 			$("#" + contactid).zoomTo(settings);
 		}
 		$(".se-pre-con").hide();
@@ -141,48 +117,26 @@ $(document).ready(function(){
 			searched = false;
 			resetPosition();
 			currentZoom = 0;
-		        //$(".se-pre-con").hide();
 			return;
 		}
 		settings = {
-			// zoomed size relative to the container element
-			// 0.0-1.0
 			targetsize: currentZoom,
 			// scale content to screen based on their size
 			// "width"|"height"|"both"
 			scalemode: "both",
-			// animation duration
 			duration: 1,
-			// easing of animation, similar to css transition params
-			// "linear"|"ease"|"ease-in"|"ease-out"|"ease-in-out"|[p1,p2,p3,p4]
-			// [p1,p2,p3,p4] refer to cubic-bezier curve params
 			easing: null,
-			// use browser native animation in webkit, provides faster and nicer
-			// animations but on some older machines, the content that is zoomed
-			// may show up as pixelated.
 			nativeanimation: false,
-			// root element to zoom relative to
-			// (this element needs to be positioned)
 			root: $(".panzoom"),//#dragArea"),
-			// show debug points in element corners. helps
-			// at debugging when zoomooz positioning fails
 			debug: false,
-			// this function is called with the element that is zoomed to in this
-			// when animation ends
 			animationendcallback: null,
-			// this specifies, that clicking an element that is zoomed to zooms
-			// back out
 			closeclick: false
 		}
 		// settings can be set for both the zoomTo and zoomTarget calls:
 		
-		
 		if(contactid != null){
-			
 			$("#" + contactid).zoomTo(settings);
-		}
-		else if (contactid == null){
-			
+		} else if (contactid == null){
 			$(".panzoom").zoomTo(settings);
 		}
 
@@ -234,7 +188,7 @@ $(document).ready(function(){
 					
 					// create names panel
 					$(".name_area").append("<div class='namesScrollBar' id='accordion'></div>");
-					$(".namesScrollBar").append("<div class='searchQuery'>Results for:" + searchTerm + "</div>");
+					$(".namesScrollBar").append("<div class='searchQuery'>Results for: " + searchTerm + "</div>");
 					$(".namesScrollBar").append("<div><ul class='searchList'></ul></div>");
 					
 					var sBuilder = "";
@@ -258,16 +212,13 @@ $(document).ready(function(){
 					$(".searchList").append(sBuilder).accordion();
 					$("#accordion").accordion("option", "active", state);
 
-				}
-				else if(count == 1){
+				} else if(count == 1){
 					
 					contactid = "contact_" + data[0].key_ + data[0].id;
-					
 					removeBorder();
 					changeView(key);
 					contSearch(contactid);
-				}
-				else{
+				} else{
 					
 					alert("Sorry, no results were found.");
 				}
@@ -276,7 +227,6 @@ $(document).ready(function(){
 
 				$('.listItem').on('click', function(){
 					
-					// We get this far...
 					resetPosition();
 					
 					counter = 0;
@@ -301,62 +251,31 @@ $(document).ready(function(){
 		
 		if(key == "nn" || key == "sc"){
 			
-			// We know that these keys belong to the 'near' side view.
+			// these keys belong to the 'near' side view
 			
-			if(current_view == "near"){
-				
-				// Dont do anything, the selected name belongs to the current view.
-				// alert("Currently on the correct view");
-			}
-			else{
-				
-				// The current view is 'off' so we need to switch back to 'near'.
+			if(current_view !== "near"){
 				
 				current_view = "near";
 				
-				// alert("Switching to near side view");
-				
-								
 				$('.panzoom').css("background-image", "url(images/FinVector2.png)");
 				$('#left-image').css("shape-outside", "polygon(0% 0%, 0% 75%, 73% 0%)");
 				$('#right-image').css("shape-outside", "polygon(100% 0%, 78% 100%, 100% 100%)");
 							
-				// Call load high data.
-				// loadHighData(current_view);
-				
-				// Load low level data.
-				// loadLowData(current_view);
-				
 				$(".off").toggle();
 				$(".near").toggle();
 			}
-		}
-		else{
+		} else{
 			
-			// We know that these names belong to the 'off' side view.
+			// these names belong to the 'off' side view
 			
-			if(current_view == "off"){
-				
-				// Dont do anything, the selected name belongs to the current view.
-				// alert("Currently on the correct view");
-			}
-			else{
-				
-				// The current view is 'near' so we need to switch back to 'off'.
+			if(current_view !== "off"){
 				
 				current_view = "off";
-				// alert("Switching to off side view");
 				
 				// Now data has been loaded up, we can set the layout.
 				$('.panzoom').css("background-image", "url(images/FinVector2Inverted.png)");
 				$('#left-image').css("shape-outside", "polygon(0% 0%, 25% 100%, 0% 100%)");
 				$('#right-image').css("shape-outside", "polygon(25% 0%, 100% 0%, 99% 80%)");
-				
-				// Call load high data.
-				// loadHighData(current_view);
-				
-				// Load low level data.
-				// loadLowData(current_view);
 				
 				$(".near").toggle();
 				$(".off").toggle();				
@@ -377,9 +296,6 @@ function loadLowData(current_view){
 			
 			var count = low_data.length
 
-			// Before we add the new p_high data, we must clear out the old stuff.
-			// $(".p_low").empty();
-				
 			if(count > 1){
 				
 				sBuilder = "";
@@ -388,7 +304,6 @@ function loadLowData(current_view){
 					var id = low_data[i].id;
 					var name = low_data[i].name;
 					var key = low_data[i].key_;
-
 
 					// Here is where we replace the big names on the page.					
 					sBuilder += "<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;";
@@ -412,9 +327,6 @@ function loadHighData(current_view){
 			
 			var count = high_data.length
 
-			// Before we add the new p_high data, we must clear out the old stuff.
-			// $(".p_high").empty();
-				
 			if(count > 1){
 				
 				sBuilder = "";
@@ -423,7 +335,6 @@ function loadHighData(current_view){
 					var id = high_data[i].id;
 					var name = high_data[i].name;
 					var key = high_data[i].key_;
-
 
 					// Here is where we replace the big names on the page!					
 					sBuilder += "<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;";
@@ -457,9 +368,6 @@ function init() {
 	$(".se-pre-con").hide("slow");
 }
 
-
-
-// reset position of fin on another click and panning
 function resetPosition() {
 	
 	$(".panzoom").css('top', 0);
@@ -475,11 +383,10 @@ function removeBorder() {
 }
 
 
-// add border to highlight name
 function createBorder(contactid) {
-	
 	$("#" + contactid).css('box-shadow', 'inset 0 0 5em #49250e');
 }
+
 var searched = false;
 
 function contSearch(contactid){

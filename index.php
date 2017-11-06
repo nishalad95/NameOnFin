@@ -21,7 +21,7 @@ $name_result = mysqli_query($con, $names_near);
     <head>
         <title>Bloodhound on the Fin</title>
         <meta charset="UTF-8">
-	      <meta name="viewport" content="width=device-width, initial-scale=0.8">
+	<meta name="viewport" content="width=device-width, initial-scale=0.8">
         <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
         <link rel="stylesheet" type="text/css" href="CSS/style.css?ver=1.1" />
         <link rel="stylesheet" type="text/css" href="CSS/lightslider.css?ver=1.1" />
@@ -34,37 +34,48 @@ $name_result = mysqli_query($con, $names_near);
         <script type="text/javascript" src="JS/panzoom.js"></script>
         <script type="text/javascript" src="JS/lightslider.js"></script>
         <script type="text/javascript" src="JS/script.js?a=1"></script>
-    	   <script type="text/javascript" src="JS/jquery.zoomooz.min.js"></script>
+    	<script type="text/javascript" src="JS/jquery.zoomooz.min.js"></script>
 
         <style>
-    	     .item ul{
-                  list-style: none outside none;
-		              padding-left: 0;
-                  margin: 0;
-	         }
-           .demo .item{ margin-bottom: 60px; }
-		       .content-slider li{
-		              text-align: center;
-                  list-style: none;
-		       }
-		       .scroller{ width: 100%; }
-           .no-js #loader { display: none; }
-           .js #loader { display: block; position: absolute; left: 100px; top: 0; }
+	   .item ul{
+                list-style: none outside none;
+		padding-left: 0;
+                margin: 0;
+	   }
+	   .demo .item{ 
+		margin-bottom: 60px; 
+	   }
+	   .content-slider li{
+		text-align: center;
+                list-style: none;
+	   }
+	   .scroller{ 
+		width: 100%; 
+	   }
+	   .no-js #loader { 
+		display: none; 
+	   }
+	   .js #loader { 
+		display: block; 
+		position: absolute; 
+		left: 100px; 
+		top: 0; 
+	   }
           .se-pre-con {
-	                position: fixed;
-	                left: 0px;
-	                top: 0px;
-	                width: 100%;
-	                height: 100%;
-	                z-index: 9999;
-	                opacity: 0.9;
-	                 background: url(images/loader-64x/Preloader_3.gif) center no-repeat #fff;
+	        position: fixed;
+	        left: 0px;
+	        top: 0px;
+	        width: 100%;
+	        height: 100%;
+	        z-index: 9999;
+	        opacity: 0.9;
+	        background: url(images/loader-64x/Preloader_3.gif) center no-repeat #fff;
           }
 
     </style>
     <script>
     	 $(document).ready(function() {
-			$("#content-slider").lightSlider({
+		$("#content-slider").lightSlider({
                 loop:true,
                 keyPress:true
             });
@@ -80,20 +91,13 @@ $name_result = mysqli_query($con, $names_near);
                     $('#image-gallery').removeClass('cS-hidden');
                 }
             });
-/*window.addEventListener(orientationEvent, function() {
-   $(".se-pre-con").show();
-   window.location.href = window.location.href.toString();
-}, false);*/
 
-		});
+	});
     </script>
     </head>
 
     <body>
       <div class="se-pre-con"></div>
-      <!--<div id="warning-message">
-        this website is only viewable in landscape mode, please rotate
-      </div>-->
         <div class="container">
             <img id="backgroundImage" src="images/BloodhoundPosterBackground.jpg" alt="Background"/>
 
@@ -202,7 +206,6 @@ $name_result = mysqli_query($con, $names_near);
 							?>
                         </ul>
                         </div>
-                    <div class="lightboxArea"><!-- Lightbox Photos --></div>
                     </div>
                 </div>
 
