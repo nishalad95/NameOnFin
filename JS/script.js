@@ -232,19 +232,26 @@ $(document).ready(function(){
 					$(".namesScrollBar").append("<div><ul class='searchList'></ul></div>");
 					
 					var sBuilder = "";
-					
 					for(var i = 0; i < count; i++){
 						
 						var id = data[i].id;
 						var name = data[i].name;
 						var key = data[i].key_;
 				
-						sBuilder += "<a id='nameLink' href='#'><li class='listItem' id='res_" + key + id + "'>" + name + "</li></a>";
-						
-						// $(".searchList").append("<a id='nameLink' href='#'><li class='listItem' id='res_" + key + id + "'>" + name + "</li></a>");
+						sBuilder += "<a id='nameLink' href='#'><li class='listItem' id='res_" + key + id + "'>" + name + "</li></a>";						
 					}
 					
 					$(".searchList").append(sBuilder);
+				
+					var state = $("#accordion").accordion({
+						collapsible: true,
+						autoHeight: false,
+						heightStyle: "content",
+						refresh: true
+					});
+					$(".searchList").append(sBuilder).accordion();
+					$("#accordion").accordion("option", "active", state);
+
 				}
 				else if(count == 1){
 					
@@ -371,12 +378,12 @@ function loadLowData(current_view){
 			if(count > 1){
 				
 				sBuilder = "";
-				
 				for(var i = 0; i < count; i++){
 
 					var id = low_data[i].id;
 					var name = low_data[i].name;
 					var key = low_data[i].key_;
+
 
 					// Here is where we replace the big names on the page.					
 					sBuilder += "<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;";
@@ -387,6 +394,8 @@ function loadLowData(current_view){
 		}
 	});
 }
+
+
 function loadHighData(current_view){
 	
 	$.ajax({
@@ -402,24 +411,25 @@ function loadHighData(current_view){
 			$(".p_high").empty();
 				
 			if(count > 1){
-			
-				sBuilder = "";
 				
+				sBuilder = "";
 				for(var i = 0; i < count; i++){
 
 					var id = high_data[i].id;
 					var name = high_data[i].name;
 					var key = high_data[i].key_;
 
+
 					// Here is where we replace the big names on the page!					
 					sBuilder += "<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;";
 				}
-				
 				$(".p_high").append(sBuilder);
 			}
 		}
 	});
 }
+
+
 function init() {
 	
 	$(".finNames").html(names_html);

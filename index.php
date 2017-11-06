@@ -105,7 +105,7 @@ $name_result = mysqli_query($con, $names_near);
                     </a>
                 </div>
                 <div class="hashtag">
-                    <a href="index.html"><img id="hashtag" src="images/Bloodhound on the fin title.png" alt="Bloodhound on the Fin" title="Bloodhound on the Fin"/></a>
+                    <a href="index.php"><img id="hashtag" src="images/Bloodhound on the fin title.png" alt="Bloodhound on the Fin" title="Bloodhound on the Fin"/></a>
                 </div>
                 <div class="searchInput">
                     <div class="inputText">
