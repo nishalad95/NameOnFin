@@ -15,7 +15,6 @@ function setup_slider()
         item:4,
         loop:false,
         slideMove:1,
-        //easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
         responsive : [{
 			breakpoint:800,
 			settings: {
@@ -68,7 +67,16 @@ $(document).ready(function(){
 				
 	$("#Flip").on("click", function(){
 		
-		changeView("no");
+		if(current_view == "near"){
+			
+			changeView("no");
+			resetPosition();
+		}
+		else{
+			
+			changeView("nn");
+			resetPosition();
+		}
 	});	
 
 	
@@ -223,22 +231,31 @@ $(document).ready(function(){
 					$(".namesScrollBar").append("<div class='searchQuery'>Results for:" + searchTerm + "</div>");
 					$(".namesScrollBar").append("<div><ul class='searchList'></ul></div>");
 					
+					var sBuilder = "";
+					
 					for(var i = 0; i < count; i++){
 						
 						var id = data[i].id;
 						var name = data[i].name;
 						var key = data[i].key_;
 				
-						$(".searchList").append("<a id='nameLink' href='#'><li class='listItem' id='res_" + key + id + "'>" + name + "</li></a>");
+						sBuilder += "<a id='nameLink' href='#'><li class='listItem' id='res_" + key + id + "'>" + name + "</li></a>";
+						
+						// $(".searchList").append("<a id='nameLink' href='#'><li class='listItem' id='res_" + key + id + "'>" + name + "</li></a>");
 					}
+					
+					$(".searchList").append(sBuilder);
 				}
 				else if(count == 1){
 					
 					contactid = "contact_" + data[0].key_ + data[0].id;
 					
-					//alert(contactid);
 					removeBorder();
-					createBorder(contactid);
+					
+					changeView(key);
+					
+					contSearch(contactid);
+					
 					$("#zoom-in").click();
 				}
 				else{
@@ -265,7 +282,6 @@ $(document).ready(function(){
 					// 
 					changeView(key);
 					
-					// alert(contactid);
 					contSearch(contactid);
 				});
 	
@@ -284,7 +300,7 @@ $(document).ready(function(){
 			if(current_view == "near"){
 				
 				// Dont do anything, the selected name belongs to the current view.
-				//alert("Currently on the correct view");
+				// alert("Currently on the correct view");
 			}
 			else{
 				
@@ -292,22 +308,18 @@ $(document).ready(function(){
 				
 				current_view = "near";
 				
-				//alert("Switching to near side view");
+				// alert("Switching to near side view");
 				
 								
 				$('.panzoom').css("background-image", "url(images/FinVector2.png)");
 				$('#left-image').css("shape-outside", "polygon(0% 0%, 0% 75%, 73% 0%)");
 				$('#right-image').css("shape-outside", "polygon(100% 0%, 78% 100%, 100% 100%)");
-				
-				$(".se-pre-con").show();
-				
+							
 				// Call load high data.
 				loadHighData(current_view);
 				
 				// Load low level data.
 				loadLowData(current_view);
-				
-				$(".se-pre-con").hide();
 			}
 		}
 		else{
@@ -317,29 +329,25 @@ $(document).ready(function(){
 			if(current_view == "off"){
 				
 				// Dont do anything, the selected name belongs to the current view.
-				//alert("Currently on the correct view");
+				// alert("Currently on the correct view");
 			}
 			else{
 				
 				// The current view is 'near' so we need to switch back to 'off'.
 				
 				current_view = "off";
-				//alert("Switching to off side view");
+				// alert("Switching to off side view");
 				
 				// Now data has been loaded up, we can set the layout.
 				$('.panzoom').css("background-image", "url(images/FinVector2Inverted.png)");
-				$('#left-image').css("shape-outside", "polygon(0% 0%, 15% 100%, 0% 100%)");
+				$('#left-image').css("shape-outside", "polygon(0% 0%, 25% 100%, 0% 100%)");
 				$('#right-image').css("shape-outside", "polygon(25% 0%, 100% 0%, 99% 80%)");
-				
-				$(".se-pre-con").show();
 				
 				// Call load high data.
 				loadHighData(current_view);
 				
 				// Load low level data.
 				loadLowData(current_view);
-				
-				$(".se-pre-con").hide();
 			}
 		}
 	}
@@ -362,16 +370,19 @@ function loadLowData(current_view){
 				
 			if(count > 1){
 				
+				sBuilder = "";
+				
 				for(var i = 0; i < count; i++){
 
 					var id = low_data[i].id;
 					var name = low_data[i].name;
 					var key = low_data[i].key_;
 
-					// Here is where we replace the big names on the page!
-					
-					$(".p_low").append("<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;");
+					// Here is where we replace the big names on the page.					
+					sBuilder += "<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;";
 				}
+				
+				$(".p_low").append(sBuilder);
 			}
 		}
 	});
@@ -392,16 +403,19 @@ function loadHighData(current_view){
 				
 			if(count > 1){
 			
+				sBuilder = "";
+				
 				for(var i = 0; i < count; i++){
 
 					var id = high_data[i].id;
 					var name = high_data[i].name;
 					var key = high_data[i].key_;
 
-					// Here is where we replace the big names on the page!
-					
-					$(".p_high").append("<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;");
+					// Here is where we replace the big names on the page!					
+					sBuilder += "<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;";
 				}
+				
+				$(".p_high").append(sBuilder);
 			}
 		}
 	});
@@ -418,9 +432,8 @@ function init() {
 	});
 
 	$(".panzoom").panzoom({
-		/*$zoomIn: $("#zoom-in"),
-		$zoomOut: $("#zoom-out"),*/
-		contain: "invert",
+
+	contain: "invert",
 		minScale: 1
 	}).panzoom("zoom");
 

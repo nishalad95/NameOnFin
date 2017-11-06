@@ -14,7 +14,7 @@ $sql_builder = "";
 
 foreach($terms as $item){
 	
-	$sql_builder .= " OR `name` LIKE '%".$item."%'";
+	$sql_builder .= " OR `name` LIKE '%".$item."%' OR `email` LIKE '%".$item."%'";
 	
 }
 

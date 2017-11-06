@@ -32,15 +32,11 @@ if($key == "near"){
 			if(!mb_check_encoding($row['name'], 'UTF-8')){
 				
 				array_push($data, convert_to_utf8($row));
-				
-				// echo $row['id'] . " -> ".convert_to_utf8($row['name'] . "<br>");
 			}
 			else{
 				
 				array_push($data, $row);
 			}
-			
-			//array_push($data, $row);
 		}
 	}
 											

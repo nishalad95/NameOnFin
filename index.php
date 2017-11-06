@@ -169,75 +169,28 @@ $name_result = mysqli_query($con, $names_near);
 
                     <div id="scroller" style='height: 100%; margin: 0 auto;'>
                         <div class="item">
-                            <ul id="content-slider" class="content-slider">
-                                <li><a href="#img1"><img src="images/Selfies/1.png" id="selfie"></a></li>
-                                <li><a href="#img2"><img src="images/Selfies/2.png" id="selfie"/></a></li>
-                                <li><a href="#img3"><img src="images/Selfies/3.png" id="selfie"/></a></li>
-                                <li><a href="#img4"><img src="images/Selfies/4.png" id="selfie"/></a></li>
-                                <li><a href="#img5"><img src="images/Selfies/5.png" id="selfie"/></a></li>
-                                <li><a href="#img6"><img src="images/Selfies/6.png" id="selfie"/></a></li>
-                                <li><a href="#img7"><img src="images/Selfies/7.png" id="selfie"/></a></li>
-                                <li><a href="#img8"><img src="images/Selfies/8.png" id="selfie"/></a></li>
-                                <li><a href="#img9"><img src="images/Selfies/9.png" id="selfie"/></a></li>
-                                <li><a href="#img10"><img src="images/Selfies/10.png" id="selfie"/></a></li>
-                                <li><a href="#img11"><img src="images/Selfies/11.png" id="selfie"/></a></li>
-                                <li><a href="#img12"><img src="images/Selfies/12.png" id="selfie"/></a></li>
-                                <li><a href="#img13"><img src="images/Selfies/13.png" id="selfie"/></a></li>
-                                <li><a href="#img14"><img src="images/Selfies/14.png" id="selfie"/></a></li>
-                                <li><a href="#img15"><img src="images/Selfies/15.png" id="selfie"/></a></li>
-                                <li><a href="#img16"><img src="images/Selfies/16.png" id="selfie"/></a></li>
-                                <li><a href="#img17"><img src="images/Selfies/17.png" id="selfie"/></a></li>
-                                <li><a href="#img18"><img src="images/Selfies/18.png" id="selfie"/></a></li>
-                                <li><a href="#img19"><img src="images/Selfies/19.png" id="selfie"/></a></li>
-                                <li><a href="#img20"><img src="images/Selfies/20.png" id="selfie"/></a></li>
-                                <li><a href="#img21"><img src="images/Selfies/21.png" id="selfie"/></a></li>
-                                <li><a href="#img22"><img src="images/Selfies/22.png" id="selfie"/></a></li>
-                                <li><a href="#img23"><img src="images/Selfies/23.png" id="selfie"/></a></li>
-                                <li><a href="#img24"><img src="images/Selfies/24.png" id="selfie"/></a></li>
-                                <li><a href="#img25"><img src="images/Selfies/25.png" id="selfie"/></a></li>
-                                <li><a href="#img26"><img src="images/Selfies/26.png" id="selfie"/></a></li>
-                                <li><a href="#img27"><img src="images/Selfies/27.png" id="selfie"/></a></li>
-                                <li><a href="#img28"><img src="images/Selfies/28.png" id="selfie"/></a></li>
-                                <li><a href="#img29"><img src="images/Selfies/29.png" id="selfie"/></a></li>
-                                <li><a href="#img30"><img src="images/Selfies/30.png" id="selfie"/></a></li>
-                                <li><a href="#img31"><img src="images/Selfies/31.png" id="selfie"/></a></li>
-                                <li><a href="#img32"><img src="images/Selfies/32.png" id="selfie"/></a></li>
-                                <li><a href="#img33"><img src="images/Selfies/33.png" id="selfie"/></a></li>
-                                <li><a href="#img34"><img src="images/Selfies/34.png" id="selfie"/></a></li>
-                                <li><a href="#img35"><img src="images/Selfies/35.png" id="selfie"/></a></li>
-                                <li><a href="#img36"><img src="images/Selfies/36.png" id="selfie"/></a></li>
-                                <li><a href="#img37"><img src="images/Selfies/37.png" id="selfie"/></a></li>
-                                <li><a href="#img38"><img src="images/Selfies/38.png" id="selfie"/></a></li>
-                                <li><a href="#img39"><img src="images/Selfies/39.png" id="selfie"/></a></li>
-                                <li><a href="#img40"><img src="images/Selfies/40.png" id="selfie"/></a></li>
-                                <li><a href="#img41"><img src="images/Selfies/41.png" id="selfie"/></a></li>
-                                <li><a href="#img42"><img src="images/Selfies/42.png" id="selfie"/></a></li>
-                                <li><a href="#img43"><img src="images/Selfies/43.png" id="selfie"/></a></li>
-                                <li><a href="#img44"><img src="images/Selfies/44.png" id="selfie"/></a></li>
-                                <li><a href="#img45"><img src="images/Selfies/45.png" id="selfie"/></a></li>
-                                <li><a href="#img46"><img src="images/Selfies/46.png" id="selfie"/></a></li>
-                                <li><a href="#img47"><img src="images/Selfies/47.png" id="selfie"/></a></li>
-                                <li><a href="#img48"><img src="images/Selfies/48.png" id="selfie"/></a></li>
-                                <li><a href="#img49"><img src="images/Selfies/49.png" id="selfie"/></a></li>
-                                <li><a href="#img50"><img src="images/Selfies/50.png" id="selfie"/></a></li>
-                                <li><a href="#img51"><img src="images/Selfies/51.png" id="selfie"/></a></li>
-                                <li><a href="#img52"><img src="images/Selfies/52.png" id="selfie"/></a></li>
-                                <li><a href="#img53"><img src="images/Selfies/53.png" id="selfie"/></a></li>
-                                <li><a href="#img54"><img src="images/Selfies/54.png" id="selfie"/></a></li>
-                                <li><a href="#img55"><img src="images/Selfies/55.png" id="selfie"/></a></li>
-                                <li><a href="#img56"><img src="images/Selfies/56.png" id="selfie"/></a></li>
-                                <li><a href="#img57"><img src="images/Selfies/57.png" id="selfie"/></a></li>
-                                <li><a href="#img58"><img src="images/Selfies/58.png" id="selfie"/></a></li>
-                                <li><a href="#img59"><img src="images/Selfies/59.png" id="selfie"/></a></li>
-                                <li><a href="#img60"><img src="images/Selfies/60.png" id="selfie"/></a></li>
-                                <li><a href="#img61"><img src="images/Selfies/61.png" id="selfie"/></a></li>
-                                <li><a href="#img62"><img src="images/Selfies/62.png" id="selfie"/></a></li>
-                                <li><a href="#img63"><img src="images/Selfies/63.png" id="selfie"/></a></li>
-                                <li><a href="#img64"><img src="images/Selfies/64.png" id="selfie"/></a></li>
-                                <li><a href="#img65"><img src="images/Selfies/65.png" id="selfie"/></a></li>
-                                <li><a href="#img66"><img src="images/Selfies/66.png" id="selfie"/></a></li>
-                                <li><a href="#img67"><img src="images/Selfies/67.png" id="selfie"/></a></li>
-                                <li><a href="#img68"><img src="images/Selfies/68.png" id="selfie"/></a></li>
+                            <ul id="content-slider" class="content-slider">							
+							<?php
+								
+								 // This will auto-load all selfie images located in the 'selfies' folder. No need for static typing now!
+								$path = "images/Selfies";
+								
+								if(is_dir($path)){
+									
+									if($dh = opendir($path)){
+										
+										while(($file = readdir($dh)) !== false){
+											
+											if($file != "." && $file !=".." && $file != "controls.png"){
+												
+												$id = (explode(".", $file))[0];
+												
+												echo "<li><a href='#img".$id."'><img src='".$path."/".$file."' id='selfie'></a></li>";
+											}
+										}
+									}
+								}
+							?>
                         </ul>
                         </div>
                     <div class="lightboxArea"><!-- Lightbox Photos --></div>

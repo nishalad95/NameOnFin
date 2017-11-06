@@ -1,19 +1,23 @@
 <?php
 
-	$path = "images/Selfies";
+	$path = "../images/Selfies";
 	
-	if($handle = opendir($path)){
+	if(is_dir($path)){
 		
-		while(($file = readdir($handle) !== false)){
+		if($dh = opendir($path)){
 			
-			if($file == '.' || $file = '..'){
+			while(($file = readdir($dh)) !== false){
 				
-				continue;
+				if($file != "." && $file !=".." && $file != "controls.png"){
+					
+					// echo $file . "<br>";
+					$id = (explode(".", $file))[0];
+					
+					echo "<li><a href='#img".$id."'><img src='".$path."/".$file."' id='selfie'></a></li>";
+					
+					// echo $id . "<br>";
+				}
 			}
-			
-			echo $file;
 		}
-		
-		closedir($handle);
 	}
 ?>
