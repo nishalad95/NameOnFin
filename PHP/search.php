@@ -26,13 +26,13 @@ if(mysqli_connect_errno()){
 	echo "Error code: " . mysqli_connect_error();
 }
 
-$sql = "(SELECT `name`, `id`, `key_` FROM `schools` WHERE `name` LIKE '%$term%'".$sql_builder.") 
+$sql = "(SELECT `name`, `id`, `key_` FROM `schools` WHERE `name` LIKE '%$term%'".$sql_builder." LIMIT 25) 
 		UNION 
 		(SELECT `name`, `id`, `key_` FROM `fin_names_near` WHERE `name` LIKE '%$term%'".$sql_builder." LIMIT 25)
 		UNION
 		(SELECT `name`, `id`, `key_` FROM `fin_names_off` WHERE `name` LIKE '%$term%'".$sql_builder." LIMIT 25)
 		UNION
-		(SELECT `name`, `id`, `key_` FROM `enhanced` WHERE `name` LIKE '%$term%'".$sql_builder.")";
+		(SELECT `name`, `id`, `key_` FROM `enhanced` WHERE `name` LIKE '%$term%'".$sql_builder." LIMIT 25)";
 
 $data = array();
 
