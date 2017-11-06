@@ -183,27 +183,26 @@ $name_result = mysqli_query($con, $names_near);
                     <div id="scroller" style='height: 100%; margin: 0 auto;'>
                         <div class="item">
                             <ul id="content-slider" class="content-slider">							
-							<?php
+				<?php
+					// This will auto-load all selfie images located in the 'selfies' folder. No need for static typing now!
+					$path = "images/Selfies";
 								
-								 // This will auto-load all selfie images located in the 'selfies' folder. No need for static typing now!
-								$path = "images/Selfies";
-								
-								if(is_dir($path)){
+					if(is_dir($path)){
 									
-									if($dh = opendir($path)){
+						if($dh = opendir($path)){
 										
-										while(($file = readdir($dh)) !== false){
+							while(($file = readdir($dh)) !== false){
 											
-											if($file != "." && $file !=".." && $file != "controls.png"){
+								if($file != "." && $file !=".." && $file != "controls.png"){
 												
-												$id = (explode(".", $file))[0];
+									$id = (explode(".", $file))[0];
 												
-												echo "<li><a href='#img".$id."'><img src='".$path."/".$file."' id='selfie'></a></li>";
-											}
-										}
-									}
+									echo "<li><a href='#img".$id."'><img src='".$path."/".$file."' id='selfie'></a></li>";
 								}
-							?>
+							}
+						}
+					}
+				?>
                         </ul>
                         </div>
                     </div>

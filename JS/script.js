@@ -36,11 +36,11 @@ function setup_slider() {
 $(document).ready(function(){
 
 	// This section pre-loads all the name data to reduce the ajax calls down to once per page load.
-	loadHighData(current_view);
-	loadLowData(current_view);
+	loadData(current_view, "high");
+	loadData(current_view, "low");
 	
-	loadHighData("off");
-	loadLowData("off");
+	loadData("off", "high");
+	loadData("off", "low");
 	
 	// By default we hide the side we dont need.
 	$(".off").toggle();
@@ -188,7 +188,7 @@ $(document).ready(function(){
 					
 					// create names panel
 					$(".name_area").append("<div class='namesScrollBar' id='accordion'></div>");
-					$(".namesScrollBar").append("<div class='searchQuery'>Results for: " + searchTerm + "</div>");
+					$(".namesScrollBar").append("<div class='searchQuery'>Show results for: " + searchTerm + "</div>");
 					$(".namesScrollBar").append("<div><ul class='searchList'></ul></div>");
 					
 					var sBuilder = "";
@@ -285,66 +285,36 @@ $(document).ready(function(){
 
 });
 
-function loadLowData(current_view){
+function loadData(current_view, level){
 	
 	$.ajax({
-		url: "PHP/low_loader.php?key_=" + current_view,
+		url: "PHP/" + level + "_loader.php?key_=" + current_view,
 		type: "POST",
 		dataType: "json",
 		
-		success: function(low_data){
+		success: function(data){
 			
-			var count = low_data.length
+			var count = data.length
 
 			if(count > 1){
 				
 				sBuilder = "";
 				for(var i = 0; i < count; i++){
 
-					var id = low_data[i].id;
-					var name = low_data[i].name;
-					var key = low_data[i].key_;
+					var id = data[i].id;
+					var name = data[i].name;
+					var key = data[i].key_;
 
 					// Here is where we replace the big names on the page.					
 					sBuilder += "<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;";
 				}
 				
-				$("." + current_view + " .p_low").append(sBuilder);
+				$("." + current_view + " .p_" + level).append(sBuilder);
 			}
 		}
 	});
 }
 
-
-function loadHighData(current_view){
-	
-	$.ajax({
-		url: "PHP/high_loader.php?key_=" + current_view,
-		type: "POST",
-		dataType: "json",
-		
-		success: function(high_data){
-			
-			var count = high_data.length
-
-			if(count > 1){
-				
-				sBuilder = "";
-				for(var i = 0; i < count; i++){
-
-					var id = high_data[i].id;
-					var name = high_data[i].name;
-					var key = high_data[i].key_;
-
-					// Here is where we replace the big names on the page!					
-					sBuilder += "<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;";
-				}
-				
-				$("." + current_view + " .p_high").append(sBuilder);
-			}
-		}
-	});
-}
 
 
 function init() {
