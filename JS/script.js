@@ -32,20 +32,18 @@ function setup_slider() {
 
 }
 
-$(document).ready(function(){
+
+$(document).ready(function () {
 	
-	// Bind the click event to the body - any static parent container will do
-	$('body').on('click', function(e) {
 
-		// Fire the callback if the click was in the top 100px by 100px
-		if (e.pageX <= 50 && e.pageY <= 50) {
+// Bind the click event to the body - any static parent container will do
+$("#backgroundImage").on('click', function(e) {
+	
+	if (e.pageX <= 25 && e.pageY <= 25) {
+		alert("This site was developed by Nisha Lad & Chris Wing :-)");
+	}
+});
 
-			// Prevent crazy animations and redundant handling
-			$(this).off('click'); 
-
-			alert("This site was developed by Nisha Lad & Chris Wing :-)");
-		}
-	});
 
 	// This section pre-loads all the name data to reduce the ajax calls down to once per page load.
 	loadData(current_view, "high");
