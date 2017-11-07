@@ -1,4 +1,3 @@
-//var current_zoom = 1;
 const MAXZOOM = 30;
 const MINZOOM = 1;
 const SCALEFACTOR = 3;
@@ -188,7 +187,7 @@ $(document).ready(function(){
 					
 					// create names panel
 					$(".name_area").append("<div class='namesScrollBar' id='accordion'></div>");
-					$(".namesScrollBar").append("<div class='searchQuery'>Show results for: " + searchTerm + "</div>");
+					$(".namesScrollBar").append("<div class='searchQuery' id='titleHeader'> Showing Results For: " + searchTerm + "</div>");
 					$(".namesScrollBar").append("<div><ul class='searchList'></ul></div>");
 					
 					var sBuilder = "";
@@ -205,12 +204,13 @@ $(document).ready(function(){
 				
 					var state = $("#accordion").accordion({
 						collapsible: true,
-						autoHeight: false,
+						autoHeight: true,
 						heightStyle: "content",
-						refresh: true
+						refresh: true,
+						icons: {"header": "ui-icon-circle-plus", "activeHeader": "ui-icon-circle-minus"}
 					});
-					$(".searchList").append(sBuilder).accordion();
 					$("#accordion").accordion("option", "active", state);
+
 
 				} else if(count == 1){
 					
@@ -380,19 +380,7 @@ $.ajax({
 	async: true,
 	url: "http://129.146.81.161/fin/?func_name=get_data",
 
-	success: function(data) {
-	  
-		var names = JSON.stringify(data);
-		var obj = $.parseJSON(names);
-		var name_array = obj.NAME;
-		var ids_array = obj.ID;
-		names_html = " ";
-
-		// create names on fin
-		for(var i = 0; i < name_array.length; i++){
-			
-			names_html += "<div class='name zzoomTarget' id='contact_"+ids_array[i]+"'>&nbsp;" + name_array[i] + ", &nbsp;</div>";
-		}
+	success: function() {
 
 		window.setTimeout("init()", 5);
 	}

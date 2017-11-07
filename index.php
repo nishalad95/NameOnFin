@@ -22,7 +22,7 @@ $name_result = mysqli_query($con, $names_near);
         <title>Bloodhound on the Fin</title>
         <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=0.8">
-        <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="CSS/style.css?ver=1.1" />
         <link rel="stylesheet" type="text/css" href="CSS/lightslider.css?ver=1.1" />
         <link rel="shortcut icon" href="#" />
@@ -204,7 +204,8 @@ $name_result = mysqli_query($con, $names_near);
 					}
 				?>
                         </ul>
-                        </div>
+			</div>
+			<div class="lightboxArea"></div>
                     </div>
                 </div>
 
