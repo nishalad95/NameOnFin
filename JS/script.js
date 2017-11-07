@@ -108,8 +108,7 @@ $(document).ready(function(){
     });
 
 	$("#zoom-out").on("click", function() {
-		$(".se-pre-con").show();
-
+		//$(".se-pre-con").show();
 		currentZoom -= 0.05;
 		if (currentZoom < 0 || currentZoom == 0)
 		{
@@ -118,6 +117,7 @@ $(document).ready(function(){
 			currentZoom = 0;
 			return;
 		}
+	
 		settings = {
 			targetsize: currentZoom,
 			// scale content to screen based on their size
@@ -132,14 +132,13 @@ $(document).ready(function(){
 			closeclick: false
 		}
 		// settings can be set for both the zoomTo and zoomTarget calls:
-		
 		if(contactid != null){
 			$("#" + contactid).zoomTo(settings);
 		} else if (contactid == null){
 			$(".panzoom").zoomTo(settings);
 		}
 
-		$(".se-pre-con").hide();
+		//$(".se-pre-con").hide();
     });
 
   $("#recenter").click(function () {
