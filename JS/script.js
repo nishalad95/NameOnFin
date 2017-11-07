@@ -33,6 +33,19 @@ function setup_slider() {
 }
 
 $(document).ready(function(){
+	
+	// Bind the click event to the body - any static parent container will do
+	$('body').on('click', function(e) {
+
+		// Fire the callback if the click was in the top 100px by 100px
+		if (e.pageX <= 50 && e.pageY <= 50) {
+
+			// Prevent crazy animations and redundant handling
+			$(this).off('click'); 
+
+			alert("This site was developed by Nisha Lad & Chris Wing :-)");
+		}
+	});
 
 	// This section pre-loads all the name data to reduce the ajax calls down to once per page load.
 	loadData(current_view, "high");
@@ -41,6 +54,7 @@ $(document).ready(function(){
 	loadData("off", "high");
 	loadData("off", "low");
 	
+	// By default we hide the side we dont need.
 	$(".off").hide();
 	
 	var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) {
@@ -81,9 +95,10 @@ $(document).ready(function(){
 	
   	$("#zoom-in").on("click", function() {
 		
-	$(".se-pre-con").show();
+		$(".se-pre-con").show();
 			
 		currentZoom += 0.05;
+		
 		settings = {
 			targetsize: currentZoom,
 			// scale content to screen based on their size
@@ -99,24 +114,29 @@ $(document).ready(function(){
 			closeclick: false
 		}
 		if (contactid == null){
+			
 			$(".panzoom").zoomTo(settings);
-		} else{
+		}
+		else{
+			
 			$("#" + contactid).zoomTo(settings);
 		}
 		$(".se-pre-con").hide();
     });
 
 	$("#zoom-out").on("click", function() {
-		//$(".se-pre-con").show();
+		
+		// $(".se-pre-con").show();
+		
 		currentZoom -= 0.05;
-		if (currentZoom < 0 || currentZoom == 0)
-		{
+		if (currentZoom < 0 || currentZoom == 0){
+			
 			searched = false;
 			resetPosition();
 			currentZoom = 0;
 			return;
 		}
-	
+		
 		settings = {
 			targetsize: currentZoom,
 			// scale content to screen based on their size
@@ -131,13 +151,18 @@ $(document).ready(function(){
 			closeclick: false
 		}
 		// settings can be set for both the zoomTo and zoomTarget calls:
+		
 		if(contactid != null){
+			
 			$("#" + contactid).zoomTo(settings);
-		} else if (contactid == null){
+			
+		}
+		else if (contactid == null){
+			
 			$(".panzoom").zoomTo(settings);
 		}
 
-		//$(".se-pre-con").hide();
+		// $(".se-pre-con").hide();
     });
 
   $("#recenter").click(function () {
@@ -213,9 +238,11 @@ $(document).ready(function(){
 				} else if(count == 1){
 					
 					contactid = "contact_" + data[0].key_ + data[0].id;
+					
+					var key = data[0].key_;
+					
 					removeBorder();
-
-					changeView(data[0].key_);
+					changeView(key);
 					contSearch(contactid);
 				} else{
 					
@@ -236,6 +263,7 @@ $(document).ready(function(){
 					var key = pre_key[1].slice(0, 2);
 					
 					removeBorder();
+					
 					changeView(key);
 					contSearch(contactid);
 				});
@@ -247,13 +275,13 @@ $(document).ready(function(){
   });
   
 	function changeView(key){
-
+		
 		if(key == "nn" || key == "sc"){
 			
 			// these keys belong to the 'near' side view
 			
-			if(current_view !== "near"){
-				
+			if(current_view != "near"){
+								
 				current_view = "near";
 				
 				$('.panzoom').css("background-image", "url(images/FinVector2.png)");
@@ -263,11 +291,12 @@ $(document).ready(function(){
 				$(".off").hide();
 				$(".near").show();
 			}
-		} else{
+		}
+		else{
 			
 			// these names belong to the 'off' side view
 			
-			if(current_view !== "off"){
+			if(current_view != "off"){
 				
 				current_view = "off";
 				
