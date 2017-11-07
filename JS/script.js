@@ -41,8 +41,7 @@ $(document).ready(function(){
 	loadData("off", "high");
 	loadData("off", "low");
 	
-	// By default we hide the side we dont need.
-	$(".off").toggle();
+	$(".off").hide();
 	
 	var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) {
 		return p.toString() === "[object SafariRemoteNotification]";
@@ -215,7 +214,8 @@ $(document).ready(function(){
 					
 					contactid = "contact_" + data[0].key_ + data[0].id;
 					removeBorder();
-					changeView(key);
+
+					changeView(data[0].key_);
 					contSearch(contactid);
 				} else{
 					
@@ -247,7 +247,7 @@ $(document).ready(function(){
   });
   
 	function changeView(key){
-		
+
 		if(key == "nn" || key == "sc"){
 			
 			// these keys belong to the 'near' side view
@@ -260,8 +260,8 @@ $(document).ready(function(){
 				$('#left-image').css("shape-outside", "polygon(0% 0%, 0% 75%, 73% 0%)");
 				$('#right-image').css("shape-outside", "polygon(100% 0%, 78% 100%, 100% 100%)");
 							
-				$(".off").toggle();
-				$(".near").toggle();
+				$(".off").hide();
+				$(".near").show();
 			}
 		} else{
 			
@@ -276,8 +276,8 @@ $(document).ready(function(){
 				$('#left-image').css("shape-outside", "polygon(0% 0%, 25% 100%, 0% 100%)");
 				$('#right-image').css("shape-outside", "polygon(25% 0%, 100% 0%, 99% 80%)");
 				
-				$(".near").toggle();
-				$(".off").toggle();				
+				$(".near").hide();
+				$(".off").show();				
 			}
 		}
 	}
