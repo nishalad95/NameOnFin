@@ -104,7 +104,7 @@ $name_result = mysqli_query($con, $names_near);
             <!-- Top search bar -->
             <div class="searchBar">
                 <div class="logo">
-                    <a href="http://www.bloodhoundssc.com/">
+                    <a href="http://www.bloodhoundssc.com/" target="_blank">
                     <img id="logo" src="images/Bloodhound_Logo.png" alt="Bloodhound logo" title="Bloodhound SSC">
                     </a>
                 </div>
@@ -113,7 +113,7 @@ $name_result = mysqli_query($con, $names_near);
                 </div>
                 <div class="searchInput">
                     <div class="inputText">
-                        <form action="#" method="post" id="search_names">
+                        <form action="#" method="post" id="search_names" autocomplete="off">
                             <input id="inputValue" type="text" name="name" placeholder="Keyword, Name, Email" maxlength="100" required>
                             <div class="searchButton">
                                 <div class="Static">
