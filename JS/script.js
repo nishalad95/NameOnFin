@@ -217,7 +217,7 @@ $("#backgroundImage").on('click', function(e) {
 						var id = data[i].id;
 						var name = data[i].name;
 						var key = data[i].key_;
-				
+						
 						sBuilder += "<a id='nameLink' href='#'><li class='listItem' id='res_" + key + id + "'>" + name + "</li></a>";
 					}
 					
