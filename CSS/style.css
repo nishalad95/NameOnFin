@@ -153,7 +153,7 @@ input{
   }
   .container {
     width: 100%;
-    height: 100%;
+    height: 100i%;
     overflow: hidden;
     margin: 0 auto;
   }
@@ -180,14 +180,13 @@ input{
   }
 
   .p_high{
-
     font-size: 0.50vw ! important;
   }
 
   .p_low{
-
     font-size: 0.18vw ! important;
   }
+
 }
 
 /* smart phones / notes*/
@@ -313,9 +312,25 @@ input{
     .name_area {
         text-shadow: 1px 1px 2px black ! important;
     }
-    .finNames {
+    .finNames_, .near, .off {
         position:absolute;
+	display:flex;
+	width:100%;
+	height:100%;
     }
+    .p_high, .p_low {
+    	display: flex;
+	position:absolute;
+	width: 100%;
+	height: 100%;
+    }
+
+    [id^="contact"] {
+	width: 100%;
+	height: 100%;
+    }
+
+
     @media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
         #overlay {
           width: 150% ! important;

@@ -230,7 +230,7 @@ $("#backgroundImage").on('click', function(e) {
 						refresh: true,
 						icons: {"header": "ui-icon-circle-plus", "activeHeader": "ui-icon-circle-minus"}
 					});
-					$("#accordion").accordion("option", "active", state);
+					$("#accordion").accordion("option", state);
 
 
 				} else if(count == 1){
