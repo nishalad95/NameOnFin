@@ -13,9 +13,10 @@ $names_near = "SELECT name, id, key_ FROM fin_names_near";
 
 $school_result = mysqli_query($con, $schools);
 $name_result = mysqli_query($con, $names_near);
-	
+
+header('X-Frame-Options: ALLOW-FROM https://docs.google.com/gview?url=fin.bloodhoundssc.com');
 ?>
-<!DOCTYPE html>
+
 
 <html>
     <head>
@@ -35,6 +36,13 @@ $name_result = mysqli_query($con, $names_near);
         <script type="text/javascript" src="JS/lightslider.js"></script>
         <script type="text/javascript" src="JS/script.js?a=1"></script>
     	<script type="text/javascript" src="JS/jquery.zoomooz.min.js"></script>
+
+	<script>
+	$( function() {
+		$( "#tabs" ).tabs({
+		});
+  	} );
+	</script>
 
         <style>
 	   .item ul{
@@ -126,8 +134,14 @@ $name_result = mysqli_query($con, $names_near);
             </div>
 
             <!-- Main content -->
-            <div class="box">
-                <div class="name_area">
+	    <div class="box">
+		<div id="tabs">
+  			<ul>
+    				<li><a href="#name_area">Virtual Fin</a></li>
+    				<li><a href="#physicalNear">Physical Fin Near</a></li>
+    				<li><a href="#physicalOff">Physical Fin Off</a></li>
+  			</ul>
+                <div id="name_area">
                    <img id="overlay" src="images/BloodhoundPosterOverlay2.png" alt="Bloodhound Fin"/>
                    <img id="greeting" src="images/Greeting.png" alt="Thank you for being part of our story"/>
 
@@ -155,6 +169,7 @@ $name_result = mysqli_query($con, $names_near);
 								</div>
 							</div>
 						</div>
+			
                     </div>
                     <!-- Scrolling Panel -->
                     <!-- zoom buttons -->
@@ -173,7 +188,11 @@ $name_result = mysqli_query($con, $names_near);
 						</div>
                     </div>
                 </div>
-            </div>
+
+	    <div id="physicalNear"><object data="iframes/1.pdf.html"></object></div>
+	    <div id="physicalOff"><object data="iframes/2.pdf.html"></object></div>
+	    </div>
+	    </div>
 
             <!-- Selfie gallery -->
             <div class="BottomBar">

@@ -65,7 +65,9 @@ $("#backgroundImage").on('click', function(e) {
   			window.location.replace("time-out.html");
     }
 
-    window.setTimeout("getAllNames()", 5);
+    window.setTimeout("init()", 5);
+    $(".se-pre-con").hide();
+		
 
     $.ajax({
 		
@@ -230,7 +232,7 @@ $("#backgroundImage").on('click', function(e) {
 						refresh: true,
 						icons: {"header": "ui-icon-circle-plus", "activeHeader": "ui-icon-circle-minus"}
 					});
-					$("#accordion").accordion("option", "active", state);
+					$("#accordion").accordion("option", state);
 
 
 				} else if(count == 1){
@@ -397,21 +399,6 @@ function contSearch(contactid){
 
 var names_html = "";
 
-function getAllNames(){
-
-$.ajax({
-	
-	type: "GET",
-	dataType: "json",
-	async: true,
-	url: "http://129.146.81.161/fin/?func_name=get_data",
-
-	success: function() {
-
-		window.setTimeout("init()", 5);
-	}
-});
-}
 
 function loadImages(data) {
 	
