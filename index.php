@@ -134,13 +134,15 @@ header('X-Frame-Options: ALLOW-FROM https://docs.google.com/gview?url=fin.bloodh
             </div>
 
             <!-- Main content -->
-	    <div class="box">
 		<div id="tabs">
   			<ul>
-    				<li><a href="#name_area">Virtual Fin</a></li>
-    				<li><a href="#physicalNear">Physical Fin Near</a></li>
-    				<li><a href="#physicalOff">Physical Fin Off</a></li>
-  			</ul>
+    				<li><a id="tab1" href="#name_area">Virtual Fin</a></li>
+    				<li><a id="tab2" href="#physicalNear">Near Side</a></li>
+    				<li><a id="tab3" href="#physicalOff">Off Side</a></li>
+			</ul>
+	
+	    	<div class="box">
+
                 <div id="name_area">
                    <img id="overlay" src="images/BloodhoundPosterOverlay2.png" alt="Bloodhound Fin"/>
                    <img id="greeting" src="images/Greeting.png" alt="Thank you for being part of our story"/>
@@ -187,10 +189,15 @@ header('X-Frame-Options: ALLOW-FROM https://docs.google.com/gview?url=fin.bloodh
 							<img id="Flip" src="images/flip.png" alt="<->" title="Flip"/>
 						</div>
                     </div>
-                </div>
-
-	    <div id="physicalNear"><object data="iframes/1.pdf.html"></object></div>
+                
+		</div>
+	    <!--<div id="physicalNear"><object data="iframes/1.pdf.html"></object></div>
 	    <div id="physicalOff"><object data="iframes/2.pdf.html"></object></div>
+	    -->
+	    <div id="physicalNear">This is the physical fin PDF near side</div>
+	    
+	    <div id="physicalOff">This is the physical fin PDF off side</div>
+	    
 	    </div>
 	    </div>
 
