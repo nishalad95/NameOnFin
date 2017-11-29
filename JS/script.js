@@ -334,7 +334,35 @@ function loadData(current_view, level){
 					// Here is where we replace the big names on the page.					
 					sBuilder += "<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;";
 				}
+
+		
+				var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+				if (isFirefox) {
+					if (level == "high" && current_view == "near") {
+
+						var whitespace = "";
+						var offset = 38;
+						for (var j = 0; j < 60; j++) {
+							whitespace += "<div class='whiteSpace' style='border-bottom: 0.5vw solid transparent;border-right: 0.5vw solid #f6f6f6;font-size: 0px; line-height: 0%; width:" + offset + "%;float:left;clear:left;'></div>";
+							offset -= 0.65;
+						}
+						$("." + current_view + " .p_" + level).append(whitespace);
+					}
 				
+				if (level == "high" && current_view == "off") {
+
+						var whitespace = "";
+						var offset = 0;
+						for (var j = 0; j < 80; j++) {
+							whitespace += "<div class='whiteSpace' style='border-bottom: 0.5vw solid transparent;border-right: 0.5vw solid #f6f6f6;font-size: 0px; line-height: 0%; width:" + offset + "%;float:left;clear:left;'></div>";
+							offset += 0.15;
+						}
+						$("." + current_view + " .p_" + level).append(whitespace);
+					}
+
+
+				}
+
 				$("." + current_view + " .p_" + level).append(sBuilder);
 			}
 		}

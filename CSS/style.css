@@ -275,6 +275,9 @@ input{
 }
 
 #overlay {
+
+    display:none; 	/* for mozilla shaping debugging */
+
     width: 100%;
     position: absolute;
     margin: -11% 0 0 0;
@@ -312,24 +315,12 @@ input{
     .name_area {
         text-shadow: 1px 1px 2px black ! important;
     }
-    .finNames_, .near, .off {
+    .finNames_ {
         position:absolute;
 	display:flex;
 	width:100%;
 	height:100%;
     }
-    .p_high, .p_low {
-    	display: flex;
-	position:absolute;
-	width: 100%;
-	height: 100%;
-    }
-
-    [id^="contact"] {
-	width: 100%;
-	height: 100%;
-    }
-
 
     @media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
         #overlay {
@@ -344,6 +335,7 @@ input{
     }
 
 }
+
 
 .panzoom {
     width:100%;
