@@ -336,26 +336,41 @@ function loadData(current_view, level){
 				}
 
 		
+
+				// whitespace div addition for cross-browser compatibility
 				var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 				if (isFirefox) {
-					if (level == "high" && current_view == "near") {
+					
 
-						var whitespace = "";
-						var offset = 38;
-						for (var j = 0; j < 60; j++) {
-							whitespace += "<div class='whiteSpace' style='border-bottom: 0.5vw solid transparent;border-right: 0.5vw solid #f6f6f6;font-size: 0px; line-height: 0%; width:" + offset + "%;float:left;clear:left;'></div>";
-							offset -= 0.65;
+					if (level == "high") {
+						var whitespace, offsetLeft, offsetRight, incLeft, incRight;
+
+						if (current_view == "near") {
+							
+							whitespace = "";
+							offsetLeft = 38;
+							offsetRight = 0;
+							incLeft = -0.65;
+							incRight = 0.15;
+						
+						}else {
+						
+							whitespace = "";
+							offsetLeft = 0;
+							offsetRight = 38;
+							incLeft = 0.15;
+							incRight = -0.65;
+						
 						}
-						$("." + current_view + " .p_" + level).append(whitespace);
-					}
-				
-				if (level == "high" && current_view == "off") {
 
-						var whitespace = "";
-						var offset = 0;
-						for (var j = 0; j < 80; j++) {
-							whitespace += "<div class='whiteSpace' style='border-bottom: 0.5vw solid transparent;border-right: 0.5vw solid #f6f6f6;font-size: 0px; line-height: 0%; width:" + offset + "%;float:left;clear:left;'></div>";
-							offset += 0.15;
+
+						for (var j = 0; j < 100; j++) {
+							
+							whitespace += "<div class='whitespaceLeft' style='width:" + offsetLeft + "%;'></div>";
+							whitespace += "<div class='whitespaceRight' style='width:" + offsetRight + "%;'></div>";
+							offsetLeft += incLeft;
+							offsetRight += incRight;
+
 						}
 						$("." + current_view + " .p_" + level).append(whitespace);
 					}

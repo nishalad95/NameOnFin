@@ -334,6 +334,29 @@ input{
         }
     }
 
+    .p_low{
+    	font-size: 0.06vw;
+    }
+
+}
+
+.whitespaceLeft {
+	border-bottom: 0.5vw solid transparent;
+	border-right: 0.5vw solid transparent;
+	font-size: 0px; 
+	line-height: 0%;
+	float:left;
+	clear:left;
+}
+
+
+.whitespaceRight {
+	border-bottom: 0.5vw solid transparent;
+	border-right: 0.5vw solid transparent;
+	font-size: 0px; 
+	line-height: 0%;
+	float:right;
+	clear:right;
 }
 
 
@@ -611,6 +634,7 @@ li[class^="listItem"]:hover {
   position: fixed;
   margin: 0 auto;
   left: 4px;
+
   top: 45%;
   width: 40px;
   font-size: 20pt;
