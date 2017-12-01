@@ -338,9 +338,9 @@ function loadData(current_view, level){
 		
 
 				// whitespace div addition for cross-browser compatibility
-				var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-				if (isFirefox) {
-					
+				var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+				/*var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;*/
+				if (!isChrome) {
 
 					if (level == "high") {
 						var whitespace, offsetLeft, offsetRight, incLeft, incRight;

@@ -2,27 +2,35 @@ html {
    background: white;
    font-family: Tahoma, Helvetica, Arial, Sans-serif;
 }
-.lslide
-{
+
+
+.lslide {
 	padding: 5px;
 }
+
 
 body {
     width: 100%;
     margin: 0 auto;
 }
 
-.container{
-    width: 100%;
+
+body, .container, #backgroundImage, form, input, .name_area, .photobanner {
     margin: 0 auto;
+}
+
+
+.container, #logo, #hashtag, form, .Static, #searchStatic, .name_area, #zoom-in, #zoom-out, #Recenter, #Flip {
+    width: 100%;
     position: relative;
 }
 
+
 #backgroundImage{
     position: absolute;
-    margin: 0 auto;
     width: 100%;
 }
+
 
 .searchBar {
     width: 70%;
@@ -35,18 +43,6 @@ body {
     display: flex;
 }
 
-/* mozilla styling */
-@-moz-document url-prefix() {
-    .searchBar {
-        background-size: 100% 100%;
-    }
-    #logo, #hashtag {
-        margin-top: 10%;
-    }
-    .inputText, .Static {
-        margin-top: 3%;
-    }
-}
 
 .logo {
     width: 6.5%;
@@ -54,10 +50,6 @@ body {
     margin: 1% 0 0 2%;
 }
 
-#logo {
-    width: 100%;
-    position: relative;
-}
 
 .hashtag {
     width: 25%;
@@ -65,10 +57,6 @@ body {
     margin: 2% 0 0 2.5%;
 }
 
-#hashtag {
-    width: 100%;
-    position: relative;
-}
 
 .searchInput {
     width: 60%;
@@ -76,21 +64,20 @@ body {
     margin: 2% 2% 0 5%;
 }
 
+
 .inputText {
     position: relative;
     display: flex;
 }
 
+
 form {
-    position: relative;
-    margin: 0 auto;
-    width: 100%;
     top:0%;
 }
 
+
 input{
     color: #060e6b;
-    margin: 0 auto;
     width: 70%;
     zoom: 100%;
     background: transparent;
@@ -101,6 +88,7 @@ input{
     top:0%;
 }
 
+
 .searchButton {
     width: 25%;
     position: relative;
@@ -108,29 +96,25 @@ input{
     float: right;
 }
 
+
 .Static {
-    position: relative;
-    width: 100%;
     top:0%;
 }
 
-#searchStatic {
-    position: relative;
-    width: 100%;
-}
 
 #inputValue {
     position: relative;
-    margin: 0 0 0 0;
     margin: 1.5% 0 0 0;
     outline: none;
     text-align: right;
     vertical-align:top;
 }
 
+
 #inputValue::placeholder {
     color: #21618C;
 }
+
 
 .box > div {
     width: 70%;
@@ -141,108 +125,10 @@ input{
         0 50px 100px 50px rgba(0, 0, 0, 0.03);
 }
 
-/* ipads and tablets */
-@media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
-  .searchBar, .box > div, .BottomBar {
-    width: 90% ! important;
-  }
-
-  .box > div {
-      height: 80vh;
-      margin: 0 auto;
-  }
-  .container {
-    width: 100%;
-    height: 100i%;
-    overflow: hidden;
-    margin: 0 auto;
-  }
-
-  #backgroundImage{
-      height: 100%;
-      width: 200%;
-      margin: 0 0 0 -50%;
-  }
-
-  #overlay {
-      height: 100vh ! important;
-      width: 150% ! important;
-      margin: -10% 0 0 -25% ! important;
-  }
-  .namesScrollBar {
-    font-size: 2vw ! important;
-  }
-  .name_area {
-    font-size: 0.15vw ! important;
-  }
-  .BottomBar {
-    height: 15vw ! important;
-  }
-
-  .p_high{
-    font-size: 0.50vw ! important;
-  }
-
-  .p_low{
-    font-size: 0.18vw ! important;
-  }
-
-}
-
-/* smart phones / notes*/
-@media (max-width: 700px) and (orientation: portrait) {
-  .searchBar, .box > div, .BottomBar {
-    width: 90% ! important;
-  }
-
-  .box > div {
-      height: 80vh;
-      margin: 0 auto;
-  }
-  .container {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    margin: 0 auto;
-  }
-
-  #backgroundImage{
-      height: 100%;
-      width: 200%;
-      margin: 0 0 0 -50%;
-  }
-
-  #overlay {
-      height: 115% ! important;
-      width: 150% ! important;
-      margin: -7% 0 0 -23% ! important;
-  }
-  .namesScrollBar {
-    font-size: 2vw ! important;
-  }
-  .name_area {
-    font-size: 0.2vw ! important;
-  }
-  .BottomBar {
-    height: 15vw ! important;
-  }
-  .p_high{
-
-    font-size: 0.75vw ! important;
-  }
-
-  .p_low{
-
-    font-size: 0.22vw ! important;
-  }
-
-}
 
 
 .name_area {
-    position: relative;
     display:flex;
-    width: 100%;
     height: 100%;
     min-height: 100%;
     max-height: 100%;
@@ -251,7 +137,6 @@ input{
     overflow-y: hidden;
     color: white;
     text-shadow: 1px 1px 2px black ! important;
-    margin: 0 auto;
     text-align: justify;
 }
 
@@ -303,42 +188,6 @@ input{
     height:100%;
 }
 
-.finNames {
-    z-index: 18;
-}
-
-/* mozilla styling */
-@-moz-document url-prefix() {
-    #overlay {
-        margin: -20% 0 0 0;
-    }
-    .name_area {
-        text-shadow: 1px 1px 2px black ! important;
-    }
-    .finNames_ {
-        position:absolute;
-	display:flex;
-	width:100%;
-	height:100%;
-    }
-
-    @media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
-        #overlay {
-          width: 150% ! important;
-          margin: -8% 0 0 -24% ! important;
-        }
-    }
-    @media (max-width: 700px) and (orientation: portrait) {
-        #overlay {
-          margin: -4% 0 0 -25% ! important;
-        }
-    }
-
-    .p_low{
-    	font-size: 0.06vw;
-    }
-
-}
 
 .whitespaceLeft {
 	border-bottom: 0.5vw solid transparent;
@@ -370,7 +219,7 @@ input{
     background-image: url(../images/FinVector2.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
-	  visibility: hidden;
+    visibility: hidden;
 }
 
 .panzoom .name{
@@ -392,13 +241,11 @@ input{
 
 #zoom-in, #zoom-out, #Recenter, #Flip {
     cursor: pointer;
-    position: relative;
-    width: 100%;
     height: 100%;
 }
 
 
-/** Multiple names scroll bar **/
+/***** MULTIPLE NAMES SCROLLING BAR *****/
 .namesScrollBar {
     position: absolute;
     max-height:100%;
@@ -412,14 +259,6 @@ input{
     background: rgba(245,245,245,0.9);
 }
 
-@-moz-document url-prefix() {
-    .namesScrollBar{
-        text-shadow: 1px 1px 1px;
-    }
-    #nameLink:hover {
-        text-shadow: 1px 1px 1px black ! important;
-    }
-}
 
 .searchQuery {
     margin: 5% 0 0 5%;
@@ -431,6 +270,7 @@ input{
     outline: none ! important;
 }
 
+
 .namesScrollBar ul {
     list-style:none;
     width: 100%;
@@ -438,11 +278,13 @@ input{
     margin-top: 5%;
 }
 
+
 .namesScrollBar li {
     line-height:200%;
     text-align: left;
     padding-left: 15%;
 }
+
 
 li[class^="listItem"] {
     list-style-position:inside;
@@ -450,27 +292,33 @@ li[class^="listItem"] {
     border-radius: 5px;
 }
 
+
 li[class^="listItem"]:hover {
     border: 2px solid rgba(0,0,0,0.2);
 }
+
 
 .namesScrollBar ul li {
 	margin-left: 5% ! important;
 	margin-right: 5% ! important;
 }
 
+
 .namesScrollBar #nameLink {
     text-decoration: none;
 }
+
 
 #nameLink, #nameLink:active {
     color: inherit;
 }
 
+
 #nameLink:hover {
     color: #e67300;
     text-shadow: 1px 1px 1px #000;
 }
+
 
 #accordion .ui-accordion-content > * {
 	-webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.3);
@@ -479,6 +327,7 @@ li[class^="listItem"]:hover {
 	color: rgb(25,25,112) ! important;
 }
 
+
 .noStyleAccordion .ui-accordion-header, .noStyleAccordion .ui-accordion-content {
 	padding: 0;
 	background: none;
@@ -486,10 +335,12 @@ li[class^="listItem"]:hover {
 	outline: none;
 }
 
+
 #accordion * {
 	padding: 0;
 	margin: 0;
 }
+
 
 .ui-accordion-header {
 	background-color: rgb(25,25,112);
@@ -499,17 +350,19 @@ li[class^="listItem"]:hover {
 }
 
 
-/** Scroll bar style **/
+/***** SCROLL BAR STYLE *****/
 #accordion::-webkit-scrollbar-track{
 	-webkit-box-shadow: inset 0 0 0 rgba(0,0,0,0.3);
 	background-color: #F5F5F5;
 	border-radius: 10px;
 }
 
+
 #accordion::-webkit-scrollbar{
     width: 10px;
     background-color: #F5F5F5;
 }
+
 
 #accordion::-webkit-scrollbar-thumb{
 	border-radius: 10px;
@@ -518,6 +371,7 @@ li[class^="listItem"]:hover {
 	color-stop(0.60, rgb(73,125,189)),
 	color-stop(0.86, rgb(28,58,148)));
 }
+
 
 .BottomBar {
     width: 70%;
@@ -528,6 +382,7 @@ li[class^="listItem"]:hover {
     background: rgba(0, 0, 128, 0.8);
     overflow:hidden;
 }
+
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .BottomBar {
@@ -541,19 +396,21 @@ li[class^="listItem"]:hover {
 
 }
 
+
 .photoBanner {
   width: 95%;
   position: relative;
-  margin: 0 auto;
   overflow:hidden;
   height:60%;
 }
+
 
 #selfieText {
     position: relative;
     width: 25%;
     margin: 2% 0 0 2%;
 }
+
 
 #scroller {
 	overflow: hidden;
@@ -562,8 +419,9 @@ li[class^="listItem"]:hover {
 	right: 0;
 	top: 1%;
 	bottom: 0;
-  height: 100%;
+  	height: 100%;
 }
+
 
 .item {
   height: 100%;
@@ -585,7 +443,7 @@ li[class^="listItem"]:hover {
   z-index:100;
 }
 
-/** LIGHTBOX MARKUP **/
+/***** LIGHTBOX MARKUP *****/
 .lightbox {
 	/** Default lightbox to hidden */
 	display: none;
@@ -601,6 +459,7 @@ li[class^="listItem"]:hover {
 	background: rgba(0,0,0,0.85);
 }
 
+
 .lightbox img {
 	/** Pad the lightbox image */
 	max-width: 90%;
@@ -611,14 +470,17 @@ li[class^="listItem"]:hover {
         display:inline;
 }
 
+
 .lightbox:target img {
 	animation: fadeInScale 0.75s ease-in-out;
 }
+
 
 @keyframes fadeInScale {
   0% { transform: scale(0.6); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
+
 
 .lightbox:target {
 	/** Remove default browser outline */
@@ -628,13 +490,12 @@ li[class^="listItem"]:hover {
 }
 
 
-.previous {
-  /**styling the left arrow**/
+.previous, .next {
+  /**styling the left and right arrow**/
   z-index: 999;
   position: fixed;
   margin: 0 auto;
   left: 4px;
-
   top: 45%;
   width: 40px;
   font-size: 20pt;
@@ -645,21 +506,6 @@ li[class^="listItem"]:hover {
   color: #ffffff;
 }
 
-.next {
-  /**styling the right arrow**/
-  z-index: 999;
-  position: fixed;
-  margin: 0 auto;
-  right: 4px;
-  top: 45%;
-  width: 40px;
-  font-size: 20pt;
-  text-decoration: none;
-  text-align: center;
-  border-radius:20%;
-  background: rgba(64,64,64,0.9);
-  color: #ffffff;
-}
 
 .exit {
   /** styling the exit button **/
@@ -675,9 +521,11 @@ li[class^="listItem"]:hover {
   color: #ffffff;
 }
 
+
 .previous:hover, .next:hover, .exit:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
 
 .selfieMessage {
     z-index: 999;
@@ -688,10 +536,8 @@ li[class^="listItem"]:hover {
     font-size: 100%;
 }
 
-/** END of Lightbox Markup **/
 
-/* Nmes on fin positioning */
-
+/***** Names on fin positioning - chrome*****/
 #left-image {
 	shape-outside: polygon(
 		0% 0%,
@@ -705,6 +551,7 @@ li[class^="listItem"]:hover {
 	visibility: hidden;
 }
 
+
 #right-image{
 	shape-outside: polygon(
 		100% 0%,
@@ -716,3 +563,206 @@ li[class^="listItem"]:hover {
 	height: 100%;
 	visibility: hidden;
 }
+
+
+
+
+/***** MOZILLA SPECIFIC STYLING *****/
+@-moz-document url-prefix() {
+
+    .searchBar {
+        background-size: 100% 100%;
+    }
+    #logo, #hashtag {
+        margin-top: 10%;
+    }
+    .inputText, .Static {
+        margin-top: 3%;
+    }
+    #overlay {
+        margin: -20% 0 0 0;
+    }
+    .name_area {
+        text-shadow: 1px 1px 2px black ! important;
+    }
+    .finNames_ {
+        position:absolute;
+	display:flex;
+	width:100%;
+	height:100%;
+    }
+
+    @media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
+        #overlay {
+          width: 150% ! important;
+          margin: -8% 0 0 -24% ! important;
+        }
+    }
+    @media (max-width: 700px) and (orientation: portrait) {
+        #overlay {
+          margin: -4% 0 0 -25% ! important;
+        }
+    }
+
+    .p_low{
+    	font-size: 0.06vw;
+    }
+    .namesScrollBar{
+        text-shadow: 1px 1px 1px;
+    }
+    #nameLink:hover {
+        text-shadow: 1px 1px 1px black ! important;
+    }
+}
+
+
+
+/***** MICROSOFT EDGE SPECIFIC STYLING *****/
+@supports (-ms-ime-align: auto) {
+	
+	.searchBar {
+        	background-size: 100% 100%;
+    	}
+
+ 	#logo, #hashtag {
+        	margin-top: 10%;
+    	}
+    	
+	.inputText, .Static {
+        	margin-top: 3%;
+    	}
+
+	.name_area {
+		position:absolute;
+		display:flex;
+	}
+	
+	.finNames_ {
+        	position:absolute;
+		display:flex;
+		width:100%;
+		height:100%;
+    	}
+}
+
+
+
+/***** IE VERSION 10 & 11 STYLING *****/
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+
+	.name_area {
+		position:absolute;
+		display:flex;
+	}
+	
+	.finNames_ {
+        	position:absolute;
+		display:flex;
+		width:100%;
+		height:100%;
+    	}
+
+}
+
+
+/***** TABLET DEVICES *****/
+@media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
+  .searchBar, .box > div, .BottomBar {
+    width: 90% ! important;
+  }
+
+  .box > div {
+      height: 80vh;
+      margin: 0 auto;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+  #backgroundImage{
+      height: 100%;
+      width: 200%;
+      margin: 0 0 0 -50%;
+  }
+
+  #overlay {
+      height: 100vh ! important;
+      width: 150% ! important;
+      margin: -10% 0 0 -25% ! important;
+  }
+  .namesScrollBar {
+    font-size: 2vw ! important;
+  }
+  .name_area {
+    font-size: 0.15vw ! important;
+  }
+  .BottomBar {
+    height: 15vw ! important;
+  }
+
+  .p_high{
+    font-size: 0.50vw ! important;
+  }
+
+  .p_low{
+    font-size: 0.18vw ! important;
+  }
+
+}
+
+
+
+/***** SMART PHONES AND NOTES *****/
+@media (max-width: 700px) and (orientation: portrait) {
+  .searchBar, .box > div, .BottomBar {
+    width: 90% ! important;
+  }
+
+  .box > div {
+      height: 80vh;
+      margin: 0 auto;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+  #backgroundImage{
+      height: 100%;
+      width: 200%;
+      margin: 0 0 0 -50%;
+  }
+
+  #overlay {
+      height: 115% ! important;
+      width: 150% ! important;
+      margin: -7% 0 0 -23% ! important;
+  }
+  .namesScrollBar {
+    font-size: 2vw ! important;
+  }
+  .name_area {
+    font-size: 0.2vw ! important;
+  }
+  .BottomBar {
+    height: 15vw ! important;
+  }
+  .p_high{
+
+    font-size: 0.75vw ! important;
+  }
+
+  .p_low{
+
+    font-size: 0.22vw ! important;
+  }
+
+}
+
+
+
