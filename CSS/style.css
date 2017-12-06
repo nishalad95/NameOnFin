@@ -15,7 +15,7 @@ body {
 }
 
 
-body, .container, #backgroundImage, form, input, .name_area, .photobanner {
+body, .container, #backgroundImage, form, input, .name_area, .photoBanner {
     margin: 0 auto;
 }
 
@@ -160,9 +160,6 @@ input{
 }
 
 #overlay {
-
-    display:none; 	/* for mozilla shaping debugging */
-
     width: 100%;
     position: absolute;
     margin: -11% 0 0 0;
@@ -386,13 +383,13 @@ li[class^="listItem"]:hover {
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .BottomBar {
-    height: 12.5vw;
-    margin: 1.5% auto;
-    position: relative;
-    border-radius: 0 0 1em 1em;
-    background: rgba(0, 0, 128, 0.8);
-    overflow:hidden;
-}
+    	height: 12.5vw;
+    	margin: 1.5% auto;
+    	position: relative;
+    	border-radius: 0 0 1em 1em;
+    	background: rgba(0, 0, 128, 0.8);
+    	overflow:hidden;
+    }
 
 }
 
@@ -592,17 +589,21 @@ li[class^="listItem"]:hover {
 	height:100%;
     }
 
+    
+    /***  Mozilla tablet devices and portrait ***/
     @media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
         #overlay {
           width: 150% ! important;
           margin: -8% 0 0 -24% ! important;
         }
     }
+    /***  Mozilla mobile devices and portrait ***/
     @media (max-width: 700px) and (orientation: portrait) {
         #overlay {
           margin: -4% 0 0 -25% ! important;
         }
     }
+    
 
     .p_low{
     	font-size: 0.06vw;
