@@ -486,13 +486,19 @@ li[class^="listItem"]:hover {
 	display: block;
 }
 
+.previous {
+  left: 4px;
+}
+
+.next {
+  right: 4px;
+}
 
 .previous, .next {
   /**styling the left and right arrow**/
   z-index: 999;
   position: fixed;
   margin: 0 auto;
-  left: 4px;
   top: 45%;
   width: 40px;
   font-size: 20pt;
@@ -541,7 +547,7 @@ li[class^="listItem"]:hover {
 		0% 75%,
 		73% 0%
 	);
-	float: left;
+	float: left; 
 	shape-margin: 5px;
 	width: 50%;
 	height: 100%;
@@ -595,15 +601,15 @@ li[class^="listItem"]:hover {
         #overlay {
           width: 150% ! important;
           margin: -8% 0 0 -24% ! important;
-        }
+  	}
     }
+
     /***  Mozilla mobile devices and portrait ***/
     @media (max-width: 700px) and (orientation: portrait) {
         #overlay {
           margin: -4% 0 0 -25% ! important;
         }
     }
-    
 
     .p_low{
     	font-size: 0.06vw;
@@ -666,7 +672,7 @@ li[class^="listItem"]:hover {
 }
 
 
-/***** TABLET DEVICES *****/
+/***** TABLET DEVICES  - chrome & opera *****/
 @media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
   .searchBar, .box > div, .BottomBar {
     width: 90% ! important;
@@ -716,7 +722,7 @@ li[class^="listItem"]:hover {
 
 
 
-/***** SMART PHONES AND NOTES *****/
+/***** SMART PHONES AND NOTES - chrome and opera *****/
 @media (max-width: 700px) and (orientation: portrait) {
   .searchBar, .box > div, .BottomBar {
     width: 90% ! important;

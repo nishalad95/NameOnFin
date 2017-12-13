@@ -41,10 +41,11 @@ $(document).ready(function () {
 	});
 
 
-	// Pre-load all the name data
+	// Pre-load all names on near side
 	loadData(current_view, "high");
 	loadData(current_view, "low");
 	
+	// Pre-laod all names on off side
 	loadData("off", "high");
 	loadData("off", "low");
 	
@@ -92,7 +93,7 @@ $(document).ready(function () {
   	$("#zoom-in").on("click", function() {
 		
 		$(".se-pre-con").show();
-		currentZoom += 0.05;
+		currentZoom += 0.2;
 		
 		settings = {
 			targetsize: currentZoom,
@@ -122,7 +123,7 @@ $(document).ready(function () {
 	$("#zoom-out").on("click", function() {
 		
 		//$(".se-pre-con").show();
-		currentZoom -= 0.05;
+		currentZoom -= 0.2;
 
 		if (currentZoom < 0 || currentZoom == 0){
 			
@@ -205,8 +206,8 @@ $(document).ready(function () {
 					
 					// create names panel
 					$(".name_area").append("<div class='namesScrollBar' id='accordion'></div>");
-					$(".namesScrollBar").append("<div class='searchQuery' id='titleHeader'> Showing Results For: " + searchTerm + "</div>");
-					$(".namesScrollBar").append("<div><ul class='searchList'></ul></div>");
+					$(".namesScrollBar").append("<div class='searchQuery' id='titleHeader'> Showing Results For: " + searchTerm + "</div>" +
+						"<div><ul class='searchList'></ul></div>");
 					
 					var sBuilder = "";
 					for(var i = 0; i < count; i++){
@@ -267,6 +268,7 @@ $(document).ready(function () {
 		});
 		
 	$(".se-pre-con").hide();
+
   });
   
 
@@ -339,19 +341,18 @@ function loadData(current_view, level){
 				if (!isChrome) {
 
 					if (level == "high") {
-						var whitespace, offsetLeft, offsetRight, incLeft, incRight;
+						var offsetLeft, offsetRight, incLeft, incRight;
+						var whitespace = "";
 
 						if (current_view == "near") {
 							
-							whitespace = "";
 							offsetLeft = 38;
 							offsetRight = 0;
 							incLeft = -0.65;
 							incRight = 0.15;
 						
-						}else {
+						} else {
 						
-							whitespace = "";
 							offsetLeft = 0;
 							offsetRight = 38;
 							incLeft = 0.15;
@@ -373,6 +374,9 @@ function loadData(current_view, level){
 				}
 
 				$("." + current_view + " .p_" + level).append(sBuilder);
+	
+
+
 			}
 		}
 	});
@@ -473,19 +477,13 @@ function loadImages(data) {
 		if (prev === 0) { prev = TOTALNUMSELFIES; }
 
 		/* what the user sees after click */
-		$(".lightboxArea").append("<div id=\"img" + i + "\" class=\"lightbox\"></div>");
+		$(".lightboxArea").append("<div id=\"imgSupersonicSelfie" + i + "\" class=\"lightbox\"></div>");
 
-		/*previous button*/
-		$(".lightbox#img" + i + "").append("<a href=\"#img" + prev + "\" class='previous'>&lt;</a>");
-
-		/* lightbox image */
-		$(".lightbox#img" + i + "").append("<a href=\"#_\"><img src=\"images/Selfies/" + i + ".png\" alt=\"selfie\" /></a>");
-		$(".lightbox#img" + i + "").append("<div class='selfieMessage'>" + allRows[i-1] + "</div> ");
-
-		/* exit button */
-		$(".lightbox#img" + i + "").append("<a href=\"#_\" class='exit'>&times;</a>");
-
-		/* next button*/
-		$(".lightbox#img" + i + "").append("<a href=\"#img" + next + "\" class='next'>&gt;</a>");
+		/*previous button, image, message, exit button, next button */
+		$(".lightbox#imgSupersonicSelfie" + i + "").append("<a href=\"#imgSupersonicSelfie" + prev + "\" class='previous'>&lt;</a>" + 
+			"<a href=\"#_\"><img src=\"images/Selfies/SupersonicSelfie" + i + ".png\" alt=\"selfie\" /></a>" + 
+			"<div class='selfieMessage'>" + allRows[i-1] + "</div> " +
+			"<a href=\"#_\" class='exit'>&times;</a>" +
+			"<a href=\"#imgSupersonicSelfie" + next + "\" class='next'>&gt;</a>");
 	}
 }
