@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw
 import pytesseract
 
 # Path to the image.
-path = "lorem_ipsum.png"
+path = "bloodhound_test.png"
 
 # The image object.
 image = Image.open(path)
@@ -16,11 +16,12 @@ text = pytesseract.image_to_string(image, None, True, False)
 # Raw, unprocessed data from the image.
 raw_data = text.split('\n')
 
+# print(raw_data)
 # The dimension of the image the words are contained within.
 dims = image.size
 
 # The words we are searching for.
-words = ["Lorem", "ipsum", "dolor", "sit"]
+words = ["104", "(City", "of", "Cambridge)", "Squadron", "ATC;", "1163", "Squadron"]
 
 # What we use to determine if we have foud the correct word or not; deleted after each word is found.
 string_builder = ""
@@ -60,7 +61,7 @@ for x in range(len(raw_data)):
             word_y1 = coord_list[0][1]
             word_y2 = coord_list[num_coords - 1][3]
             
-            draw.rectangle([word_x1, word_y1, word_x2, word_y2], outline = "red")
+            draw.rectangle([word_x1, word_y1, word_x2, word_y2], outline = "white")
 
             string_builder = ""
             coord_list = []
@@ -79,13 +80,28 @@ for x in range(len(raw_data)):
 
     # draw.rectangle([x1, y1, x2, y2], outline = "red")
 
+"""
+Currently we have each seperated word from each whole word, however we need to join the seperated words into the correct whole word.
+
+Thankfully in the PDF file each whole word is seperated by ;, so we just need to detect that in the individual words.
+"""
+
+# For ever word found in master list.
 for point in master_coords:
 
     x = point[1]
     y = point[2]
     word = point[0]
+
+    """
+    # For every letter in the word.
+    for char in word:
+
+        # We know this is the end of a whole word.
+        if char == ";"
+    """
     
-    draw.ellipse([x, y, x + 5, y + 5], outline = "red")
+    draw.ellipse([x, y, x + 5, y + 5], outline = "white")
     
     print(word + ": " + str(x) + ", " + str(y))
 image.show()
