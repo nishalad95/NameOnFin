@@ -93,7 +93,7 @@ $(document).ready(function () {
   	$("#zoom-in").on("click", function() {
 		
 		$(".se-pre-con").show();
-		currentZoom += 0.2;
+		currentZoom += 0.15;
 		
 		settings = {
 			targetsize: currentZoom,
@@ -123,7 +123,7 @@ $(document).ready(function () {
 	$("#zoom-out").on("click", function() {
 		
 		//$(".se-pre-con").show();
-		currentZoom -= 0.2;
+		currentZoom -= 0.05;
 
 		if (currentZoom < 0 || currentZoom == 0){
 			
