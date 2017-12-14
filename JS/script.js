@@ -1,6 +1,3 @@
-const MAXZOOM = 30;
-const MINZOOM = 1;
-const SCALEFACTOR = 3;
 var contactid = null;
 var counter = 0;
 
@@ -12,9 +9,8 @@ function setup_slider() {
         item:4,
         loop:false,
         slideMove:1,
-        responsive : [{
-			breakpoint:800,
-			settings: {
+        responsive : [{	breakpoint:800,
+			settings: { 
 				item:3,
 				slideMove:1,
 				slideMargin:6
@@ -26,35 +22,37 @@ function setup_slider() {
 				item:2,
 				slideMove:1
 			}
-        }
+        	}
         ]
     });
 
 }
 
 
+
 $(document).ready(function () {
+
+	// Bind the click event to the body
+	$("#backgroundImage").on('click', function(e) {
 	
-
-// Bind the click event to the body - any static parent container will do
-$("#backgroundImage").on('click', function(e) {
-	
-	if (e.pageX <= 25 && e.pageY <= 25) {
-		alert("This site was developed by Nisha Lad & Chris Wing :-)");
-	}
-});
+		if (e.pageX <= 25 && e.pageY <= 25) {
+			alert("This site was developed by Nisha Lad & Chris Wing :-)");
+		}
+	});
 
 
-	// This section pre-loads all the name data to reduce the ajax calls down to once per page load.
+	// Pre-load all names on near side
 	loadData(current_view, "high");
 	loadData(current_view, "low");
 	
+	// Pre-laod all names on off side
 	loadData("off", "high");
 	loadData("off", "low");
 	
-	// By default we hide the side we dont need.
+	// Only show one side at a time
 	$(".off").hide();
 	
+	/*
 	var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) {
 		return p.toString() === "[object SafariRemoteNotification]";
 	})(!window['safari'] || safari.pushNotification);
@@ -63,12 +61,13 @@ $("#backgroundImage").on('click', function(e) {
         alert('We have detected you are not using a supported browser. Please move to either Google Chrome or Mozilla Firefox.');
 			document.write("<style>body { display:none }</style>");
   			window.location.replace("time-out.html");
-    }
+    	}
+	*/
+
 
     window.setTimeout("getAllNames()", 5);
 
-    $.ajax({
-		
+    $.ajax({	
 		url: 'SelfieMessages.csv',
 		dataType: 'text',
 		async: true,
@@ -94,8 +93,7 @@ $("#backgroundImage").on('click', function(e) {
   	$("#zoom-in").on("click", function() {
 		
 		$(".se-pre-con").show();
-			
-		currentZoom += 0.05;
+		currentZoom += 0.15;
 		
 		settings = {
 			targetsize: currentZoom,
@@ -106,27 +104,27 @@ $("#backgroundImage").on('click', function(e) {
 			easing: null,
 			nativeanimation: false,
 			// root element to zoom relative to
-			root: $(".panzoom"),//#dragArea"),
+			root: $(".panzoom"),
 			debug: false,
 			animationendcallback: null,
 			closeclick: false
 		}
+
 		if (contactid == null){
-			
 			$(".panzoom").zoomTo(settings);
-		}
-		else{
-			
+		} else{
 			$("#" + contactid).zoomTo(settings);
 		}
+
 		$(".se-pre-con").hide();
-    });
+
+    	});
 
 	$("#zoom-out").on("click", function() {
 		
-		// $(".se-pre-con").show();
-		
+		//$(".se-pre-con").show();
 		currentZoom -= 0.05;
+
 		if (currentZoom < 0 || currentZoom == 0){
 			
 			searched = false;
@@ -148,22 +146,19 @@ $("#backgroundImage").on('click', function(e) {
 			animationendcallback: null,
 			closeclick: false
 		}
-		// settings can be set for both the zoomTo and zoomTarget calls:
 		
 		if(contactid != null){
-			
 			$("#" + contactid).zoomTo(settings);
-			
-		}
-		else if (contactid == null){
-			
+		} else if (contactid == null){
 			$(".panzoom").zoomTo(settings);
 		}
 
 		// $(".se-pre-con").hide();
-    });
+    	});
 
-  $("#recenter").click(function () {
+
+
+  	$("#recenter").click(function () {
 	  
 		$(".se-pre-con").show();
 		currentZoom = 0;
@@ -171,8 +166,11 @@ $("#backgroundImage").on('click', function(e) {
 		resetPosition();
 		currentZoom = 0;
 		$(".se-pre-con").hide();
-  });
+
+  	});
   
+
+
   $("#search_names").submit(function(e){
 	  
 	$(".se-pre-con").show();
@@ -208,8 +206,8 @@ $("#backgroundImage").on('click', function(e) {
 					
 					// create names panel
 					$(".name_area").append("<div class='namesScrollBar' id='accordion'></div>");
-					$(".namesScrollBar").append("<div class='searchQuery' id='titleHeader'> Showing Results For: " + searchTerm + "</div>");
-					$(".namesScrollBar").append("<div><ul class='searchList'></ul></div>");
+					$(".namesScrollBar").append("<div class='searchQuery' id='titleHeader'> Showing Results For: " + searchTerm + "</div>" +
+						"<div><ul class='searchList'></ul></div>");
 					
 					var sBuilder = "";
 					for(var i = 0; i < count; i++){
@@ -270,14 +268,16 @@ $("#backgroundImage").on('click', function(e) {
 		});
 		
 	$(".se-pre-con").hide();
+
   });
   
+
+
 	function changeView(key){
 		
 		if(key == "nn" || key == "sc"){
 			
-			// these keys belong to the 'near' side view
-			
+			// 'near' side names
 			if(current_view != "near"){
 								
 				current_view = "near";
@@ -289,16 +289,14 @@ $("#backgroundImage").on('click', function(e) {
 				$(".off").hide();
 				$(".near").show();
 			}
-		}
-		else{
+
+		} else{
 			
-			// these names belong to the 'off' side view
-			
+			// 'off' side names
 			if(current_view != "off"){
 				
 				current_view = "off";
 				
-				// Now data has been loaded up, we can set the layout.
 				$('.panzoom').css("background-image", "url(images/FinVector2Inverted.png)");
 				$('#left-image').css("shape-outside", "polygon(0% 0%, 25% 100%, 0% 100%)");
 				$('#right-image').css("shape-outside", "polygon(25% 0%, 100% 0%, 99% 80%)");
@@ -310,6 +308,9 @@ $("#backgroundImage").on('click', function(e) {
 	}
 
 });
+
+
+
 
 function loadData(current_view, level){
 	
@@ -334,8 +335,48 @@ function loadData(current_view, level){
 					// Here is where we replace the big names on the page.					
 					sBuilder += "<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;";
 				}
-				
+
+				// whitespace div addition for cross-browser compatibility
+				var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+				if (!isChrome) {
+
+					if (level == "high") {
+						var offsetLeft, offsetRight, incLeft, incRight;
+						var whitespace = "";
+
+						if (current_view == "near") {
+							
+							offsetLeft = 38;
+							offsetRight = 0;
+							incLeft = -0.65;
+							incRight = 0.15;
+						
+						} else {
+						
+							offsetLeft = 0;
+							offsetRight = 38;
+							incLeft = 0.15;
+							incRight = -0.65;
+						
+						}
+
+						for (var j = 0; j < 100; j++) {
+							
+							whitespace += "<div class='whitespaceLeft' style='width:" + offsetLeft + "%;'></div>";
+							whitespace += "<div class='whitespaceRight' style='width:" + offsetRight + "%;'></div>";
+							offsetLeft += incLeft;
+							offsetRight += incRight;
+
+						}
+						$("." + current_view + " .p_" + level).append(whitespace);
+					}
+
+				}
+
 				$("." + current_view + " .p_" + level).append(sBuilder);
+	
+
+
 			}
 		}
 	});
@@ -364,6 +405,8 @@ function init() {
 	$(".se-pre-con").hide("slow");
 }
 
+
+
 function resetPosition() {
 	
 	$(".panzoom").css('top', 0);
@@ -372,6 +415,8 @@ function resetPosition() {
 	counter = 0;
 }
 
+
+
 function removeBorder() {
 	
 	resetPosition();
@@ -379,9 +424,12 @@ function removeBorder() {
 }
 
 
+
 function createBorder(contactid) {
 	$("#" + contactid).css('box-shadow', 'inset 0 0 5em #49250e');
 }
+
+
 
 var searched = false;
 
@@ -394,6 +442,8 @@ function contSearch(contactid){
 		searched = true;
 	}
 }
+
+
 
 var names_html = "";
 
@@ -413,6 +463,8 @@ $.ajax({
 });
 }
 
+
+
 function loadImages(data) {
 	
 	const TOTALNUMSELFIES = 68;
@@ -425,19 +477,13 @@ function loadImages(data) {
 		if (prev === 0) { prev = TOTALNUMSELFIES; }
 
 		/* what the user sees after click */
-		$(".lightboxArea").append("<div id=\"img" + i + "\" class=\"lightbox\"></div>");
+		$(".lightboxArea").append("<div id=\"imgSupersonicSelfie" + i + "\" class=\"lightbox\"></div>");
 
-		/*previous button*/
-		$(".lightbox#img" + i + "").append("<a href=\"#img" + prev + "\" class='previous'>&lt;</a>");
-
-		/* lightbox image */
-		$(".lightbox#img" + i + "").append("<a href=\"#_\"><img src=\"images/Selfies/" + i + ".png\" alt=\"selfie\" /></a>");
-		$(".lightbox#img" + i + "").append("<div class='selfieMessage'>" + allRows[i-1] + "</div> ");
-
-		/* exit button */
-		$(".lightbox#img" + i + "").append("<a href=\"#_\" class='exit'>&times;</a>");
-
-		/* next button*/
-		$(".lightbox#img" + i + "").append("<a href=\"#img" + next + "\" class='next'>&gt;</a>");
+		/*previous button, image, message, exit button, next button */
+		$(".lightbox#imgSupersonicSelfie" + i + "").append("<a href=\"#imgSupersonicSelfie" + prev + "\" class='previous'>&lt;</a>" + 
+			"<a href=\"#_\"><img src=\"images/Selfies/SupersonicSelfie" + i + ".png\" alt=\"selfie\" /></a>" + 
+			"<div class='selfieMessage'>" + allRows[i-1] + "</div> " +
+			"<a href=\"#_\" class='exit'>&times;</a>" +
+			"<a href=\"#imgSupersonicSelfie" + next + "\" class='next'>&gt;</a>");
 	}
 }
