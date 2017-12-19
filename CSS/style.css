@@ -220,11 +220,14 @@ input{
 }
 
 .panzoom .name{
-    display:inline;
+    display:inline-block;
+    /*display:inline;*/
     z-index:17;
     position:relative;
     border-radius: 5%;
+    white-space:nowrap;
 }
+
 
 .wrapper {
     opacity: 1.0;

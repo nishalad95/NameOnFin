@@ -32,7 +32,6 @@ function setup_slider() {
 
 $(document).ready(function () {
 
-	// Bind the click event to the body
 	$("#backgroundImage").on('click', function(e) {
 	
 		if (e.pageX <= 25 && e.pageY <= 25) {
@@ -41,31 +40,19 @@ $(document).ready(function () {
 	});
 
 
-	// Pre-load all names on near side
+	// Pre-load all names on near and off side
 	loadData(current_view, "high");
 	loadData(current_view, "low");
-	
-	// Pre-laod all names on off side
 	loadData("off", "high");
 	loadData("off", "low");
 	
-	// Only show one side at a time
+	// hide the off side 
 	$(".off").hide();
-	
-	/*
-	var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) {
-		return p.toString() === "[object SafariRemoteNotification]";
-	})(!window['safari'] || safari.pushNotification);
-
-	if (isSafari) {
-        alert('We have detected you are not using a supported browser. Please move to either Google Chrome or Mozilla Firefox.');
-			document.write("<style>body { display:none }</style>");
-  			window.location.replace("time-out.html");
-    	}
-	*/
 
 
-    window.setTimeout("getAllNames()", 5);
+
+    window.setTimeout("init()", 5);
+
 
     $.ajax({	
 		url: 'SelfieMessages.csv',
@@ -74,91 +61,92 @@ $(document).ready(function () {
 		success: function (e){
 			loadImages(e);
 		}
-	});
+    });
 
-	window.setTimeout("setup_slider()", 5);
+
+    window.setTimeout("setup_slider()", 5);
 				
-	$("#Flip").on("click", function(){
+	
+    $("#Flip").on("click", function(){
 		
-		if(current_view == "near"){
-			changeView("no");
-			resetPosition();
-		} else{
-			changeView("nn");
-			resetPosition();
-		}
-	});	
+	if(current_view == "near"){
+		changeView("no");
+		resetPosition();
+	} else{
+		changeView("nn");
+		resetPosition();
+	}
+    });	
 
 	
-  	$("#zoom-in").on("click", function() {
+    $("#zoom-in").on("click", function() {
 		
-		$(".se-pre-con").show();
-		currentZoom += 0.15;
+	$(".se-pre-con").show();
+	currentZoom += 0.15;
 		
-		settings = {
-			targetsize: currentZoom,
-			// scale content to screen based on their size
-			// "width"|"height"|"both"
-			scalemode: "both",
-			duration: 1,
-			easing: null,
-			nativeanimation: false,
-			// root element to zoom relative to
-			root: $(".panzoom"),
-			debug: false,
-			animationendcallback: null,
-			closeclick: false
-		}
+	settings = {
+		targetsize: currentZoom,
+		// scale content to screen based on their size
+		// "width"|"height"|"both"
+		scalemode: "both",
+		duration: 1,
+		easing: null,
+		nativeanimation: false,
+		// root element to zoom relative to
+		root: $(".panzoom"),
+		debug: false,
+		animationendcallback: null,
+		closeclick: false
+	}
 
-		if (contactid == null){
-			$(".panzoom").zoomTo(settings);
-		} else{
-			$("#" + contactid).zoomTo(settings);
-		}
+	if (contactid == null){
+		$(".panzoom").zoomTo(settings);
+	} else{
+		$("#" + contactid).zoomTo(settings);
+	}
 
-		$(".se-pre-con").hide();
+	$(".se-pre-con").hide();
 
-    	});
+    });
 
-	$("#zoom-out").on("click", function() {
+
+    $("#zoom-out").on("click", function() {
 		
-		//$(".se-pre-con").show();
-		currentZoom -= 0.05;
+	currentZoom -= 0.05;
 
-		if (currentZoom < 0 || currentZoom == 0){
-			
-			searched = false;
-			resetPosition();
-			currentZoom = 0;
-			return;
-		}
+	if (currentZoom < 0 || currentZoom == 0){		
+		searched = false;
+		resetPosition();
+		currentZoom = 0;
+		return;
+	}
 		
-		settings = {
-			targetsize: currentZoom,
-			// scale content to screen based on their size
-			// "width"|"height"|"both"
-			scalemode: "both",
-			duration: 1,
-			easing: null,
-			nativeanimation: false,
-			root: $(".panzoom"),//#dragArea"),
-			debug: false,
-			animationendcallback: null,
-			closeclick: false
-		}
-		
-		if(contactid != null){
-			$("#" + contactid).zoomTo(settings);
-		} else if (contactid == null){
-			$(".panzoom").zoomTo(settings);
-		}
+	settings = {
+		targetsize: currentZoom,
+		// scale content to screen based on their size
+		// "width"|"height"|"both"
+		scalemode: "both",
+		duration: 1,
+		easing: null,
+		nativeanimation: false,
+		root: $(".panzoom"),//#dragArea"),
+		debug: false,
+		animationendcallback: null,
+		closeclick: false
+	}
+	
 
-		// $(".se-pre-con").hide();
-    	});
+	if(contactid != null){
+		$("#" + contactid).zoomTo(settings);
+	} else if (contactid == null){
+		$(".panzoom").zoomTo(settings);
+ 	}
+
+    });
 
 
 
-  	$("#recenter").click(function () {
+    $("#recenter").click(function () {
 	  
 		$(".se-pre-con").show();
 		currentZoom = 0;
@@ -167,11 +155,11 @@ $(document).ready(function () {
 		currentZoom = 0;
 		$(".se-pre-con").hide();
 
-  	});
+    });
   
 
 
-  $("#search_names").submit(function(e){
+    $("#search_names").submit(function(e){
 	  
 	$(".se-pre-con").show();
 	
@@ -189,6 +177,7 @@ $(document).ready(function () {
 		   obj[item.name] = item.value;
 		   return obj;
 	}, {});
+
 
 	var searchTerm = data["name"];
 	
@@ -269,43 +258,42 @@ $(document).ready(function () {
 		
 	$(".se-pre-con").hide();
 
-  });
+    });
   
 
 
-	function changeView(key){
+    function changeView(key){
 		
-		if(key == "nn" || key == "sc"){
+	if(key == "nn" || key == "sc"){
 			
-			// 'near' side names
-			if(current_view != "near"){
-								
-				current_view = "near";
+		// 'near' side names
+		if(current_view != "near"){
+			current_view = "near";
 				
-				$('.panzoom').css("background-image", "url(images/FinVector2.png)");
-				$('#left-image').css("shape-outside", "polygon(0% 0%, 0% 75%, 73% 0%)");
-				$('#right-image').css("shape-outside", "polygon(100% 0%, 78% 100%, 100% 100%)");
+			$('.panzoom').css("background-image", "url(images/FinVector2.png)");
+			$('#left-image').css("shape-outside", "polygon(0% 0%, 0% 75%, 73% 0%)");
+			$('#right-image').css("shape-outside", "polygon(100% 0%, 78% 100%, 100% 100%)");
 							
-				$(".off").hide();
-				$(".near").show();
-			}
+			$(".off").hide();
+			$(".near").show();
+		}
 
-		} else{
+	} else{
 			
-			// 'off' side names
-			if(current_view != "off"){
+		// 'off' side names
+		if(current_view != "off"){
+			current_view = "off";
 				
-				current_view = "off";
+			$('.panzoom').css("background-image", "url(images/FinVector2Inverted.png)");
+			$('#left-image').css("shape-outside", "polygon(0% 0%, 25% 100%, 0% 100%)");
+			$('#right-image').css("shape-outside", "polygon(25% 0%, 100% 0%, 99% 80%)");
 				
-				$('.panzoom').css("background-image", "url(images/FinVector2Inverted.png)");
-				$('#left-image').css("shape-outside", "polygon(0% 0%, 25% 100%, 0% 100%)");
-				$('#right-image').css("shape-outside", "polygon(25% 0%, 100% 0%, 99% 80%)");
-				
-				$(".near").hide();
-				$(".off").show();				
-			}
+			$(".near").hide();
+			$(".off").show();				
 		}
 	}
+    }
+
 
 });
 
@@ -332,45 +320,14 @@ function loadData(current_view, level){
 					var name = data[i].name;
 					var key = data[i].key_;
 
-					// Here is where we replace the big names on the page.					
-					sBuilder += "<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "</div>&nbsp;";
+					// build a string containing all name divs					
+					sBuilder += "<div class='name zzoomTarget' id='contact_" + key + "" + id + "'>" + name + "&nbsp;</div>";
 				}
 
-				// whitespace div addition for cross-browser compatibility
+				// whitespace div addition for firefox, IE and edge
 				var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-				if (!isChrome) {
-
-					if (level == "high") {
-						var offsetLeft, offsetRight, incLeft, incRight;
-						var whitespace = "";
-
-						if (current_view == "near") {
-							
-							offsetLeft = 38;
-							offsetRight = 0;
-							incLeft = -0.65;
-							incRight = 0.15;
-						
-						} else {
-						
-							offsetLeft = 0;
-							offsetRight = 38;
-							incLeft = 0.15;
-							incRight = -0.65;
-						
-						}
-
-						for (var j = 0; j < 100; j++) {
-							
-							whitespace += "<div class='whitespaceLeft' style='width:" + offsetLeft + "%;'></div>";
-							whitespace += "<div class='whitespaceRight' style='width:" + offsetRight + "%;'></div>";
-							offsetLeft += incLeft;
-							offsetRight += incRight;
-
-						}
-						$("." + current_view + " .p_" + level).append(whitespace);
-					}
-
+				if(!isChrome) {
+					adjustSpacing(current_view, level);
 				}
 
 				$("." + current_view + " .p_" + level).append(sBuilder);
@@ -381,6 +338,45 @@ function loadData(current_view, level){
 		}
 	});
 }
+
+
+
+function adjustSpacing(current_view, level) {
+	
+	if (level == "high") {
+		var offsetLeft, offsetRight, incLeft, incRight;
+		var whitespace = "";
+
+		if (current_view == "near") {
+							
+			offsetLeft = 38;
+			offsetRight = 0;
+			incLeft = -0.65;
+			incRight = 0.15;
+						
+		} else {
+						
+			offsetLeft = 0;
+			offsetRight = 38;
+			incLeft = 0.15;
+			incRight = -0.65;
+						
+		}
+
+		for (var j = 0; j < 100; j++) {
+							
+			whitespace += "<div class='whitespaceLeft' style='width:" + offsetLeft + "%;'></div>";
+			whitespace += "<div class='whitespaceRight' style='width:" + offsetRight + "%;'></div>";
+			offsetLeft += incLeft;
+			offsetRight += incRight;
+
+		}
+		$("." + current_view + " .p_" + level).append(whitespace);
+	}
+
+}
+
+
 
 
 
@@ -446,22 +442,6 @@ function contSearch(contactid){
 
 
 var names_html = "";
-
-function getAllNames(){
-
-$.ajax({
-	
-	type: "GET",
-	dataType: "json",
-	async: true,
-	url: "http://129.146.81.161/fin/?func_name=get_data",
-
-	success: function() {
-
-		window.setTimeout("init()", 5);
-	}
-});
-}
 
 
 
