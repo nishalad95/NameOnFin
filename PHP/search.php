@@ -28,7 +28,6 @@ $sql = "(SELECT `name`, `id`, `key_` FROM `schools` WHERE `name` LIKE '%$term%' 
 
 $data = array();
 
-// Gets school data.
 foreach($con->query($sql) as $row){
 	
 	if (json_encode($row) != NULL) {	

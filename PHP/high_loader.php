@@ -18,32 +18,31 @@ if(mysqli_connect_errno()){
 
 $data = array();
 
+$table = "";
+
+
+
 if($key == "near"){
-	
-	// Gets near side priority data.
-	
-	$sql = "SELECT name, id, key_ FROM schools";
-	
-	foreach($con->query($sql) as $row){
-		
-		array_push($data, $row);
-	}
-	
-	echo json_encode($data);
+
+	$table = "schools";
+
+} else if ($key == "off") {
+
+	$table = "enhanced";
 }
-else if($key == "off"){
+
+
+
+$sql = "SELECT name, id, key_ FROM `$table`";
 	
-	// Gets the off side high priority data.
-	
-	$sql = "SELECT name, id, key_ FROM enhanced";
-	
-	foreach($con->query($sql) as $row){
+foreach($con->query($sql) as $row){
 		
-		array_push($data, $row);
-	}
-	
-	echo json_encode($data);
+	array_push($data, $row);
 }
+	
+echo json_encode($data);
+
+
 
 mysqli_close($con);
 ?>
