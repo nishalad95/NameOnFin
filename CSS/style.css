@@ -576,6 +576,12 @@ li[class^="listItem"]:hover {
 /***** MOZILLA SPECIFIC STYLING *****/
 @-moz-document url-prefix() {
 
+    @media only screen and (orientation:portrait){
+	body {
+	    -moz-transform: rotate(90deg);
+    	}
+    }
+    
     .searchBar {
         background-size: 100% 100%;
     }
@@ -597,22 +603,26 @@ li[class^="listItem"]:hover {
 	width:100%;
 	height:100%;
     }
-
+    
     
     /***  Mozilla tablet devices and portrait ***/
+    /*
     @media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
         #overlay {
           width: 150% ! important;
           margin: -8% 0 0 -24% ! important;
   	}
     }
+    */
 
     /***  Mozilla mobile devices and portrait ***/
+    /*
     @media (max-width: 700px) and (orientation: portrait) {
         #overlay {
           margin: -4% 0 0 -25% ! important;
         }
     }
+    */
 
     .p_low{
     	font-size: 0.06vw;
@@ -629,7 +639,13 @@ li[class^="listItem"]:hover {
 
 /***** MICROSOFT EDGE SPECIFIC STYLING *****/
 @supports (-ms-ime-align: auto) {
-	
+
+	@media only screen and (orientation:portrait){
+		body {
+	    		-ms-transform: rotate(90deg);
+    		}
+    	}
+
 	.searchBar {
         	background-size: 100% 100%;
     	}
@@ -660,6 +676,12 @@ li[class^="listItem"]:hover {
 /***** IE VERSION 10 & 11 STYLING *****/
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
 
+	@media only screen and (orientation:portrait){
+		body {
+	    		-ms-transform: rotate(90deg);
+    		}
+    	}
+    
 	.name_area {
 		position:absolute;
 		display:flex;
@@ -675,7 +697,7 @@ li[class^="listItem"]:hover {
 }
 
 
-/***** TABLET DEVICES  - chrome & opera *****/
+/***** TABLET DEVICES in portrait - chrome & opera *****/
 @media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
   .searchBar, .box > div, .BottomBar {
     width: 90% ! important;

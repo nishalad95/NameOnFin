@@ -33,14 +33,17 @@ function setup_slider() {
 $(document).ready(function () {
 
 	var isEdge = navigator.appVersion.indexOf('Edge') > -1;
-	var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-
-	if (isEdge || isFirefox) {
+	if (isEdge) {
         	alert('We have detected you are not using a supported browser. Please move to either Google Chrome or Safari.');
 		document.write("<style>body { display:none }</style>");
   		window.location.replace("time-out.html");
     	}
 
+	//var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1; 
+ 	//if (isFirefox && window.innerWidth < window.innerHeight) {
+    	//	alert("We have detected you are Portrait mode. Please use Landscape mode to view the Bloodhound Fin.");
+	//}
+	
 
 	$("#backgroundImage").on('click', function(e) {
 	
