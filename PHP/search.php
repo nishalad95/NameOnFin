@@ -9,7 +9,7 @@ if(isset($_REQUEST['term'])){
 }
 
 
-$con = mysqli_connect("localhost", "root", "", "Bloodhound");
+$con = mysqli_connect("localhost", "root", "", "bloodhound_old");
 
 if(mysqli_connect_errno()){
 	
