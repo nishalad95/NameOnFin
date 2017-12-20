@@ -6,7 +6,7 @@
 
 ini_set('max_execution_time', 50000);
 
-$con = mysqli_connect("localhost", "root", "", "bloodhound");
+$con = mysqli_connect("localhost", "root", "", "bloodhound_old");
 
 $table_names = array("fin_names_off", "fin_names_near", "schools", "enhanced");
 
