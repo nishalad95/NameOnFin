@@ -32,6 +32,16 @@ function setup_slider() {
 
 $(document).ready(function () {
 
+	var isEdge = navigator.appVersion.indexOf('Edge') > -1;
+	var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+
+	if (isEdge || isFirefox) {
+        	alert('We have detected you are not using a supported browser. Please move to either Google Chrome or Safari.');
+		document.write("<style>body { display:none }</style>");
+  		window.location.replace("time-out.html");
+    	}
+
+
 	$("#backgroundImage").on('click', function(e) {
 	
 		if (e.pageX <= 25 && e.pageY <= 25) {
