@@ -15,12 +15,12 @@ body {
 }
 
 
-body, .container, #backgroundImage, form, input, .name_area, .photoBanner {
+body, .container, #backgroundImage, form, input, .photoBanner {
     margin: 0 auto;
 }
 
 
-.container, #logo, #hashtag, form, .Static, #searchStatic, .name_area, #zoom-in, #zoom-out, #Recenter, #Flip {
+.container, #logo, #hashtag, form, .Static, #searchStatic, #Recenter, #Flip {
     width: 100%;
     position: relative;
 }
@@ -140,15 +140,6 @@ input{
     text-align: justify;
 }
 
-.p_high{
-
-	font-size: 0.20vw;
-}
-
-.p_low{
-	
-	font-size: 0.10vw;
-}
 
 #dragArea {
     width:100%;
@@ -163,7 +154,7 @@ input{
     width: 100%;
     position: absolute;
     margin: -11% 0 0 0;
-    z-index: 19;
+    z-index: 20;
 }
 
 #greeting {
@@ -174,72 +165,32 @@ input{
 }
 
 
-.fin-image {
-    z-index:17;
-    display:flex;
-}
 
-#finIMG {
-    position:absolute;
-    cursor: move;
-    height:100%;
-}
-
-
-.whitespaceLeft {
-	border-bottom: 0.5vw solid transparent;
-	border-right: 0.5vw solid transparent;
-	font-size: 0px; 
-	line-height: 0%;
-	float:left;
-	clear:left;
+#mapid{
+	z-index:19;
+	/*height: 750px;
+	width: 1250px;*/
+	height: 100%;
+	width: 100%;
 }
 
 
-.whitespaceRight {
-	border-bottom: 0.5vw solid transparent;
-	border-right: 0.5vw solid transparent;
-	font-size: 0px; 
-	line-height: 0%;
-	float:right;
-	clear:right;
-}
-
-
-.panzoom {
-    width:100%;
-    height:100%;
-    cursor: move;
-    overflow:hidden;
-    position:absolute;
-    z-index:17;
-    background-image: url(../images/FinVector2.png);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    visibility: hidden;
-}
-
-.panzoom .name{
-    display:inline-block;
-    /*display:inline;*/
-    z-index:17;
-    position:relative;
-    border-radius: 5%;
-    white-space:nowrap;
+.leaflet-container {
+    background-color:rgba(255,0,0,0.0);
 }
 
 
 .wrapper {
     opacity: 1.0;
     position:absolute;
-    z-index: 18;
+    z-index: 19;
     width: 5%;
     top: 2%;
     right: 2%;
 }
 
 
-#zoom-in, #zoom-out, #Recenter, #Flip {
+#Recenter, #Flip {
     cursor: pointer;
     height: 100%;
 }
@@ -543,45 +494,11 @@ li[class^="listItem"]:hover {
 }
 
 
-/***** Names on fin positioning - chrome*****/
-#left-image {
-	shape-outside: polygon(
-		0% 0%,
-		0% 75%,
-		73% 0%
-	);
-	float: left; 
-	shape-margin: 5px;
-	width: 50%;
-	height: 100%;
-	visibility: hidden;
-}
-
-
-#right-image{
-	shape-outside: polygon(
-		100% 0%,
-		78% 100%,
-		100% 100%
-	);
-	float: right;
-	width: 50%;
-	height: 100%;
-	visibility: hidden;
-}
-
-
 
 
 /***** MOZILLA SPECIFIC STYLING *****/
 @-moz-document url-prefix() {
 
-    @media only screen and (orientation:portrait){
-	body {
-	    -moz-transform: rotate(90deg);
-    	}
-    }
-    
     .searchBar {
         background-size: 100% 100%;
     }
@@ -594,39 +511,25 @@ li[class^="listItem"]:hover {
     #overlay {
         margin: -20% 0 0 0;
     }
-    .name_area {
-        text-shadow: 1px 1px 2px black ! important;
-    }
-    .finNames_ {
-        position:absolute;
-	display:flex;
-	width:100%;
-	height:100%;
-    }
-    
-    
+   
+
     /***  Mozilla tablet devices and portrait ***/
-    /*
     @media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
         #overlay {
           width: 150% ! important;
           margin: -8% 0 0 -24% ! important;
   	}
     }
-    */
+    
 
     /***  Mozilla mobile devices and portrait ***/
-    /*
     @media (max-width: 700px) and (orientation: portrait) {
         #overlay {
           margin: -4% 0 0 -25% ! important;
         }
     }
-    */
+    
 
-    .p_low{
-    	font-size: 0.06vw;
-    }
     .namesScrollBar{
         text-shadow: 1px 1px 1px;
     }
@@ -640,12 +543,6 @@ li[class^="listItem"]:hover {
 /***** MICROSOFT EDGE SPECIFIC STYLING *****/
 @supports (-ms-ime-align: auto) {
 
-	@media only screen and (orientation:portrait){
-		body {
-	    		-ms-transform: rotate(90deg);
-    		}
-    	}
-
 	.searchBar {
         	background-size: 100% 100%;
     	}
@@ -658,17 +555,6 @@ li[class^="listItem"]:hover {
         	margin-top: 3%;
     	}
 
-	.name_area {
-		position:absolute;
-		display:flex;
-	}
-	
-	.finNames_ {
-        	position:absolute;
-		display:flex;
-		width:100%;
-		height:100%;
-    	}
 }
 
 
@@ -676,23 +562,6 @@ li[class^="listItem"]:hover {
 /***** IE VERSION 10 & 11 STYLING *****/
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
 
-	@media only screen and (orientation:portrait){
-		body {
-	    		-ms-transform: rotate(90deg);
-    		}
-    	}
-    
-	.name_area {
-		position:absolute;
-		display:flex;
-	}
-	
-	.finNames_ {
-        	position:absolute;
-		display:flex;
-		width:100%;
-		height:100%;
-    	}
 
 }
 
@@ -728,19 +597,8 @@ li[class^="listItem"]:hover {
   .namesScrollBar {
     font-size: 2vw ! important;
   }
-  .name_area {
-    font-size: 0.15vw ! important;
-  }
   .BottomBar {
     height: 15vw ! important;
-  }
-
-  .p_high{
-    font-size: 0.50vw ! important;
-  }
-
-  .p_low{
-    font-size: 0.18vw ! important;
   }
 
 }
@@ -778,20 +636,8 @@ li[class^="listItem"]:hover {
   .namesScrollBar {
     font-size: 2vw ! important;
   }
-  .name_area {
-    font-size: 0.2vw ! important;
-  }
   .BottomBar {
     height: 15vw ! important;
-  }
-  .p_high{
-
-    font-size: 0.75vw ! important;
-  }
-
-  .p_low{
-
-    font-size: 0.22vw ! important;
   }
 
 }

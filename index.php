@@ -22,19 +22,19 @@ $name_result = mysqli_query($con, $names_near);
         <title>Bloodhound on the Fin</title>
         <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=0.8">
+	<link rel="stylesheet" href="leaflet/leaflet/leaflet.css"/>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="CSS/style.css?ver=1.1" />
         <link rel="stylesheet" type="text/css" href="CSS/lightslider.css?ver=1.1" />
-        <link rel="shortcut icon" href="#" />
-        <link rel="icon" href="favicon.png" type="image/x-icon"/>
+        <link rel="icon" href="images/favicon.png" type="image/x-icon"/>
 
+	<script src="leaflet/leaflet/leaflet.js" ></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script type="text/javascript" src="JS/panzoom.js"></script>
         <script type="text/javascript" src="JS/lightslider.js"></script>
         <script type="text/javascript" src="JS/script.js?a=1"></script>
-    	<script type="text/javascript" src="JS/jquery.zoomooz.min.js"></script>
+	<script type="text/javascript" src="JS/leafletCode.js"></script>
 
         <style>
 	   .item ul{
@@ -52,25 +52,6 @@ $name_result = mysqli_query($con, $names_near);
 	   .scroller{ 
 		width: 100%; 
 	   }
-	   .no-js #loader { 
-		display: none; 
-	   }
-	   .js #loader { 
-		display: block; 
-		position: absolute; 
-		left: 100px; 
-		top: 0; 
-	   }
-          .se-pre-con {
-	        position: fixed;
-	        left: 0px;
-	        top: 0px;
-	        width: 100%;
-	        height: 100%;
-	        z-index: 9999;
-	        opacity: 0.9;
-	        background: url(images/loader-64x/Preloader_3.gif) center no-repeat #fff;
-          }
 
     </style>
     <script>
@@ -97,7 +78,6 @@ $name_result = mysqli_query($con, $names_near);
     </head>
 
     <body>
-      <div class="se-pre-con"></div>
         <div class="container">
             <img id="backgroundImage" src="images/BloodhoundPosterBackground.jpg" alt="Background"/>
 
@@ -125,55 +105,34 @@ $name_result = mysqli_query($con, $names_near);
                 </div>
             </div>
 
+
             <!-- Main content -->
             <div class="box">
                 <div class="name_area">
                    <img id="overlay" src="images/BloodhoundPosterOverlay2.png" alt="Bloodhound Fin"/>
                    <img id="greeting" src="images/Greeting.png" alt="Thank you for being part of our story"/>
 
+
                     <!-- Names on the Fin -->
                     <div id="dragArea">
-						<div class="panzoom" id="draggable">
-
-						   <img src="images/FinVector2.png" id="left-image" alt="Fin vector"/>
-						   <img src="images/FinVector2.png" id="right-image" alt="Fin vector"/>
-						   
-							<div class="finNames_">
-								<div class="near">
-									<div class="p_high">
-									</div>
-
-									<div class="p_low">
-									</div>
-								</div>
-								<div class="off">
-									<div class="p_high">
-									</div>
-
-									<div class="p_low">
-									</div>
-								</div>
-							</div>
-						</div>
+				<div id="mapid"></div>
                     </div>
-                    <!-- Scrolling Panel -->
+
+
+		    <!-- Scrolling Panel -->
                     <!-- zoom buttons -->
                     <div class="wrapper">
-                        <div id="zoom-in">
-							<img id="zoom-in" src="images/ZoomIn.png" alt="+" title="Zoom in"/>
-						</div>
-                        <div id="zoom-out">
-							<img id="zoom-out" src="images/ZoomOut.png" alt="-" title="Zoom out"/>
-						</div>
-                        <div id="recenter">
-							<img id="Recenter" src="images/recenter.png" alt="*" title="Recenter"/>
-						</div>
-						<div id="flip">
-							<img id="Flip" src="images/flip.png" alt="<->" title="Flip"/>
-						</div>
+                        	<div id="recenter">
+					<img id="Recenter" src="images/recenter.png" alt="*" title="Recenter"/>
+				</div>
+				<div id="flip">
+					<img id="Flip" src="images/flip.png" alt="<->" title="Flip"/>
+				</div>
                     </div>
                 </div>
             </div>
+
+
 
             <!-- Selfie gallery -->
             <div class="BottomBar">
