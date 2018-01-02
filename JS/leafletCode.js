@@ -5,21 +5,28 @@ $(document).ready(function () {
 		
 		crs: L.CRS.Simple,
 		minZoom: 0,
-        maxZoom: 10
+        	maxZoom: 10,
+		zoomControl: false,
+
 	});
-	
+
+
+	L.control.zoom({
+     		position:'topright'
+	}).addTo(map);
+
+
 	var bloodhoundIcon = L.icon({
 		
 		iconUrl: 'custom_marker.png',
-
-		iconSize:     [200, 100], // size of the icon
-		iconAnchor:   [100, 50] // point of the icon which will correspond to marker's location
+		iconSize:     [200, 100], 
+		iconAnchor:   [100, 50]
 	});
 	
-	// Initial width/ height of the image.
+
+	// Add spliced images to the map
 	width = 0;
 	height = 0;
-	
 	tmp = 0;
 	
 	for(x = 0; x < 10; x++){	
@@ -31,23 +38,18 @@ $(document).ready(function () {
 			
 			counter = y + tmp;
 			
-			// Here we calculate the bounds of each tile object.
+			// Calculate bounds of each tile object and add to map
 			var bounds = [[height, width], [height + 100, width + 200]];
+			var path = "leaflet/slices/bloodhound_spliced__";
 			
-			var path = "";
-			
-			// Loac up each tile object.
 			if (counter < 10){
-				
-				path = "leaflet/slices/bloodhound_spliced__0" + counter  + ".png";				
+				path += "0" + counter  + ".png";				
+			} else {
+				path += counter  + ".png";	
 			}
-			else{
-				path = "leaflet/slices/bloodhound_spliced__" + counter  + ".png";	
-			}
-			var image = L.imageOverlay(path, bounds).addTo(map);
-			
+
+			var image = L.imageOverlay(path, bounds).addTo(map);	
 			map.fitBounds(bounds);
-			
 			counter -= 1;
 			height += 100;
 		}
@@ -55,11 +57,28 @@ $(document).ready(function () {
 		width += 200;
 	}
 	
-	// Allows the middle of the map to be shown on page load.
+
+	// Show middle of map on page load
 	map.setView([height / 2, width / 2], 0);
 
+
+	// Restrict dragging of fin image to bounds
+	var southWest = L.latLng(0, 0), northEast = L.latLng(1000, 2000);
+	var bounds = L.latLngBounds(southWest, northEast);
+
+	map.setMaxBounds(bounds);
+	map.on('drag', function() {
+    		map.panInsideBounds(bounds, { animate: false });
+	});
+
+
+
 	$(".leaflet-control-attribution").hide();
-	
+
+
+
+
+
 	/*
 		The search function that pulls names from the database.
 	*/
