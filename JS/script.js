@@ -1,8 +1,12 @@
 var contactid = null;
-var counter = 0;
-
 var current_view = "near";
-var currentZoom = 0;
+
+// Transformation factor for intrisic image size to leaflet image size
+var x_trans = 12.28;
+var y_trans = 10.864;
+var imageHeight = 1000;
+var imageWidth = 2000;
+
 
 function setup_slider() {
 	$('#lightSlider').lightSlider({
@@ -44,190 +48,239 @@ $(document).ready(function () {
 	$(".off").hide();
 
 
-
-    window.setTimeout("init()", 5);
-
-
-    $.ajax({	
+    	$.ajax({	
 		url: 'SelfieMessages.csv',
 		dataType: 'text',
 		async: true,
 		success: function (e){
 			loadImages(e);
 		}
-    });
+    	});
 
 
-    window.setTimeout("setup_slider()", 5);
+    	window.setTimeout("setup_slider()", 5);
 				
-	
-    $("#Flip").on("click", function(){
+
+
+	// The map object the tile layers are drawn onto.
+	var map = L.map('mapid', {
 		
-	if(current_view == "near"){
+		crs: L.CRS.Simple,
+		minZoom: 0,
+        	maxZoom: 10,
+		zoomControl: false,
+
+	});
+
+
+        $('#zoom-in').click(function(){
+          map.setZoom(map.getZoom() + 1)
+        });
+
+
+        $('#zoom-out').click(function(){
+          map.setZoom(map.getZoom() - 1)
+        });
+
+
+
+	var bloodhoundIcon = L.icon({
+		
+		iconUrl: 'custom_marker.png',
+		iconSize:     [200, 100], 
+		iconAnchor:   [100, 50]
+	});
 	
+	
+	$("#tab").tabs();
 
-	} else{
+	addImagesToMap();
+	
+	function addImagesToMap() {
+		var width = 0, height = 0, tmp = 0;
+		var counter, bounds, image, path;
+	
+		for(x = 0; x < 10; x++){	
+			
+			height = 0;
+			tmp += 1;
+		
+			for(var y = 90; y >= 0; y -= 10){	
+		
+				counter = y + tmp;
+				bounds = [[height, width], [height + 100, width + 200]];
+			
+				path = "leaflet/slices/bloodhound_spliced__";			
 
+				if (counter < 10){
+					path += "0";
+				}
+				
+				path += counter  + ".png";
 
+				image = L.imageOverlay(path, bounds).addTo(map);	
+				map.fitBounds(bounds);
+				counter -= 1;
+				height += 100;
+			}
+		
+			width += 200;
+		}	
+	
 	}
-    });	
 
 
-    
-    $("#recenter").click(function () {
-	  
-		currentZoom = 0;
-		searched = false;
-		resetPosition();
-		currentZoom = 0;
 
-    });
+	// Show middle of map on page load
+	map.setView([imageHeight / 2, imageWidth / 2], 0);
+
+
+	// Restrict dragging of fin image to bounds
+	var southWest = L.latLng(0, 0), northEast = L.latLng(1000, 2000);
+	var bounds = L.latLngBounds(southWest, northEast);
+
+	map.setMaxBounds(bounds);
+	map.on('drag', function() {
+    		map.panInsideBounds(bounds, { animate: false });
+	});
+
+
+
+	$(".leaflet-control-attribution").hide();
+
+
+	$("#recenter").click(function () {
+		map.setView([imageHeight/2, imageWidth/2], 0);  
+    	});
   
 
 
+    	$("#Flip").on("click", function(){
+		
+		if(current_view == "near"){
+	
 
-    $("#search_names").submit(function(e){
+		} else{
+
+
+		}
+    	});	
+
+
+
+	var state = $("#newNames").accordion({
+		collapsible: true,
+		autoHeight: true,
+		heightStyle: "content",
+		refresh: true,
+		icons: {"header": "ui-icon-circle-plus", "activeHeader": "ui-icon-circle-minus"}
+	});
+	$("#newNames").accordion("option", state);
+
+
+
+
+    
+
+    	$("#search_names").submit(function(e){
 	  
-	// show fin and names when a name is searched
-	e.preventDefault();
-	$("#overlay").hide();
-	$("#greeting").hide();
-	$(".namesScrollBar").remove();
-	$(".wrapper").show();
-	searched = true;
-	current_zoom = 1;
-	counter = 0;
+		e.preventDefault();
+		$("#overlay").hide();
+		$("#greeting").hide();
+		$(".namesScrollBar").remove();
+		$(".wrapper").show();
 	
-	var data = $("#search_names").serializeArray().reduce(function(obj, item){
-		   obj[item.name] = item.value;
-		   return obj;
-	}, {});
+		var data = $("#search_names").serializeArray().reduce(function(obj, item){
+			obj[item.name] = item.value;
+		   	return obj;
+		}, {});
 
 
-	var searchTerm = data["name"];
+		var searchTerm = data["name"];
 	
-		$.ajax({
+			$.ajax({
 			
-			url: "PHP/search.php?term=" + searchTerm,
-			type: "POST",
-			asyn: false,
-			dataType: "json",
-			success: function(data){
+				url: "PHP/search.php?term=" + searchTerm,
+				type: "POST",
+				asyn: false,
+				dataType: "json",
+				success: function(data){
 				
-				var count = data.length
+					var count = data.length;
+					var coords, name, key, x, y, xOffset, yOffset;
 				
-				if(count > 1){
+					if(count > 1){
 					
-					// create names panel
-					$(".name_area").append("<div class='namesScrollBar' id='accordion'></div>");
-					$(".namesScrollBar").append("<div class='searchQuery' id='titleHeader'> Showing Results For: " + searchTerm + "</div>" +
-						"<div><ul class='searchList'></ul></div>");
+						// create names panel
+						$(".name_area").append("<div class='namesScrollBar' id='accordion'></div>");
+						$(".namesScrollBar").append("<div class='searchQuery'> Showing Results For: " + searchTerm + "</div>" +
+							"<div><ul class='searchList'></ul></div>");
 					
-					var sBuilder = "";
-					for(var i = 0; i < count; i++){
+						var sBuilder = "";
+						for(var i = 0; i < count; i++){
 						
-						var id = data[i].id;
-						var name = data[i].name;
-						var key = data[i].key_;
-						
-						sBuilder += "<a id='nameLink' href='#'><li class='listItem' id='res_" + key + id + "'>" + name + "</li></a>";
+							name = data[i].name;
+							key = data[i].key_;
+							coords = data[i].coord;
+							coords = coords.split(",");
+							x = coords[0];
+							y = coords[1];
+							yOffset = height - (y / y_trans);
+							xOffset = x / x_trans;
+							sBuilder += "<a id='nameLink' href='#'><li class='listItem' id='res_" + key + "_" + yOffset + "_" + xOffset + "'>" + name + "</li></a>";
+						}
+					
+						$(".searchList").append(sBuilder);
+				
+						var state = $("#accordion").accordion({
+							collapsible: true,
+							autoHeight: true,
+							heightStyle: "content",
+							refresh: true,
+							icons: {"header": "ui-icon-circle-plus", "activeHeader": "ui-icon-circle-minus"}
+						});
+						$("#accordion").accordion("option", state);
+
+
+					} else if(count == 1){
+					
+						coords = data[0].coord;
+						coords = coords.split(",");
+						x = coords[0];
+						y = coords[1];
+						yOffset = height - (y / y_trans);
+						xOffset = x / x_trans;
+						map.setView([yOffset, xOffset], 3);
+						L.marker([yOffset - 10, xOffset], {icon:bloodhoundIcon}).addTo(map);
+					
+					} else{
+					
+						alert("Sorry, no results were found.");
 					}
-					
-					$(".searchList").append(sBuilder);
 				
-					var state = $("#accordion").accordion({
-						collapsible: true,
-						autoHeight: true,
-						heightStyle: "content",
-						refresh: true,
-						icons: {"header": "ui-icon-circle-plus", "activeHeader": "ui-icon-circle-minus"}
+				
+					$('.listItem').on('click', function(){
+					
+						var info = $(this).attr("id").split("_");
+						// KEY INFORMATION IS ALSO NEEDED TO IMPLEMENTED
+						y = info[2];
+						x = info[3];
+						map.setView(y, x, 3);
+						L.marker([y - 10, x], {icon:bloodhoundIcon}).addTo(map);
+
 					});
-					$("#accordion").accordion("option", state);
 
-
-				} else if(count == 1){
-					
-					contactid = "contact_" + data[0].key_ + data[0].id;
-					
-					var key = data[0].key_;
-					
-					removeBorder();
-					changeView(key);
-					contSearch(contactid);
-				} else{
-					
-					alert("Sorry, no results were found.");
-				}
-				
-				resetPosition();
-
-				$('.listItem').on('click', function(){
-					
-					resetPosition();
-					
-					counter = 0;
-					currentZoom = 0;
-					contactid = "contact_" + $(this).attr("id").replace("res_", "");
-					
-					var pre_key = contactid.split("_");
-					var key = pre_key[1].slice(0, 2);
-					
-					removeBorder();
-					
-					changeView(key);
-					contSearch(contactid);
-				});
 	
-			}
-		});
+				}
+			});
 		
 
-    });
+    	});
   
 
 
 
 });
-
-
-
-
-function init() {
-	
-
-}
-
-
-
-function resetPosition() {
-	
-}
-
-
-
-function removeBorder() {
-	
-}
-
-
-
-function createBorder(contactid) {
-
-}
-
-
-
-var searched = false;
-
-function contSearch(contactid){
-			
-	if (searched){
-		counter = 1;
-		createBorder(contactid);
-		$("#zoom-in").click();
-		searched = true;
-	}
-}
 
 
 

@@ -1,20 +1,3 @@
-<?php
-
-$con = mysqli_connect("localhost", "root", "", "Bloodhound");
-
-if(mysqli_connect_errno()){
-	
-	echo "Failed to connect to database, server may be down :/";
-	echo "Error code: " . mysqli_connect_error();
-}
-
-$schools = "SELECT name, id, key_ FROM schools";
-$names_near = "SELECT name, id, key_ FROM fin_names_near";
-
-$school_result = mysqli_query($con, $schools);
-$name_result = mysqli_query($con, $names_near);
-	
-?>
 <!DOCTYPE html>
 
 <html>
@@ -34,7 +17,6 @@ $name_result = mysqli_query($con, $names_near);
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type="text/javascript" src="JS/lightslider.js"></script>
         <script type="text/javascript" src="JS/script.js?a=1"></script>
-	<script type="text/javascript" src="JS/leafletCode.js"></script>
 
         <style>
 	   .item ul{
@@ -106,8 +88,13 @@ $name_result = mysqli_query($con, $names_near);
             </div>
 
 
-            <!-- Main content -->
-            <div class="box">
+	    <!-- Main content -->
+	    <div class="box">
+
+		<ul id="tab">
+        		<li><a href="#">New Names</a></li>
+		</ul>
+
                 <div class="name_area">
                    <img id="overlay" src="images/BloodhoundPosterOverlay2.png" alt="Bloodhound Fin"/>
                    <img id="greeting" src="images/Greeting.png" alt="Thank you for being part of our story"/>
@@ -120,8 +107,15 @@ $name_result = mysqli_query($con, $names_near);
 
 
 		    <!-- Scrolling Panel -->
-                    <!-- zoom buttons -->
-                    <div class="wrapper">
+                    <!-- Buttons -->
+		    <div class="wrapper">
+
+				<div id="zoom-in">
+					<img id="zoom-in" src="images/ZoomIn.png" alt="+" title="Zoom in"/>
+				</div>
+                        	<div id="zoom-out">
+					<img id="zoom-out" src="images/ZoomOut.png" alt="-" title="Zoom out"/>
+				</div>
                         	<div id="recenter">
 					<img id="Recenter" src="images/recenter.png" alt="*" title="Recenter"/>
 				</div>
