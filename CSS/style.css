@@ -548,6 +548,11 @@ li[class^="listItem"]:hover {
           width: 150% ! important;
           margin: -8% 0 0 -24% ! important;
   	}
+
+	.wrapper{
+      	  width: 12%;
+ 	}
+
     }
     
 
@@ -556,6 +561,10 @@ li[class^="listItem"]:hover {
         #overlay {
           margin: -4% 0 0 -25% ! important;
         }
+
+	.wrapper{
+      	  width: 10%;
+ 	}
     }
     
 
@@ -596,6 +605,13 @@ li[class^="listItem"]:hover {
 
 
 /***** TABLET DEVICES in portrait - chrome & opera *****/
+@media (min-width: 701px) and (max-width: 2000px) and (orientation: landscape) {
+   .wrapper {
+   	width: 7%;
+   }
+}
+
+/***** TABLET DEVICES in portrait - chrome & opera *****/
 @media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
   .searchBar, .box > div, .BottomBar {
     width: 90% ! important;
@@ -623,6 +639,11 @@ li[class^="listItem"]:hover {
       width: 150% ! important;
       margin: -10% 0 0 -25% ! important;
   }
+
+  .wrapper{
+      width: 10%;
+  }
+
   .namesScrollBar {
     font-size: 2vw ! important;
   }
@@ -665,6 +686,12 @@ li[class^="listItem"]:hover {
   .namesScrollBar {
     font-size: 2vw ! important;
   }
+
+  .wrapper{
+      width: 12%;
+  }
+
+
   .BottomBar {
     height: 15vw ! important;
   }
