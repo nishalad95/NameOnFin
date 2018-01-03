@@ -38,7 +38,6 @@ $(document).ready(function () {
 
 
 	$("#backgroundImage").on('click', function(e) {
-	
 		if (e.pageX <= 25 && e.pageY <= 25) {
 			alert("This site was developed by Nisha Lad & Chris Wing :-)");
 		}
@@ -64,16 +63,26 @@ $(document).ready(function () {
 
 	// The map object the tile layers are drawn onto.
 	var map = L.map('mapid', {
-		
 		crs: L.CRS.Simple,
-		minZoom: 0,
-        	maxZoom: 10,
+		minZoom: -1,
+        	maxZoom: 4,
 		zoomControl: false,
 
 	});
 
 
-        $('#zoom-in').click(function(){
+        // change zoom level of fin depending on device 
+	window.addEventListener('resize', function(event){
+    		var width = document.documentElement.clientWidth;
+    		// phones are less than 768 pixels wide
+    		if (width < 768) {
+        		map.setZoom(4);
+    		}
+	});	
+	
+	
+	
+	$('#zoom-in').click(function(){
           map.setZoom(map.getZoom() + 1)
         });
 
@@ -82,10 +91,9 @@ $(document).ready(function () {
           map.setZoom(map.getZoom() - 1)
         });
 
-
+	
 
 	var bloodhoundIcon = L.icon({
-		
 		iconUrl: 'custom_marker.png',
 		iconSize:     [200, 100], 
 		iconAnchor:   [100, 50]
@@ -131,14 +139,12 @@ $(document).ready(function () {
 
 
 
-	// Show middle of map on page load
-	map.setView([imageHeight / 2, imageWidth / 2], 0);
-
+	// Show middle of map on page load (y, x, zoomLevel)
+	map.setView([imageHeight / 2, imageWidth / 2], -1);
 
 	// Restrict dragging of fin image to bounds
 	var southWest = L.latLng(0, 0), northEast = L.latLng(1000, 2000);
 	var bounds = L.latLngBounds(southWest, northEast);
-
 	map.setMaxBounds(bounds);
 	map.on('drag', function() {
     		map.panInsideBounds(bounds, { animate: false });
@@ -276,9 +282,8 @@ $(document).ready(function () {
 		
 
     	});
-  
 
-
+	
 
 });
 

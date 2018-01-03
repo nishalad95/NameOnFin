@@ -423,6 +423,27 @@ li[class^="listItem"]:hover {
   z-index:100;
 }
 
+
+
+
+.item ul{
+  list-style: none outside none;
+  padding-left: 0;
+  margin: 0;
+}
+.demo .item{ 
+  margin-bottom: 60px; 
+}
+.content-slider li{
+  text-align: center;
+  list-style: none;
+}
+.scroller{ 
+  width: 100%; 
+}
+
+
+
 /***** LIGHTBOX MARKUP *****/
 .lightbox {
 	/** Default lightbox to hidden */
@@ -488,7 +509,6 @@ li[class^="listItem"]:hover {
   text-decoration: none;
   text-align: center;
   border-radius:20%;
-  background: rgba(64,64,64,0.9);
   color: #ffffff;
 }
 
@@ -503,13 +523,12 @@ li[class^="listItem"]:hover {
   font-size: 20pt;
   text-decoration: none;
   border-radius:20%;
-  background: rgba(64,64,64,0.9);
   color: #ffffff;
 }
 
 
 .previous:hover, .next:hover, .exit:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  color: rgba(213, 216, 220, 0.8);
 }
 
 
@@ -604,12 +623,6 @@ li[class^="listItem"]:hover {
 }
 
 
-/***** TABLET DEVICES in portrait - chrome & opera *****/
-@media (min-width: 701px) and (max-width: 2000px) and (orientation: landscape) {
-   .wrapper {
-   	width: 7%;
-   }
-}
 
 /***** TABLET DEVICES in portrait - chrome & opera *****/
 @media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
