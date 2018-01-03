@@ -71,20 +71,22 @@
 
 
 	    <!-- Main content -->
-	    <div class="box">
-
-		<ul id="tab">
-        		<li><a href="#">New Names</a></li>
+	    <div id="tabs">
+		<ul>
+			<li><a id="tab1" href="#name_area">Virtual Fin</a></li>
+			<li><a id="tab2" href="#newNames">New Names</a></li>
 		</ul>
 
-                <div class="name_area">
+	    <div class="box">
+
+                <div id="name_area">
                    <img id="overlay" src="images/BloodhoundPosterOverlay2.png" alt="Bloodhound Fin"/>
                    <img id="greeting" src="images/Greeting.png" alt="Thank you for being part of our story"/>
 
 
                     <!-- Names on the Fin -->
                     <div id="dragArea">
-				<div id="mapid"></div>
+				<div id="nearSide"></div>
                     </div>
 
 
@@ -106,7 +108,12 @@
 				</div>
                     </div>
                 </div>
-            </div>
+	    
+		<div id="newNames"></div>
+
+
+	    </div>
+	    </div>
 
 
 

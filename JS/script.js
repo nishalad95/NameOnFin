@@ -59,16 +59,25 @@ $(document).ready(function () {
 
     	window.setTimeout("setup_slider()", 5);
 				
+	
+
+	$( function() {
+		$("#tabs").tabs({
+		});
+  	} );
+
+
 
 
 	// The map object the tile layers are drawn onto.
-	var map = L.map('mapid', {
+	var map = L.map('nearSide', {
 		crs: L.CRS.Simple,
 		minZoom: -1,
         	maxZoom: 4,
 		zoomControl: false,
 
 	});
+
 
 
         // change zoom level of fin depending on device 
@@ -140,7 +149,7 @@ $(document).ready(function () {
 
 
 	// Show middle of map on page load (y, x, zoomLevel)
-	map.setView([imageHeight / 2, imageWidth / 2], -1);
+	map.setView([imageHeight / 2, imageWidth / 2], 0);
 
 	// Restrict dragging of fin image to bounds
 	var southWest = L.latLng(0, 0), northEast = L.latLng(1000, 2000);
