@@ -115,45 +115,39 @@
 	    </div>
 	    </div>
 
-
-
-            <!-- Selfie gallery -->
-            <div class="BottomBar">
-                <img id="selfieText" src="images/SupersonicSelfies.png" alt="Supersonic Selfies!"/>
-                <div class="photoBanner">
-
-                    <div id="scroller" style='height: 100%; margin: 0 auto;'>
-                        <div class="item">
-                            <ul id="content-slider" class="content-slider">							
-				<?php
-					// This will auto-load all selfie images located in the 'selfies' folder. No need for static typing now!
-					$path = "images/Selfies";
-								
-					if(is_dir($path)){
-									
-						if($dh = opendir($path)){
-										
-							while(($file = readdir($dh)) !== false){
+		<!-- Selfie gallery -->
+		<div class="BottomBar">
+			<img id="selfieText" src="images/SupersonicSelfies.png" alt="Supersonic Selfies!"/>
+			<div class="photoBanner">
+				<div id="scroller" style='height: 100%; margin: 0 auto;'>
+					<div class="item">
+						<ul id="content-slider" class="content-slider">							
+							<?php
+								// This will auto-load all selfie images located in the 'selfies' folder. No need for static typing now!
+								$path = "images/Selfies";
 											
-								if($file != "." && $file !=".." && $file != "controls.png"){
+								if(is_dir($path)){
 												
-									$id = (explode(".", $file))[0];
-												
-									echo "<li><a href='#img".$id."'><img src='".$path."/".$file."' id='selfie'></a></li>";
+									if($dh = opendir($path)){
+													
+										while(($file = readdir($dh)) !== false){
+														
+											if($file != "." && $file !=".." && $file != "controls.png"){
+															
+												$id = (explode(".", $file))[0];
+															
+												echo "<li><a href='#img".$id."'><img src='".$path."/".$file."' id='selfie'></a></li>";
+											}
+										}
+									}
 								}
-							}
-						}
-					}
-				?>
-                        </ul>
+							?>
+						</ul>
+					</div>
+					<div class="lightboxArea"></div>
+				</div>
 			</div>
-			<div class="lightboxArea"></div>
-
-                    </div>
-                </div>
-
-                </div>
+		</div>
 	    </div>
-
     </body>
 </html>
