@@ -337,7 +337,6 @@ function loadImages(data) {
 		/*previous button, image, message, exit button, next button */
 		$(".lightbox#imgSupersonicSelfie" + i + "").append("<a href=\"#imgSupersonicSelfie" + prev + "\" class='previous'>&lt;</a>" + 
 			"<a href=\"#_\"><img src=\"images/Selfies/SupersonicSelfie" + i + ".png\" alt=\"selfie\" /></a>" + 
-			"<div class='selfieMessage'>" + allRows[i-1] + "</div> " +
 			"<a href=\"#_\" class='exit'>&times;</a>" +
 			"<a href=\"#imgSupersonicSelfie" + next + "\" class='next'>&gt;</a>");
 	}
