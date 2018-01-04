@@ -154,6 +154,17 @@ input{
 }
 
 
+#tabs ul li.selected {
+    background: rgb(0, 0, 128);
+    color: #fff
+}
+
+#tabs a:active, #tabs a:hover {
+    background: rgb(0, 0, 128);
+    color: #fff
+}
+
+
 #newNames {
 	display: flex ! important;
 	position: relative;
@@ -628,11 +639,11 @@ li[class^="listItem"]:hover {
 
 /***** TABLET DEVICES in portrait - chrome & opera *****/
 @media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
-  .searchBar, .box > div, .BottomBar {
+  .searchBar, #tabs > div, .BottomBar {
     width: 90% ! important;
   }
 
-  .box > div {
+  #tabs > div {
       height: 80vh;
       margin: 0 auto;
   }
@@ -672,11 +683,11 @@ li[class^="listItem"]:hover {
 
 /***** SMART PHONES AND NOTES - chrome and opera *****/
 @media (max-width: 700px) and (orientation: portrait) {
-  .searchBar, .box > div, .BottomBar {
+  .searchBar, #tabs > div, .BottomBar {
     width: 90% ! important;
   }
 
-  .box > div {
+  #tabs > div {
       height: 80vh;
       margin: 0 auto;
   }
