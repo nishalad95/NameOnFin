@@ -40,8 +40,11 @@ $(document).ready(function (){
 		}
 	});
 
+
+
 	// hide the off side 
 	$(".off").hide();
+
 
 	
 	// Opera browser adjustments
@@ -49,6 +52,8 @@ $(document).ready(function (){
 	if(isOpera){
     		$("#overlay").css('margin','-14% 0% 0% 0%');
 	}
+
+
 
 
     	$.ajax({	
@@ -61,19 +66,14 @@ $(document).ready(function (){
     	});
 
 
+
     	window.setTimeout("setup_slider()", 5);
 				
 	
-
-	$( function() {
-		$("#tabs").tabs({
-		});
-  	} );
+	$("#tabs").tabs({});
 
 
-
-
-	// The map object the tile layers are drawn onto.
+	// Make the fin map
 	var map = L.map('nearSide', {
 		crs: L.CRS.Simple,
 		minZoom: -1,
@@ -82,13 +82,16 @@ $(document).ready(function (){
 
 	});
 
-	var bloodhoundIcon = L.icon({
-		
-		iconUrl: 'images/custom_marker.png',
 
+	// Make the bloodhound marker for map
+	var bloodhoundIcon = L.icon({
+		iconUrl: 'images/custom_marker.png',
 		iconSize:     [200, 100], // size of the icon
 		iconAnchor:   [100, 50] // point of the icon which will correspond to marker's location
 	});
+
+
+
 
         // change zoom level of fin depending on device 
 	window.addEventListener('resize', function(event){
@@ -110,8 +113,10 @@ $(document).ready(function (){
           map.setZoom(map.getZoom() - 1)
         });
 
-	
-	// new names added here
+
+
+
+	// Add the new names in the 2nd tab
 	$.ajax({
 			
 		url: "PHP/new_names_pull.php",
@@ -132,10 +137,8 @@ $(document).ready(function (){
 	});
 
 	
-	$("#tab").tabs();
 
 	var data = addImagesToMap();
-	
 	var width = data[0];
 	var height = data[1];
 	
@@ -176,6 +179,7 @@ $(document).ready(function (){
 	
 	}
 
+
 	// The width and height of the image (total) being used.
 	var img_h = 10864;
 	var img_w = 24560;
@@ -187,22 +191,29 @@ $(document).ready(function (){
 	// Show middle of map on page load (y, x, zoomLevel)
 	map.setView([imageHeight / 2, imageWidth / 2], 0);
 
+
+
 	// Restrict dragging of fin image to bounds
 	var southWest = L.latLng(0, 0), northEast = L.latLng(1000, 2000);
 	var bounds = L.latLngBounds(southWest, northEast);
 	map.setMaxBounds(bounds);
 	
 	map.on('drag', function() {
-    	map.panInsideBounds(bounds, { animate: false });
+    		map.panInsideBounds(bounds, { animate: false });
 	});
+
+
 
 	$(".leaflet-control-attribution").hide();
 
 
+
 	$("#recenter").click(function () {
 		map.setView([imageHeight/2, imageWidth/2], 0);  
-    });
+    	});
   
+
+
 	$("#Flip").on("click", function(){
 	
 		if(current_view == "near"){
@@ -214,6 +225,8 @@ $(document).ready(function (){
 
 		}
 	});	
+
+
 
 
 	$("#search_names").submit(function(e){
@@ -276,36 +289,27 @@ $(document).ready(function (){
 					$("#accordion").accordion("option", state);
 
 
-				} 
-				else if(count = 1){
+				} else if(count = 1){
 					
-					// Coord data pulled from the database.
 					var coords = data[0].coord;
-					
 					coords__ = coords.split(",");
-					
 					x = coords__[0];
 					y = coords__[1];
 					
 					panToName(x, y);
 					
-				} 
-				else{
+				} else{
 					
 					alert("Sorry, no results were found.");
 				}
 
+
 				$('.listItem').on('click', function(){
 					
-					/* This is where we handle names inside the results list being clicked. */
-					
 					var id_data = $(this).attr("id").replace("res_", "");
-					
 					var pre_key = id_data.split("_");
-					
 					var x = pre_key[1];
 					var y = pre_key[2];
-					
 					panToName(x, y);
 					
 				});				
@@ -331,7 +335,20 @@ $(document).ready(function (){
 
 		currentMarker = L.marker([y_off - 10, x_off], {icon: bloodhoundIcon});
 		currentMarker.addTo(map);
+
+
+		// Adjust marker size based on zoom level
+		map.on('zoomend', function() {
+  			var currentZoom = map.getZoom();
+			if (currentZoom !== 0) {
+				bloodhoundIcon.options.iconSize = [200 * 0.5 * currentZoom, 100 * 0.5 * currentZoom];
+				currentMarker.setIcon(bloodhoundIcon);
+			}
+		});
+
+	
 	}
+
 
 
 

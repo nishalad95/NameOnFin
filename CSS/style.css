@@ -177,7 +177,7 @@ input{
 #newNames {
 	position: relative;
 	z-index: 20;
-	background: rgba(229, 231, 233, 0.6);
+	background: rgba(229, 231, 233, 0.75);
 	overflow-x:hidden;
 	overflow-y:scroll;
 	max-width: 100%;
