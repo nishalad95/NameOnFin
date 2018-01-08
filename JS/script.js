@@ -43,6 +43,13 @@ $(document).ready(function (){
 	// hide the off side 
 	$(".off").hide();
 
+	
+	// Opera browser adjustments
+	var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+	if(isOpera){
+    		$("#overlay").css('margin','-14% 0% 0% 0%');
+	}
+
 
     	$.ajax({	
 		url: 'SelfieMessages.csv',
@@ -186,15 +193,6 @@ $(document).ready(function (){
 		}
 	});	
 
-	var state = $("#newNames").accordion({
-		collapsible: true,
-		autoHeight: true,
-		heightStyle: "content",
-		refresh: true,
-		icons: {"header": "ui-icon-circle-plus", "activeHeader": "ui-icon-circle-minus"}
-	});
-	
-	$("#newNames").accordion("option", state);
 
 	$("#search_names").submit(function(e){
   
@@ -294,29 +292,34 @@ $(document).ready(function (){
 	
 
 	});
-	
-	/*
-		this function will pan the Leaflet view-port to the given xy coordinate.
-		It will also check to see if there is already a marker added to the map, if there is it will delete it.
-	*/
+
+
+
 	function panToName(x, y){
 		
 		// If a map marker already exists.
 		if(currentMarker != null){
-
 			map.removeLayer(currentMarker);
 		}
 
-		// Here we calculate the coordinates to pan to.
+		// Calculate coords and pan
 		y_off = height - (y / y_trans);
 		x_off = x / x_trans;
-
-		// Pan to coords.
 		map.setView([y_off, x_off], 3);
 
 		currentMarker = L.marker([y_off - 10, x_off], {icon: bloodhoundIcon});
 		currentMarker.addTo(map);
 	}
+
+
+
+	$('#newNamesList li').each(function() {
+  		var back = ["#000080","orange","white"];
+  		var rand = back[Math.floor(Math.random() * back.length)];
+  		$(this).css('color',rand);
+	});
+
+
 
 });
 
