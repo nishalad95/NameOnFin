@@ -1,10 +1,14 @@
 var contactid = null;
 var current_view = "near";
-
 var currentMarker = null;
 
+// Transformation factor for intrisic image size to leaflet image size
+var x_trans = 12.28;
+var y_trans = 10.864;
+// Intrinsic height and width of image in pixels
 var imageHeight = 1000;
 var imageWidth = 2000;
+
 
 
 function setup_slider() {
@@ -30,6 +34,8 @@ function setup_slider() {
     });
 
 }
+
+
 
 $(document).ready(function (){
 
@@ -124,14 +130,17 @@ $(document).ready(function (){
 		asyn: false,
 		dataType: "json",
 		success: function(data){
-			
-			var newRecord;
-			var newNames = "";
-			for (var i = 0; i < data.length; i++) {
-				newRecord = data[i].name;
-				newNames += "<li>" + newRecord + "</li>";
+		
+			$("#title").append("<h3 id='namesHeader'>The next set of names which will be added to the fin of Bloodhound on XX/XX/XXXX are:</h3>");
+			if (data.length !== 0) {
+				var newRecord;
+				var newNames = "";
+				for (var i = 0; i < data.length; i++) {
+					newRecord = data[i].name;
+					newNames += "<li>" + newRecord + "</li>";
+				}
+				$("#newNamesList").append(newNames);
 			}
-			$("#newNamesList").append(newNames);
 		}
 
 	});
@@ -145,7 +154,6 @@ $(document).ready(function (){
 	function addImagesToMap() {
 		
 		var width = 0, height = 0, tmp = 0;
-		
 		var counter, bounds, image, path;
 	
 		for(x = 0; x < 10; x++){	
@@ -180,17 +188,8 @@ $(document).ready(function (){
 	}
 
 
-	// The width and height of the image (total) being used.
-	var img_h = 10864;
-	var img_w = 24560;
-
-	// This is the image width/ height divided by leaflet width/height.
-	x_trans = img_w / width;
-	y_trans = img_h / height;
-
 	// Show middle of map on page load (y, x, zoomLevel)
 	map.setView([imageHeight / 2, imageWidth / 2], 0);
-
 
 
 	// Restrict dragging of fin image to bounds

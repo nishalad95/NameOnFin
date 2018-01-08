@@ -110,7 +110,7 @@
                 </div>
 	    
 		<div id="newNames">
-
+			<div id="title"></div>
 			<div id="newNamesList"></div>  
 
 		</div>	
