@@ -109,6 +109,28 @@ $(document).ready(function (){
         $('#zoom-out').click(function(){
           map.setZoom(map.getZoom() - 1)
         });
+
+	
+	// new names added here
+	$.ajax({
+			
+		url: "PHP/new_names_pull.php",
+		type: "GET",
+		asyn: false,
+		dataType: "json",
+		success: function(data){
+			
+			var newRecord;
+			var newNames = "";
+			for (var i = 0; i < data.length; i++) {
+				newRecord = data[i].name;
+				newNames += "<li>" + newRecord + "</li>";
+			}
+			$("#newNamesList").append(newNames);
+		}
+
+	});
+
 	
 	$("#tab").tabs();
 
@@ -311,13 +333,6 @@ $(document).ready(function (){
 		currentMarker.addTo(map);
 	}
 
-
-
-	$('#newNamesList li').each(function() {
-  		var back = ["#000080","orange","white"];
-  		var rand = back[Math.floor(Math.random() * back.length)];
-  		$(this).css('color',rand);
-	});
 
 
 

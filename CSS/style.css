@@ -143,7 +143,7 @@ input{
 
 
 .ui-tabs .ui-tabs-panel {
-	padding: 0 0 0 0;
+    padding: 0 0 0 0;
 }
 
 .ui-widget-content, .ui-widget-header{
@@ -177,7 +177,7 @@ input{
 #newNames {
 	position: relative;
 	z-index: 20;
-	background: rgba(229, 231, 233, 0.65);
+	background: rgba(229, 231, 233, 0.6);
 	overflow-x:hidden;
 	overflow-y:scroll;
 	max-width: 100%;
@@ -194,8 +194,14 @@ input{
     column-count: 3;
     direction:ltr;
     padding-left: 30px;
+    list-style-type:disc;
 }
 
+
+#newNamesList li:nth-child(4n+1) {color: orange;}
+#newNamesList li:nth-child(4n+2) {color: white;}
+#newNamesList li:nth-child(4n+3) {color: #5489f7;}
+#newNamesList li:nth-child(4n+4) {color: #000080;}
 
 #name_area {
     position: relative;
@@ -608,6 +614,12 @@ input{
       	  width: 12%;
  	}
 
+	#newNamesList {
+		-moz-column-count: 2;
+    		-webkit-column-count: 2;
+    		column-count: 2;
+	}
+
     }
     
 
@@ -620,6 +632,14 @@ input{
 	.wrapper{
       	  width: 10%;
  	}
+
+	#newNamesList {
+		-moz-column-count: 2;
+    		-webkit-column-count: 2;
+    		column-count: 2;
+	}
+
+
     }
     
 
@@ -695,6 +715,13 @@ input{
       margin: -11.5% 0 0 -24.5% ! important;
   }
 
+   #newNamesList {
+      -moz-column-count: 2;
+      -webkit-column-count: 2;
+      column-count: 2;
+   }
+
+
   .wrapper{
       width: 10%;
   }
@@ -746,6 +773,14 @@ input{
       width: 150% ! important;
       margin: -11% 0 0 -23% ! important;
   }
+
+  #newNamesList {
+      -moz-column-count: 2;
+      -webkit-column-count: 2;
+      column-count: 2;
+   }
+
+
   .namesScrollBar {
     font-size: 2vw ! important;
   }
