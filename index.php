@@ -73,8 +73,8 @@
 	    <!-- Main content -->
 	    <div id="tabs">
 		<ul>
-			<li><a id="tab1" href="#name_area">Virtual Fin</a></li>
-			<li><a id="tab2" href="#newNames">New Names</a></li>
+			<li><a id="tab1" href="#name_area" title="Find your name on the fin!">Bloodhound Fin</a></li>
+			<li><a id="tab2" href="#newNames" title="Next set of names to be added">New Names</a></li>
 		</ul>
 
 	    <div class="box">

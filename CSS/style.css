@@ -188,18 +188,20 @@ input{
 	width: 100%;
 	display: flex;
 	margin: 0 auto;
+	text-align:center;
 	color: #000080;
 	text-shadow: 1px 1px 2px black;
 }
 
 #namesHeader {
+	position: relative;
 	margin: 0 auto;
 	font-weight: normal;
 }
 
 
 #newNamesList {
-    width: 100%;
+    width: 95%;
     height: auto;
     margin: 0 auto;
     text-shadow: 1px 1px 2px black;
@@ -207,7 +209,6 @@ input{
     -webkit-column-count: 3;
     column-count: 3;
     direction:ltr;
-    padding-left: 30px;
     padding-top: 10px;
     list-style-type:disc;
 }
@@ -600,6 +601,13 @@ input{
 
 
 
+@media screen and (orientation: portrait) {
+	.ui-tabs-nav {
+		width: 90%;
+	}
+}
+
+
 
 /***** MOZILLA SPECIFIC STYLING *****/
 @-moz-document url-prefix() {
@@ -614,7 +622,7 @@ input{
         margin-top: 3%;
     }
     #overlay {
-        margin: -25% 0 0 0;
+        margin: -13% 0 0 0;
     }
    
 

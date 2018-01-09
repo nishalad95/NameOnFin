@@ -259,7 +259,7 @@ $(document).ready(function (){
 				
 					// create names panel
 					$("#name_area").append("<div class='namesScrollBar' id='accordion'></div>");
-					$(".namesScrollBar").append("<div class='searchQuery'> Showing Results For: " + searchTerm + "</div>" +
+					$(".namesScrollBar").append("<div class='searchQuery'> Results For: " + searchTerm + "</div>" +
 						"<div><ul class='searchList'></ul></div>");
 				
 					var sBuilder = "";
@@ -337,13 +337,13 @@ $(document).ready(function (){
 
 
 		// Adjust marker size based on zoom level
-		map.on('zoomend', function() {
+		/*map.on('zoomend', function() {
   			var currentZoom = map.getZoom();
 			if (currentZoom !== 0) {
 				bloodhoundIcon.options.iconSize = [200 * 0.5 * currentZoom, 100 * 0.5 * currentZoom];
 				currentMarker.setIcon(bloodhoundIcon);
 			}
-		});
+		});*/
 
 	
 	}
