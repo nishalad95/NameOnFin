@@ -642,15 +642,15 @@ input{
     		-webkit-column-count: 2;
     		column-count: 2;
 	}
+	.ui-tabs-nav {
+		font-size: 75%;
+	}
 
     }
     
 
     /***  Mozilla mobile devices and portrait ***/
     @media (max-width: 700px) and (orientation: portrait) {
-        #overlay {
-          margin: -4% 0 0 -25% ! important;
-        }
 
 	.wrapper{
       	  width: 10%;
@@ -661,10 +661,28 @@ input{
     		-webkit-column-count: 2;
     		column-count: 2;
 	}
-
+	.ui-tabs-nav {
+		font-size: 60%;
+	}
 
     }
+
+    /*** Mozilla tablets and landscape ***/
+    @media (min-width: 701px) and (max-width:2000px) and (orientation: landscape) {
+    .ui-tabs-nav {
+		font-size: 75%;
+	}
     
+    }
+
+    /*** Mozilla mobiles and landscape ***/
+    @media (max-width:700px) and (orientation: landscape) {
+    .ui-tabs-nav {
+		font-size: 50%;
+	}
+    
+    }
+
 
     .namesScrollBar{
         text-shadow: 1px 1px 1px;
