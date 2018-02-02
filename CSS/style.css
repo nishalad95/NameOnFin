@@ -1,0 +1,841 @@
+html {
+   background: white;
+   font-family: Tahoma, Helvetica, Arial, Sans-serif;
+}
+
+
+.lslide {
+	padding: 5px;
+}
+
+
+body {
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+body, .container, #backgroundImage, form, input, .photoBanner {
+    margin: 0 auto;
+}
+
+
+.container, #logo, #hashtag, form, .Static, #searchStatic, #Recenter, #Flip, #zoom-in, #zoom-out {
+    width: 100%;
+    position: relative;
+}
+
+
+#backgroundImage{
+    position: absolute;
+    width: 100%;
+}
+
+
+.searchBar {
+    width: 70%;
+    margin: 0 auto 0% auto;
+    max-height: 10%;
+    background-image: url('../images/Search-Bar.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: relative;
+    display: flex;
+}
+
+
+.logo {
+    width: 6.5%;
+    position: relative;
+    margin: 1% 0 0 2%;
+}
+
+
+.hashtag {
+    width: 25%;
+    position: relative;
+    margin: 2% 0 0 2.5%;
+}
+
+
+.searchInput {
+    width: 60%;
+    position: relative;
+    margin: 2% 2% 0 5%;
+}
+
+
+.inputText {
+    position: relative;
+    display: flex;
+}
+
+
+form {
+    top:0%;
+}
+
+
+input{
+    color: #060e6b;
+    width: 70%;
+    zoom: 100%;
+    background: transparent;
+    border: none;
+    font-size: 1.5vw;
+    font-weight: 100;
+    position:absolute;
+    top:0%;
+}
+
+
+.searchButton {
+    width: 25%;
+    position: relative;
+    margin: 0 0 0 0.75%;
+    float: right;
+}
+
+
+.Static {
+    top:0%;
+}
+
+
+#inputValue {
+    position: relative;
+    margin: 1.5% 0 0 0;
+    outline: none;
+    text-align: right;
+    vertical-align:top;
+}
+
+
+#inputValue::placeholder {
+    color: #21618C;
+}
+
+
+
+#tabs > div {
+    width: 70%;
+    height: 37vw;
+    margin: 0% auto;
+    position: relative;
+    box-shadow: 0 50px 100px 50px rgba(0, 0, 0, 0.03),
+        0 50px 100px 50px rgba(0, 0, 0, 0.03);
+}
+
+
+
+#tabs {
+    position: relative;
+    display: block;
+    padding: 0 !important;
+    margin-top: 0 ! important;
+    border-style: none;
+    background-color: transparent;
+    background-image: none;
+    outline: none;
+}
+
+
+
+
+.ui-tabs .ui-tabs-panel {
+    padding: 0 0 0 0;
+}
+
+.ui-widget-content, .ui-widget-header{
+    border: none !important;
+}
+
+.ui-tabs-nav {
+    background: transparent;
+    border-width: 0px 0px 1px 0px;
+    width: 70%;
+    margin: 0 auto ! important;
+}
+
+
+.ui-tabs-active {
+   background: rgb(25, 25, 112) ! important;
+}
+
+
+#tabs ul li.selected {
+    background: rgb(0, 0, 128);
+    color: #fff
+}
+
+#tabs a:active, #tabs a:hover {
+    background: rgb(0, 0, 128);
+    color: #fff
+}
+
+
+#newNames {
+	position: relative;
+	z-index: 20;
+	background: rgba(229, 231, 233, 0.75);
+	overflow-x:hidden;
+	overflow-y:scroll;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+#title {
+	width: 100%;
+	display: flex;
+	margin: 0 auto;
+	text-align:center;
+	color: #000080;
+	text-shadow: 1px 1px 2px black;
+}
+
+#namesHeader {
+	position: relative;
+	margin: 0 auto;
+	font-weight: normal;
+}
+
+
+#newNamesList {
+    width: 95%;
+    height: auto;
+    margin: 0 auto;
+    text-shadow: 1px 1px 2px black;
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
+    column-count: 3;
+    direction:ltr;
+    padding-top: 10px;
+    list-style-type:disc;
+}
+
+
+#newNamesList li:nth-child(4n+1) {color: orange;}
+#newNamesList li:nth-child(4n+2) {color: white;}
+#newNamesList li:nth-child(4n+3) {color: #5489f7;}
+#newNamesList li:nth-child(4n+4) {color: #000080;}
+
+#name_area {
+    position: relative;
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    max-width:100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+
+#dragArea {
+    width:100%;
+    height:100%;
+    max-height: 100%;
+    max-width:100%;
+    position: absolute;
+    display:flex;
+}
+
+#overlay {
+    width: 100%;
+    position: absolute;
+    margin: -12.5% 0 0 0;
+    z-index: 20;
+}
+
+#greeting {
+    position: absolute;
+    width: 45%;
+    margin: 7% 0 0 3%;
+    z-index: 20;
+}
+
+
+
+#nearSide, #offSide{
+	z-index:19;
+	height: 100%;
+	width: 100%;
+}
+
+
+.leaflet-container {
+    background-color:rgba(255,0,0,0.0);
+}
+
+
+.wrapper {
+    opacity: 1.0;
+    position:absolute;
+    z-index: 19;
+    width: 5%;
+    top: 2%;
+    right: 2%;
+}
+
+
+#Recenter, #Flip, #zoom-in, #zoom-out {
+    cursor: pointer;
+    height: 100%;
+}
+
+
+/***** MULTIPLE NAMES SCROLLING BAR *****/
+.namesScrollBar {
+    position: absolute;
+    max-height:100%;
+    height:auto;
+    width: 30%;
+    z-index:20;
+    overflow:auto;
+    color: rgb(25,25,112);
+    font-size: 1vw;
+    text-shadow: 1px 1px;
+    background: rgba(245,245,245,0.9);
+}
+
+
+.searchQuery {
+    margin: 5% 0 0 5%;
+    font-size: 120%;
+    background: rgb(25,25,112);
+
+}
+
+
+.ui-state-focus {
+    outline: none ! important;
+}
+
+
+.namesScrollBar ul {
+    list-style:none;
+    width: 100%;
+    padding:0;
+    margin-top: 5%;
+}
+
+
+.namesScrollBar li {
+    line-height:200%;
+    text-align: left;
+    padding-left: 15%;
+}
+
+
+.namesScrollBar li[class^="listItem"] {
+    list-style-position:inside;
+    border-radius: 5px;
+}
+
+
+
+.namesScrollBar ul li {
+	margin-left: 5% ! important;
+	margin-right: 5% ! important;
+}
+
+
+.namesScrollBar #nameLink {
+    text-decoration: none;
+}
+
+
+#nameLink, #nameLink:active {
+    color: inherit;
+}
+
+
+#nameLink:hover {
+    color: #e67300 ! important;
+    text-shadow: 1px 1px 1px #000;
+}
+
+
+#accordion .ui-accordion-content > * {
+	-webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.3);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+	color: rgb(25,25,112) ! important;
+}
+
+
+.noStyleAccordion .ui-accordion-header, .noStyleAccordion .ui-accordion-content {
+	padding: 0;
+	background: none;
+	border: none;
+	outline: none;
+}
+
+
+#accordion * {
+	padding: 0;
+	margin: 0;
+}
+
+
+.ui-accordion-header {
+	background-color: rgb(25,25,112) ! important;
+	color: white;
+        text-shadow: 1px 1px 1px white ! important;
+	line-height: 200%;
+}
+
+
+/***** SCROLL BAR STYLE *****/
+#accordion::-webkit-scrollbar-track, 
+#newNames::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 0 rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+
+#accordion::-webkit-scrollbar,
+#newNames::-webkit-scrollbar {
+    width: 10px;
+    background-color: #F5F5F5;
+}
+
+
+#accordion::-webkit-scrollbar-thumb, 
+#newNames::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-image: -webkit-gradient(linear,left bottom,left top,
+	color-stop(0.44, rgb(122,153,217)),
+	color-stop(0.60, rgb(73,125,189)),
+	color-stop(0.86, rgb(28,58,148)));
+}
+
+
+.BottomBar {
+    width: 70%;
+    height: 12.5vw;
+    margin: 1.5% auto;
+    position: relative;
+    border-radius: 0 0 1em 1em;
+    background: rgba(0, 0, 128, 0.8);
+    overflow:hidden;
+}
+
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .BottomBar {
+    	height: 12.5vw;
+    	margin: 1.5% auto;
+    	position: relative;
+    	border-radius: 0 0 1em 1em;
+    	background: rgba(0, 0, 128, 0.8);
+    	overflow:hidden;
+    }
+
+}
+
+
+.photoBanner {
+  width: 95%;
+  position: relative;
+  overflow:hidden;
+  height:60%;
+}
+
+
+#selfieText {
+    position: relative;
+    width: 25%;
+    margin: 2% 0 0 2%;
+}
+
+
+#scroller {
+	overflow: hidden;
+	position: relative;
+	left: 0;
+	right: 0;
+	top: 1%;
+	bottom: 0;
+  	height: 100%;
+}
+
+
+.item {
+  height: 100%;
+  position: relative;
+}
+
+
+#selfie {
+    width: 75%;
+    height: 75%;
+    top: 1%;
+    opacity: 1.0;
+}
+
+.content-slider a {
+  position: relative;
+  margin: 0 auto;
+  display:flex;
+  z-index:100;
+}
+
+
+
+
+.item ul{
+  list-style: none outside none;
+  padding-left: 0;
+  margin: 0;
+}
+.demo .item{ 
+  margin-bottom: 60px; 
+}
+.content-slider li{
+  text-align: center;
+  list-style: none;
+}
+.scroller{ 
+  width: 100%; 
+}
+
+
+
+/***** LIGHTBOX MARKUP *****/
+.lightbox {
+	/** Default lightbox to hidden */
+	display: none;
+
+	/** Position and style */
+	position: fixed;
+	z-index: 998;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.85);
+}
+
+
+.lightbox img {
+	/** Pad the lightbox image */
+	max-width: 90%;
+        height: 90vh;
+	max-height: 90vw;
+        text-align:center;
+	margin-top: 2%;
+        display:inline;
+}
+
+
+.lightbox:target img {
+	animation: fadeInScale 0.75s ease-in-out;
+}
+
+
+@keyframes fadeInScale {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+
+.lightbox:target {
+	/** Remove default browser outline */
+	outline: none;
+	/** Unhide lightbox **/
+	display: block;
+}
+
+.previous {
+  left: 4px;
+}
+
+.next {
+  right: 4px;
+}
+
+.previous, .next {
+  /**styling the left and right arrow**/
+  z-index: 999;
+  position: fixed;
+  margin: 0 auto;
+  top: 45%;
+  width: 40px;
+  font-size: 20pt;
+  text-decoration: none;
+  text-align: center;
+  border-radius:20%;
+  color: #ffffff;
+}
+
+
+.exit {
+  /** styling the exit button **/
+  z-index: 999;
+  position: fixed;
+  right: 4px;
+  top: 4px;
+  width: 40px;
+  font-size: 20pt;
+  text-decoration: none;
+  border-radius:20%;
+  color: #ffffff;
+}
+
+
+.previous:hover, .next:hover, .exit:hover {
+  color: rgba(213, 216, 220, 0.8);
+}
+
+
+.selfieMessage {
+    z-index: 999;
+    position:fixed;
+    color: #ffffff;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 100%;
+}
+
+
+
+@media screen and (orientation: portrait) {
+	.ui-tabs-nav {
+		width: 90%;
+	}
+}
+
+
+
+/***** MOZILLA SPECIFIC STYLING *****/
+@-moz-document url-prefix() {
+
+    .searchBar {
+        background-size: 100% 100%;
+    }
+    #logo, #hashtag {
+        margin-top: 10%;
+    }
+    .inputText, .Static {
+        margin-top: 3%;
+    }
+    #overlay {
+        margin: -13% 0 0 0;
+    }
+   
+
+    /***  Mozilla tablet devices and portrait ***/
+    @media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
+        #overlay {
+          width: 150% ! important;
+          /*margin: -4% 0 0 -24% ! important;*/
+  	}
+
+	.wrapper{
+      	  width: 12%;
+ 	}
+
+	#newNamesList {
+		-moz-column-count: 2;
+    		-webkit-column-count: 2;
+    		column-count: 2;
+	}
+	.ui-tabs-nav {
+		font-size: 75%;
+	}
+
+    }
+    
+
+    /***  Mozilla mobile devices and portrait ***/
+    @media (max-width: 700px) and (orientation: portrait) {
+
+	.wrapper{
+      	  width: 10%;
+ 	}
+
+	#newNamesList {
+		-moz-column-count: 2;
+    		-webkit-column-count: 2;
+    		column-count: 2;
+	}
+	.ui-tabs-nav {
+		font-size: 60%;
+	}
+
+    }
+
+    /*** Mozilla tablets and landscape ***/
+    @media (min-width: 701px) and (max-width:2000px) and (orientation: landscape) {
+    .ui-tabs-nav {
+		font-size: 75%;
+	}
+    
+    }
+
+    /*** Mozilla mobiles and landscape ***/
+    @media (max-width:700px) and (orientation: landscape) {
+    .ui-tabs-nav {
+		font-size: 50%;
+	}
+    
+    }
+
+
+    .namesScrollBar{
+        text-shadow: 1px 1px 1px;
+    }
+    #nameLink:hover {
+        text-shadow: 1px 1px 1px black ! important;
+    }
+}
+
+
+
+/***** MICROSOFT EDGE SPECIFIC STYLING *****/
+@supports (-ms-ime-align: auto) {
+
+	.searchBar {
+        	background-size: 100% 100%;
+    	}
+
+ 	#logo, #hashtag {
+        	margin-top: 10%;
+    	}
+    	
+	.inputText, .Static {
+        	margin-top: 3%;
+    	}
+
+	#overlay {
+    		margin: -13.5% 0 0 0;
+	}
+
+
+}
+
+
+
+
+/***** IE VERSION 10 & 11 STYLING *****/
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+
+
+}
+
+
+
+/***** TABLET DEVICES in portrait - chrome & opera *****/
+@media (min-width: 701px) and (max-width: 2000px) and (orientation: portrait) {
+  .searchBar, #tabs > div, .BottomBar {
+    width: 90% ! important;
+  }
+
+  #tabs > div {
+      height: 80vh;
+      margin: 0 auto;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+  #backgroundImage{
+      height: 100%;
+      width: 200%;
+      margin: 0 0 0 -50%;
+  }
+
+  #overlay {
+      height: 100vh ! important;
+      width: 150% ! important;
+      margin: -11.5% 0 0 -24.5% ! important;
+  }
+
+   #newNamesList {
+      -moz-column-count: 2;
+      -webkit-column-count: 2;
+      column-count: 2;
+   }
+
+
+  .wrapper{
+      width: 10%;
+  }
+
+  .namesScrollBar {
+    font-size: 2vw ! important;
+  }
+  .BottomBar {
+    height: 15vw ! important;
+  }
+
+}
+
+
+
+@media screen and (device-height: 360px) and (device-width: 640px) and (orientation: landscape) {
+	#overlay{
+		margin: -17% 0 0 0;
+	}
+}
+
+
+
+/***** SMART PHONES AND NOTES - chrome and opera *****/
+@media (max-width: 700px) and (orientation: portrait) {
+  .searchBar, #tabs > div, .BottomBar {
+    width: 90% ! important;
+  }
+
+  #tabs > div {
+      height: 80vh;
+      margin: 0 auto;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+  #backgroundImage{
+      height: 100%;
+      width: 200%;
+      margin: 0 0 0 -50%;
+  }
+
+  #overlay {
+      height: 115% ! important;
+      width: 150% ! important;
+      margin: -11% 0 0 -23% ! important;
+  }
+
+  #newNamesList {
+      -moz-column-count: 2;
+      -webkit-column-count: 2;
+      column-count: 2;
+   }
+
+
+  .namesScrollBar {
+    font-size: 2vw ! important;
+  }
+
+  .wrapper{
+      width: 12%;
+  }
+
+
+  .BottomBar {
+    height: 15vw ! important;
+  }
+
+}
+
+
+
