@@ -11,6 +11,8 @@
         <link rel="stylesheet" type="text/css" href="CSS/lightslider.css?ver=1.1" />
         <link rel="icon" href="images/favicon.png" type="image/x-icon"/>
 
+	
+
 	<script src="leaflet/leaflet/leaflet.js" ></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -19,7 +21,7 @@
         <script type="text/javascript" src="JS/script.js?a=1"></script>
 
     <script>
-    	 $(document).ready(function() {
+    $(document).ready(function() {
 		$("#content-slider").lightSlider({
                 loop:true,
                 keyPress:true
@@ -88,8 +90,8 @@
 
                     <!-- Names on the Fin -->
                     <div id="dragArea">
-						<div id="nearSide"></div>
-						<div id="offSide"></div>
+						<div id="map"></div>
+						<div id="mapOff"></div>
                     </div>
 
 

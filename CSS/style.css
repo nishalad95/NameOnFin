@@ -255,7 +255,7 @@ input{
 
 
 
-#nearSide, #offSide{
+#map, #offSide{
 	z-index:19;
 	height: 100%;
 	width: 100%;

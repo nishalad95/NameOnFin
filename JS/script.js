@@ -1,13 +1,11 @@
 var contactid = null;
-var currentMarker = null;
 
-// Transformation factor for intrisic image size to leaflet image size
-var x_trans = 16;
-var y_trans = 15.574;
-// Intrinsic height and width of image in pixels
+// Transformation factor for intrisic image pixel size to leaflet image size
+var x_trans = 16; 
+var y_trans = 16;
+// Height and width of leaflet image in pixels
 var imageHeight = 1000;
-var imageWidth = 2000;
-//
+var imageWidth = 1000;
 var current_view = "near";
 
 
@@ -43,9 +41,6 @@ $(document).ready(function (){
 			alert("This site was developed by Nisha Lad & Chris Wing :-)");
 		}
 	});
-
-	// On page load, hide the off side until the flip button is pressed.
-	$("#offSide").hide();
 	
 	// Opera browser adjustments
 	var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
@@ -54,44 +49,59 @@ $(document).ready(function (){
     		$("#overlay").css('margin','-14% 0% 0% 0%');
 	}
 
-	$.ajax({	
-		url: 'SelfieMessages.csv',
-		dataType: 'text',
-		async: true,
-		success: function (e){
-			loadImages(e);
-		}
-	});
 
     window.setTimeout("setup_slider()", 5);				
 	
 	$("#tabs").tabs({});
-
-	// Nearside map.
-	var map = L.map('nearSide', {
-		crs: L.CRS.Simple,
-		minZoom: -1,
-        maxZoom: 4,
-		zoomControl: false,
-
-	});
 	
-	// Offside map.
-	var mapOff = L.map('offSide', {
-		crs: L.CRS.Simple,
-		minZoom: -1,
-        maxZoom: 4,
-		zoomControl: false,
+	var map = L.map('map', {
+			crs: L.CRS.Simple,
+			minZoom: 0,
+			maxZoom: 5,
+			zoomControl: false,
 
 	});
 
-	// Make the bloodhound marker for map
-	var bloodhoundIcon = L.icon({
-		iconUrl: 'images/custom_marker.png',
-		iconSize:     [200, 100], // size of the icon
-		iconAnchor:   [100, 50] // point of the icon which will correspond to marker's location
-	});
-
+	
+	addImagesToMap();
+	
+	function addImagesToMap() {
+		
+		var width = 0, height = 0, inc = 0;
+		var counter, bounds, image1, image2, path;
+				
+		map.eachLayer(function (layer) {
+			map.removeLayer(layer);
+		}); 
+	
+		for(x = 0; x < 10; x++){	
+			
+			height = 0;
+			inc += 1;
+		
+			for(var y = 40; y >= 0; y -= 10){	
+		
+				counter = y + inc;
+				bounds = [[height, width], [height + 100, width + 100]];
+								
+				path = "leaflet/" + current_view + "_side/master_" + current_view + "_";
+					
+				if (counter < 10) { path += "0";}
+					
+				path += counter  + ".png";
+				image = L.imageOverlay(path, bounds).addTo(map);
+				counter -= 1;
+				height += 100;
+					
+			}		
+			width += 100;
+		}
+		map.setView([imageHeight / 2, imageWidth / 2], 0);
+	}
+	
+	
+	
+	
     // change zoom level of fin depending on device 
 	window.addEventListener('resize', function(event){
 		
@@ -100,55 +110,42 @@ $(document).ready(function (){
 		if (width < 768) {
 			map.setZoom(4);
 		}
-	});	
-		
-	// Handles map zooming.
-	$('#zoom-in').click(function(){
-        
-		if(current_view == "near"){
-			
-			map.setZoom(map.getZoom() + 1)
-		}
-		else{
-			
-			mapOff.setZoom(map.getZoom() + 1)
-		}
-		
-    });
-
-	// Handles map zooming.
-	$('#zoom-out').click(function(){
-		
-		if(current_view == "near"){
-			
-			map.setZoom(map.getZoom() - 1)
-		}
-		else{
-			
-			mapOff.setZoom(map.getZoom() - 1)
-		}
 	});
 	
-	// Handles flipping map.
+	$('#zoom-in').click(function(){ map.setZoom(map.getZoom() + 1); });
+	$('#zoom-out').click(function(){ map.setZoom(map.getZoom() - 1); });
+	
+	
 	$('#Flip').click(function(){
-		
-		if(current_view == "near"){
-			
-			$("#nearSide").hide();
-			$("#offSide").show();
-			
+		if (current_view == "near") {
 			current_view = "off";
-		}
-		else{
-						
-			$("#offSide").hide();
-			$("#nearSide").show();
-			
+			addImagesToMap();
+
+		} else {
 			current_view = "near";
+			addImagesToMap();
 		}
 	});
 
-	// Add the new names in the 2nd tab
+	
+	$("#recenter").click(function () { map.setView([imageHeight/2, imageWidth/2], 0); });
+	map.setView([imageHeight / 2, imageWidth / 2], 0);
+	$(".leaflet-control-attribution").hide();
+
+	
+	var southWest = L.latLng(0, 0), northEast = L.latLng(500, 1000);
+	var bounds = L.latLngBounds(southWest, northEast);
+	map.setMaxBounds(bounds);
+	
+	
+	map.on('drag', function() {
+    		map.panInsideBounds(bounds, { animate: false });
+	});
+
+	
+
+
+	// Add the upcoming names in the 2nd tab
 	$.ajax({
 			
 		url: "PHP/new_names_pull.php",
@@ -171,98 +168,8 @@ $(document).ready(function (){
 
 	});	
 
-	var data = addImagesToMap("near");
-	var dataOff = addImagesToMap("off");
-	var width = data[0];
-	var height = data[1];
-	
-	function addImagesToMap(side) {
-		
-		var width = 0, height = 0, tmp = 0;
-		var counter, bounds, image, path;
-	
-		for(x = 0; x < 10; x++){	
-			
-			height = 0;
-			tmp += 1;
-		
-			for(var y = 90; y >= 0; y -= 10){	
-		
-				counter = y + tmp;
-				bounds = [[height, width], [height + 100, width + 200]];
-			
-				if (side == "near"){
-					
-					path = "leaflet/Near side/master_sliced/master_near_"
-					
-					if (counter < 10){
-						path += "0";
-					}
-					
-					path += counter  + ".png";
-
-					image = L.imageOverlay(path, bounds).addTo(map);	
-					map.fitBounds(bounds);
-					counter -= 1;
-					height += 100;
-				}
-				else{
-					
-					path = "leaflet/Off side/master_sliced/master_off_"
-					
-					if (counter < 10){
-						path += "0";
-					}
-					
-					path += counter  + ".png";
-
-					image = L.imageOverlay(path, bounds).addTo(mapOff);	
-					mapOff.fitBounds(bounds);
-					counter -= 1;
-					height += 100;
-				}
-			}
-		
-			width += 200;
-		}
-
-		return [width, height];
-	}
-
-	// Show middle of map on page load (y, x, zoomLevel)
-	map.setView([imageHeight / 2, imageWidth / 2], 0);
-	mapOff.setView([imageHeight / 2, imageWidth / 2], 0);
-
-
-	// Restrict dragging of fin image to bounds
-	var southWest = L.latLng(0, 0), northEast = L.latLng(1000, 2000);
-	var bounds = L.latLngBounds(southWest, northEast);
-	
-	map.setMaxBounds(bounds);
-	mapOff.setMaxBounds(bounds);
-	
-	map.on('drag', function() {
-    		map.panInsideBounds(bounds, { animate: false });
-	});
-	
-	mapOff.on('drag', function() {
-    		mapOff.panInsideBounds(bounds, { animate: false });
-	});
-
-	$(".leaflet-control-attribution").hide();
-
-	$("#recenter").click(function () {
-		
-		if(current_view == "near"){
-			
-			map.setView([imageHeight/2, imageWidth/2], 0);
-		}
-		else{
-			
-			mapOff.setView([imageHeight/2, imageWidth/2], 0);
-		}    
-	});
   
+
 	$("#search_names").submit(function(e){
   
 		e.preventDefault();
@@ -290,7 +197,6 @@ $(document).ready(function (){
 				var count = data.length;
 				var coords, name, key, x, y, xOffset, yOffset;
 				
-				alert(count);
 				if(count > 1){
 				
 					// create names panel
@@ -336,28 +242,17 @@ $(document).ready(function (){
 					if(key == "sc" || key == "nn"){
 						
 						// Name belongs on near side.
-						
-						if(current_view != "near"){
-							
-							// We must change to near side.
-							
+						if(current_view != "near"){						
 							current_view = "near";
-							
-							$("#offSide").hide();
-							$("#nearSide").show();
+							addImagesToMap();
 						}
 					}
 					else{
 						
 						// Name belongs on off side.
-						
-						if(current_view != "off"){
-							
-							// We must change to near side.
+						if(current_view != "off"){	
 							current_view = "off";
-							
-							$("#nearSide").hide();
-							$("#offSide").show();
+							addImagesToMap();
 						}
 					}
 					
@@ -380,29 +275,20 @@ $(document).ready(function (){
 					
 					if(key_ == "sc" || key_ == "nn"){
 						
-						// Name belongs on near side.
-						
+						// Name belongs on near side.	
 						if(current_view != "near"){
-							
-							// We must change to near side.
-							
+							// change to near side	
 							current_view = "near";
-							
-							$("#offSide").hide();
-							$("#nearSide").show();
+							addImagesToMap();
 						}
 					}
 					else{
 						
 						// Name belongs on off side.
-						
 						if(current_view != "off"){
-							
 							// We must change to near side.
 							current_view = "off";
-							
-							$("#nearSide").hide();
-							$("#offSide").show();
+							addImagesToMap();
 						}
 					}
 					panToName(x, y, key_);
@@ -413,61 +299,19 @@ $(document).ready(function (){
 
 	function panToName(x, y, key_){
 		
-		/*
-		// If a map marker already exists.
-		if(currentMarker != null){
-			map.removeLayer(currentMarker);
-			mapOff.removeLayer(currentMarker);
-		}
-		*/
-		
-		// Calculate coords and pan.
-		y_off = (height - (y / y_trans)) - 35;
-		x_off = (x / x_trans);
-		
+		y_off = ((imageHeight / 2) - (y / y_trans));
+		x_off = (x / x_trans);		
 		var zoom_level = 3;
 		
-		// Depending what level the names are, we may need to adjust pan-to zoom and transformation constants.
-		if(key_ == "nn" || key_ == "no"){
-			
-			zoom_level = 4;
-			x_off = (x / 15.32);
+		if(key_ == "nn" || key_ == "no"){			
+			zoom_level = 7;
 		}
-		// Set the custom marker.
-		
-		currentMarker = L.marker([y_off, x_off], {icon: bloodhoundIcon});
-		
-		if(current_view == "near"){
-			
-			map.setView([y_off, x_off], zoom_level);
-			// currentMarker.addTo(map);
-		}
-		else{
-			
-			mapOff.setView([y_off, x_off], zoom_level);
-			// currentMarker.addTo(mapOff);
-		}	
+		map.setView([y_off, x_off], zoom_level);
+
 	}
+	
+	
 });
 
-function loadImages(data) {
-	
-	const TOTALNUMSELFIES = 68;
-	var allRows = data.split(/\r?\n|\r/);
 
-	for (var i = 1; i <= TOTALNUMSELFIES; i++) {
-		
-		var prev = i - 1;
-		var next = (i + 1) % TOTALNUMSELFIES;
-		if (prev === 0) { prev = TOTALNUMSELFIES; }
 
-		/* what the user sees after click */
-		$(".lightboxArea").append("<div id=\"imgSupersonicSelfie" + i + "\" class=\"lightbox\"></div>");
-
-		/*previous button, image, message, exit button, next button */
-		$(".lightbox#imgSupersonicSelfie" + i + "").append("<a href=\"#imgSupersonicSelfie" + prev + "\" class='previous'>&lt;</a>" + 
-			"<a href=\"#_\"><img src=\"images/Selfies/SupersonicSelfie" + i + ".png\" alt=\"selfie\" /></a>" + 
-			"<a href=\"#_\" class='exit'>&times;</a>" +
-			"<a href=\"#imgSupersonicSelfie" + next + "\" class='next'>&gt;</a>");
-	}
-}
